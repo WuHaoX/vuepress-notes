@@ -413,21 +413,21 @@ importers:
 
   packages/bundler-vite:
     specifiers:
-      '@vitejs/plugin-vue': ^3.1.2
+      '@vitejs/plugin-vue': ^3.2.0
       '@vuepress/client': workspace:*
       '@vuepress/core': workspace:*
       '@vuepress/shared': workspace:*
       '@vuepress/utils': workspace:*
-      autoprefixer: ^10.4.12
+      autoprefixer: ^10.4.13
       connect-history-api-fallback: ^2.0.0
       postcss: ^8.4.18
       postcss-load-config: ^4.0.1
       rollup: ^2.79.1
-      vite: ~3.1.8
+      vite: ~3.2.2
       vue: ^3.2.41
       vue-router: ^4.1.6
     dependencies:
-      '@vitejs/plugin-vue': 3.2.0_vite@3.1.8+vue@3.2.41
+      '@vitejs/plugin-vue': 3.2.0_vite@3.2.3+vue@3.2.41
       '@vuepress/client': link:../client
       '@vuepress/core': link:../core
       '@vuepress/shared': link:../shared
@@ -437,7 +437,7 @@ importers:
       postcss: 8.4.18
       postcss-load-config: 4.0.1_postcss@8.4.18
       rollup: 2.79.1
-      vite: 3.1.8
+      vite: 3.2.3
       vue: 3.2.41
       vue-router: 4.1.6_vue@3.2.41
 
@@ -449,7 +449,7 @@ importers:
       '@vuepress/core': workspace:*
       '@vuepress/shared': workspace:*
       '@vuepress/utils': workspace:*
-      autoprefixer: ^10.4.12
+      autoprefixer: ^10.4.13
       chokidar: ^3.5.3
       copy-webpack-plugin: ^11.0.0
       css-loader: ^6.7.1
@@ -462,7 +462,7 @@ importers:
       postcss-loader: ^7.0.1
       style-loader: ^3.3.1
       vue: ^3.2.41
-      vue-loader: ^17.0.0
+      vue-loader: ^17.0.1
       vue-router: ^4.1.6
       webpack: ^5.74.0
       webpack-chain: ^6.5.1
@@ -504,7 +504,7 @@ importers:
       cac: ^6.7.14
       chokidar: ^3.5.3
       envinfo: ^7.8.1
-      esbuild: ^0.15.12
+      esbuild: ^0.15.13
     dependencies:
       '@vuepress/core': link:../core
       '@vuepress/shared': link:../shared
@@ -2704,14 +2704,14 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitejs/plugin-vue/3.2.0_vite@3.1.8+vue@3.2.41:
+  /@vitejs/plugin-vue/3.2.0_vite@3.2.3+vue@3.2.41:
     resolution: {integrity: sha512-E0tnaL4fr+qkdCNxJ+Xd0yM31UwMkQje76fsDVBBUCoGOUPexu2VDUYHL8P4CwV+zMvWw6nlRw19OnRKmYAJpw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.1.8
+      vite: 3.2.3
       vue: 3.2.41
     dev: false
 
@@ -7963,6 +7963,7 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
 
   /rollup/2.79.1:
     resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==}
@@ -9178,6 +9179,40 @@ packages:
       rollup: 2.78.1
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
+
+  /vite/3.2.3:
+    resolution: {integrity: sha512-h8jl1TZ76eGs3o2dIBSsvXDLb1m/Ec1iej8ZMdz+PsaFUsftZeWe2CZOI3qogEsMNaywc17gu0q6cQDzh/weCQ==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': '>= 14'
+      less: '*'
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      esbuild: 0.15.13
+      postcss: 8.4.18
+      resolve: 1.22.1
+      rollup: 2.79.1
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: false
 
   /vitest/0.24.5:
     resolution: {integrity: sha512-zw6JhPUHtLILQDe5Q39b/SzoITkG+R7hcFjuthp4xsi6zpmfQPOZcHodZ+3bqoWl4EdGK/p1fuMiEwdxgbGLOA==}
