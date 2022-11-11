@@ -1,12 +1,12 @@
-# Extending
+# 继承
 
-VuePress default theme is widely used by users, so it is designed to be extendable, allowing users to make their own customization with ease.
+VuePress 默认主题有着大量的用户，因此我们对它进行了一些便于继承的设计，以便用户轻松进行定制化。
 
-VuePress provides basic ability to extend a theme, but different themes may have different features to be extended. Thus, if you are using a community theme, you'd better refer to the theme's own documentation for how to extending it.
+VuePress 提供了继承主题的基础能力，但不同的主题可能会提供不同的可继承的功能。因此，如果你使用的是一个社区主题的话，你最好参考主题本身的文档来了解如何继承它。
 
-## Layout Slots
+## 布局插槽
 
-Default theme's `Layout` provides some slots:
+默认主题的 `Layout` 布局提供了一些插槽：
 
 - `navbar`
 - `navbar-before`
@@ -20,9 +20,9 @@ Default theme's `Layout` provides some slots:
 - `page-content-top`
 - `page-content-bottom`
 
-With the help of them, you can add or replace content easily. Here comes an example to introduce how to extend default theme with layout slots.
+在它们的帮助下，你可以很容易地添加或替换内容。下面通过一个示例来介绍一下如何使用布局插槽来继承默认主题。
 
-Firstly, create a client config file `.vuepress/client.ts`:
+首先，创建一个客户端配置文件 `.vuepress/client.ts` ：
 
 ```ts
 import { defineClientConfig } from '@vuepress/client'
@@ -35,7 +35,7 @@ export default defineClientConfig({
 })
 ```
 
-Next, create the `.vuepress/layouts/Layout.vue`, and make use of the slots that provided by the `Layout` of default theme:
+接下来，创建 `.vuepress/layouts/Layout.vue` ，并使用由默认主题的 `Layout` 布局提供的插槽：
 
 ```vue
 <script setup>
@@ -57,17 +57,17 @@ import ParentLayout from '@vuepress/theme-default/layouts/Layout.vue'
 </style>
 ```
 
-Then the default `Layout` layout has been overridden by your own local layout, which will add a custom footer to every normal pages in default theme (excluding homepage):
+此时默认的 `Layout` 布局已经被你的本地布局覆盖，将会在除了首页外的所有页面添加一个自定义的页脚：
 
 ![extending-a-theme](/images/cookbook/extending-a-theme-01.png)
 
-## Components Replacement
+## 组件替换
 
-The layout slots are useful, but sometimes you might find it's not flexible enough. Default theme also provides the ability to replace a single component.
+布局插槽十分实用，但有时候你可能会觉得它不够灵活。默认主题同样提供了替换单个组件的能力。
 
-Default theme has registered [alias](../plugin-api.md#alias) for every [non-global components](https://github.com/vuepress/vuepress-next/tree/main/ecosystem/theme-default/src/client/components) with a `@theme` prefix. For example, the alias of `HomeFooter.vue` is `@theme/HomeFooter.vue`.
+默认主题将所有 [非全局的组件](https://github.com/vuepress/vuepress-next/tree/main/ecosystem/theme-default/src/client/components) 都注册了一个带 `@theme` 前缀的 [alias](../plugin-api.md#alias) 。例如，`HomeFooter.vue` 的别名是 `@theme/HomeFooter.vue` 。
 
-Then, if you want to replace the `HomeFooter.vue` component, just override the alias in your config file `.vuepress/config.ts`:
+接下来，如果你想要替换 `HomeFooter.vue` 组件，只需要在配置文件 `.vuepress/config.ts` 中覆盖这个别名即可：
 
 ```ts
 import { getDirname, path } from '@vuepress/utils'
@@ -83,9 +83,9 @@ export default defineUserConfig({
 })
 ```
 
-## Developing a Child Theme
+## 开发一个子主题
 
-Instead of extending the default theme directly in `.vuepress/config.ts` and `.vuepress/client.ts`, you can also develop your own theme extending the default theme:
+除了在 `.vuepress/config.ts` 和 `.vuepress/client.ts` 中直接扩展默认主题以外，你可以通过继承默认主题来开发一个你自己的主题：
 
 ```ts
 import type { Theme } from '@vuepress/core'
@@ -99,10 +99,10 @@ export const childTheme = (options: DefaultThemeOptions): Theme => {
     name: 'vuepress-theme-child',
     extends: defaultTheme(options),
 
-    // override layouts in child theme's client config file
+    // 在子主题的客户端配置文件中覆盖布局
     clientConfigFile: path.resolve(__dirname, './client.js'),
 
-    // override component alias
+    // 覆盖组件别名
     alias: {
       '@theme/HomeFooter.vue': path.resolve(__dirname, './components/MyHomeFooter.vue'),
     },

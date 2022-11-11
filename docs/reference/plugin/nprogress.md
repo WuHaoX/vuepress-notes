@@ -2,19 +2,19 @@
 title: nprogress
 ---
 
-<!-- `# nprogress` will be rendered as `<h1 id="nprogress">`, and the id will conflict with the nprogress bar (stupid) -->
+<!-- `# nprogress` 会被渲染成 `<h1 id="nprogress">` ，导致 id 和 nprogress 进度条冲突 （有点蠢） -->
 
-<!-- so we add a 'plugin' suffix in the h1 title, and use title frontmatter to set the page title -->
+<!-- 所以我们在 h1 标题后添加一个 '插件' 后缀，然后通过 title frontmatter 来设置页面标题 -->
 
-# nprogress Plugin
+# nprogress 插件
 
 <NpmBadge package="@vuepress/plugin-nprogress" />
 
-Integrate [nprogress](https://github.com/rstacruz/nprogress) into VuePress, which can provide a progress bar when navigating to another page.
+将 [nprogress](https://github.com/rstacruz/nprogress) 集成到 VuePress 中，在切换到另一个页面时会展示进度条。
 
-This plugin has been integrated into the default theme.
+该插件已经集成到默认主题中。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-nprogress@next
@@ -30,8 +30,8 @@ export default {
 }
 ```
 
-## Styles
+## 样式
 
-You can customize the style of the progress bar via CSS variables:
+你可以通过 CSS 变量来自定义进度条的样式：
 
 @[code css](@vuepress/plugin-nprogress/src/client/styles/vars.css)

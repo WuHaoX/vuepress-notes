@@ -1,49 +1,9 @@
 import type { SidebarConfig } from '@vuepress/theme-default'
 
 export const sidebarEn: SidebarConfig = {
-  '/guide/': [
-    {
-      text: 'Guide',
-      children: [
-        '/guide/README.md',
-        '/guide/getting-started.md',
-        '/guide/configuration.md',
-        '/guide/page.md',
-        '/guide/markdown.md',
-        '/guide/assets.md',
-        '/guide/i18n.md',
-        '/guide/deployment.md',
-        '/guide/theme.md',
-        '/guide/plugin.md',
-        '/guide/bundler.md',
-        '/guide/migration.md',
-      ],
-    },
-  ],
-  '/advanced/': [
-    {
-      text: 'Advanced',
-      children: [
-        '/advanced/architecture.md',
-        '/advanced/plugin.md',
-        '/advanced/theme.md',
-      ],
-    },
-    {
-      text: 'Cookbook',
-      children: [
-        '/advanced/cookbook/README.md',
-        '/advanced/cookbook/usage-of-client-config.md',
-        '/advanced/cookbook/adding-extra-pages.md',
-        '/advanced/cookbook/making-a-theme-extendable.md',
-        '/advanced/cookbook/passing-data-to-client-code.md',
-        '/advanced/cookbook/markdown-and-vue-sfc.md',
-      ],
-    },
-  ],
   '/reference/': [
     {
-      text: 'VuePress Reference',
+      text: '前台使用教程',
       collapsible: true,
       children: [
         '/reference/cli.md',
@@ -57,12 +17,15 @@ export const sidebarEn: SidebarConfig = {
       ],
     },
     {
-      text: 'Bundlers Reference',
+      text: '后台管理系统',
       collapsible: true,
-      children: ['/reference/bundler/vite.md', '/reference/bundler/webpack.md'],
+      children: [
+        '/reference/bundler/vite.md',
+        '/reference/bundler/webpack.md',
+      ],
     },
     {
-      text: 'Default Theme Reference',
+      text: '默认主题参考',
       collapsible: true,
       children: [
         '/reference/default-theme/config.md',
@@ -74,11 +37,11 @@ export const sidebarEn: SidebarConfig = {
       ],
     },
     {
-      text: 'Official Plugins Reference',
+      text: '官方插件参考',
       collapsible: true,
       children: [
         {
-          text: 'Common Features',
+          text: '常用功能',
           children: [
             '/reference/plugin/back-to-top.md',
             '/reference/plugin/container.md',
@@ -90,7 +53,7 @@ export const sidebarEn: SidebarConfig = {
           ],
         },
         {
-          text: 'Content Search',
+          text: '内容搜索',
           children: [
             '/reference/plugin/docsearch.md',
             '/reference/plugin/search.md',
@@ -104,14 +67,14 @@ export const sidebarEn: SidebarConfig = {
           ],
         },
         {
-          text: 'Syntax Highlighting',
+          text: '语法高亮',
           children: [
             '/reference/plugin/prismjs.md',
             '/reference/plugin/shiki.md',
           ],
         },
         {
-          text: 'Theme Development',
+          text: '主题开发',
           children: [
             '/reference/plugin/active-header-links.md',
             '/reference/plugin/git.md',

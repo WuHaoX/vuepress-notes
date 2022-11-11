@@ -1,24 +1,24 @@
-# Theme
+# 主题
 
-VuePress theme can provide layouts, styles and many other features for you, helping you to focus on writing Markdown content.
+VuePress 主题为你提供了布局、样式和其他功能，帮助你专注于 Markdown 内容的写作。
 
-## Default Theme
+## 默认主题
 
-VuePress has a default theme out of the box, which is applied to our documentation site you are currently browsing.
+VuePress 有一个开箱即用的默认主题，正使用在你当前正在浏览的文档网站上。
 
-If you don't specify the theme to use, the default theme will be used automatically.
+如果你不指定要使用的主题，那么就会自动使用默认主题。
 
-To configure the default theme, you need to import and use it in your config file via the [theme](../reference/config.md#theme) option:
+为了配置默认主题，你需要在你的配置文件中通过 [theme](../reference/config.md#theme) 配置项来使用它：
 
 ```ts
 import { defaultTheme } from 'vuepress'
 
-export default  {
+export default {
   theme: defaultTheme({
-    // default theme config
+    // 默认主题配置
     navbar: [
       {
-        text: 'Home',
+        text: '首页',
         link: '/',
       },
     ],
@@ -26,14 +26,14 @@ export default  {
 }
 ```
 
-The default theme provides basic but useful features for documentation site, you can check out [Default Theme Config Reference](../reference/default-theme/config.md) for a full list of config.
+默认主题为文档网站提供了基础且实用的功能，你可以前往 [默认主题配置参考](../reference/default-theme/config.md) 获取全部的配置列表。
 
-However, you might think it is not good enough. Or, you want to build a different type of site, for example, a blog, instead of a documentation. Then, you can try to use a community theme or create a local theme.
+然而，你可能觉得默认主题不够出色，又或者你不想搭建一个文档网站，而是一个其他类型的网站，比如博客。此时，你可以尝试使用社区主题或者创建本地主题。
 
-## Community Theme
+## 社区主题
 
-Community users have created lots of theme and published them to [NPM](https://www.npmjs.com/search?q=keywords:vuepress-theme). You should check the theme's own documentation for detailed guide.
+社区用户创建了很多主题，并将它们发布到了 [NPM](https://www.npmjs.com/search?q=keywords:vuepress-theme) 上。查看主题本身的文档可以获取更详细的指引。
 
-## Local Theme
+## 本地主题
 
-If you want to use your own custom theme but don't want to publish it, you can create a local theme. Refer to [Advanced > Writing a Theme](../advanced/theme.md) for how to write your own theme.
+如果你想要使用自己的自定义主题，但是又不想发布它，你可以创建一个本地主题。前往 [深入 > 开发主题](../advanced/theme.md) 学习如何开发你自己的主题。

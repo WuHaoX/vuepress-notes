@@ -2,13 +2,13 @@
 
 <NpmBadge package="@vuepress/plugin-theme-data" />
 
-Provide client data for your theme, with VuePress [i18n](../../guide/i18n.md) support.
+为你的主题提供客户端数据，包含 VuePress 的 [多语言支持](../../guide/i18n.md) 。
 
-This plugin is mainly used to develop themes, and has been integrated into the default theme. You won't need to use it directly in most cases.
+该插件主要用于开发主题，并且已经集成到默认主题中。大部分情况下你不需要直接使用它。
 
-For theme authors, this plugin will help you to use the same i18n mechanism as VuePress and the default theme. But if you don't want to provide i18n support, or you want to implement in your own way, you don't need this plugin.
+对于主题作者，该插件可以提供与 VuePress 及默认主题相同的多语言支持机制。但是如果你的主题不需要提供多语言支持，或者你想用你自己的方式来实现多语言支持，那么你不需要使用该插件。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-theme-data@next
@@ -20,27 +20,27 @@ import { themeDataPlugin } from '@vuepress/plugin-theme-data'
 export default {
   plugins: [
     themeDataPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Options
+## 配置项
 
 ### themeData
 
-- Type: `ThemeData`
+- 类型： `ThemeData`
 
-- Default: `{}`
+- 默认值： `{}`
 
-- Details:
+- 详情：
 
-  The theme data object that you want to use in client side.
+  你希望在 Client 端中使用的主题数据对象。
 
-  You can provide theme data in Node side via this option, and use it in client side via [useThemeData](#useThemeData) and [useThemeLocaleData](#useThemeLocaleData).
+  你可以通过该配置项，在 Node 端提供主题数据，然后在客户端通过 [useThemeData](#useThemeData) 和 [useThemeLocaleData](#useThemeLocaleData) 来使用主题数据。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -60,20 +60,20 @@ export default {
 ```
 
 ::: warning
-The theme data object will be processed by `JSON.stringify()` before forwarding to client side, so you should ensure that you are providing a JSON-friendly object.
+主题数据对象在传递到客户端之前，会使用 `JSON.stringify()` 进行处理，因此你需要保证你提供的是一个可以被 JSON 序列化的对象。
 :::
 
 ## Composition API
 
 ### useThemeData
 
-- Details:
+- 详情：
 
-  Returns the theme data ref object.
+  返回主题数据的 Ref 对象。
   
-  The value is provided by [themeData](#themeData) option.
+  数据是通过 [themeData](#themeData) 配置项提供的。
 
-- Example:
+- 示例：
 
 ```ts
 import { useThemeData } from '@vuepress/plugin-theme-data/client'
@@ -93,13 +93,13 @@ export default {
 
 ### useThemeLocaleData
 
-- Details:
+- 详情：
 
-  Returns the theme data ref object in current locale.
+  返回当前 locale 下主题数据的 Ref 对象。
 
-  The properties of current locale has been merged into the root-level properties.
+  当前 locale 中的字段已被合并到顶层字段中。
 
-- Example:
+- 示例：
 
 ```ts
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client'

@@ -3,19 +3,12 @@ import { version } from '../meta.js'
 
 export const navbarEn: NavbarConfig = [
   {
-    text: 'Guide',
-    link: '/guide/',
-  },
-  {
-    text: 'Reference',
+    text: '商城手册',
     children: [
       {
-        text: 'VuePress',
+        text: '前台使用教程',
         children: [
-          {
-            text: 'CLI',
-            link: '/reference/cli.html',
-          },
+          '/reference/cli.md',
           '/reference/config.md',
           '/reference/frontmatter.md',
           '/reference/components.md',
@@ -26,14 +19,14 @@ export const navbarEn: NavbarConfig = [
         ],
       },
       {
-        text: 'Bundlers',
+        text: '后台管理系统',
         children: [
           '/reference/bundler/vite.md',
           '/reference/bundler/webpack.md',
         ],
       },
       {
-        text: 'Default Theme',
+        text: '默认主题',
         children: [
           '/reference/default-theme/config.md',
           '/reference/default-theme/frontmatter.md',
@@ -42,98 +35,6 @@ export const navbarEn: NavbarConfig = [
           '/reference/default-theme/styles.md',
           '/reference/default-theme/extending.md',
         ],
-      },
-    ],
-  },
-  {
-    text: 'Plugins',
-    children: [
-      {
-        text: 'Common Features',
-        children: [
-          '/reference/plugin/back-to-top.md',
-          '/reference/plugin/container.md',
-          '/reference/plugin/external-link-icon.md',
-          '/reference/plugin/google-analytics.md',
-          '/reference/plugin/medium-zoom.md',
-          '/reference/plugin/nprogress.md',
-          '/reference/plugin/register-components.md',
-        ],
-      },
-      {
-        text: 'Content Search',
-        children: [
-          '/reference/plugin/docsearch.md',
-          '/reference/plugin/search.md',
-        ],
-      },
-      {
-        text: 'PWA',
-        children: [
-          '/reference/plugin/pwa.md',
-          '/reference/plugin/pwa-popup.md',
-        ],
-      },
-      {
-        text: 'Syntax Highlighting',
-        children: [
-          '/reference/plugin/prismjs.md',
-          '/reference/plugin/shiki.md',
-        ],
-      },
-      {
-        text: 'Theme Development',
-        children: [
-          '/reference/plugin/active-header-links.md',
-          '/reference/plugin/git.md',
-          '/reference/plugin/palette.md',
-          '/reference/plugin/theme-data.md',
-          '/reference/plugin/toc.md',
-        ],
-      },
-    ],
-  },
-  {
-    text: 'Learn More',
-    children: [
-      {
-        text: 'Advanced',
-        children: [
-          '/advanced/architecture.md',
-          '/advanced/plugin.md',
-          '/advanced/theme.md',
-          {
-            text: 'Cookbook',
-            link: '/advanced/cookbook/',
-          },
-        ],
-      },
-      {
-        text: 'Resources',
-        children: [
-          '/contributing.md',
-          {
-            text: 'Awesome VuePress',
-            link: 'https://github.com/vuepress/awesome-vuepress',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    text: `v${version}`,
-    children: [
-      {
-        text: 'Changelog',
-        link: 'https://github.com/vuepress/vuepress-next/blob/main/CHANGELOG.md',
-      },
-      {
-        text: 'v1.x',
-        link: 'https://v1.vuepress.vuejs.org',
-      },
-      {
-        text: 'v0.x',
-        link: 'https://v0.vuepress.vuejs.org',
       },
     ],
   },

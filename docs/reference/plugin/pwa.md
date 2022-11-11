@@ -2,11 +2,11 @@
 
 <NpmBadge package="@vuepress/plugin-pwa" />
 
-Make your VuePress site a [Progressive Web Application (PWA)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps).
+使你的 VuePress 站点成为一个 [渐进式 Web 应用 (PWA)](https://developer.mozilla.org/zh-CN/docs/Web/Progressive_web_apps).
 
-This plugin uses [workbox-build](https://developers.google.com/web/tools/workbox/modules/workbox-build) to generate service worker file, and uses [register-service-worker](https://github.com/yyx990803/register-service-worker) to register service worker.
+该插件使用 [workbox-build](https://developers.google.com/web/tools/workbox/modules/workbox-build) 来生成 Service Worker 文件，并通过 [register-service-worker](https://github.com/yyx990803/register-service-worker) 来注册 Service Worker 。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-pwa@next
@@ -18,7 +18,7 @@ import { pwaPlugin } from '@vuepress/plugin-pwa'
 export default {
   plugins: [
     pwaPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
@@ -26,13 +26,13 @@ export default {
 
 ## Web App Manifests
 
-To make your website fully compliant with PWA, you need to create a [Web app manifests](https://developer.mozilla.org/en-US/docs/Web/Manifest) file and set the icons, colors, etc. for your PWA.
+为了使你的网站符合 PWA 的要求，你需要创建一个 [Web app manifests](https://developer.mozilla.org/zh-CN/docs/Web/Manifest) 文件，并且为你的 PWA 设置图标、颜色等信息。
 
-You need to put your manifest file and icons into the [public files directory](../../guide/assets.md#public-files). In the following example, we assume that you are using the default public directory `.vuepress/public`.
+你需要将你的 Manifest 文件和图标放置在 [Public 目录](../../guide/assets.md#public-文件) 下。在下述的示例中，我们假设你正在使用默认的 Public 目录 `.vuepress/public` 。
 
-1. Create manifest file
+1. 创建 Manifest 文件
 
-Typically `.vuepress/public/manifest.webmanifest`:
+通常是 `.vuepress/public/manifest.webmanifest` ：
 
 ```json
 {
@@ -58,38 +58,38 @@ Typically `.vuepress/public/manifest.webmanifest`:
 }
 ```
 
-2. Generate PWA icons
+2. 生成 PWA 图标
 
-To make your PWA more accessible, you need to generate some icons, and put them inside the public directory.
+为了提高你的 PWA 的可用性，你需要生成一些图标，并将它们放置在 Public 目录下。
 
-Make sure the path of icons matches the `icons` field in your manifest file:
+确保图标的路径匹配 Manifest 文件中的 `icons` 字段：
 
 - `.vuepress/public/images/icons/android-chrome-192x192.png`
 - `.vuepress/public/images/icons/android-chrome-384x384.png`
 
 ::: tip
-Some tools can help to do that. For example, [Favicon Generator](https://realfavicongenerator.net/) would help you to generate icons together with a sample manifest file.
+一些工具可以帮助你做这些事。比如 [Favicon Generator](https://realfavicongenerator.net/) 可以帮助你生成图片以及一个 Manifest 文件样例。
 :::
 
-3. Set tags in head
+3. 设置 Head 中的标签
 
-You also need to set some tags via [head](../config.md#head) option to [deploy the manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest#deploying_a_manifest_with_the_link_tag):
+你还需要通过 [head](../config.md#head) 配置项来设置一些标签，用来 [部署你的 Manifest 文件](https://developer.mozilla.org/en-US/docs/Web/Manifest#deploying_a_manifest_with_the_link_tag) 。
 
 ```ts
 export default {
   head: [
     ['link', { rel: 'manifest', href: '/manifest.webmanifest' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
-    // ...other tags
+    // ...其他标签
   ],
 }
 ```
 
-## Options
+## 配置项
 
-This plugin accepts all parameters of workbox-build's [generateSW method](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW) in its options, except `globDirectory` and `swDest`.
+该插件的配置项可以接收 workbox-build 中 [generateSW 方法](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW) 除了 `globDirectory` 和 `swDest` 以外的所有参数。
 
-For example, you can set `skipWaiting: true` to auto activate the new service worker once it is ready:
+比如，你可以设置 `skipWaiting: true` ，这将在新的 Service Worker 就绪之后立即激活它：
 
 ```ts
 export default {
@@ -101,34 +101,34 @@ export default {
 }
 ```
 
-But if you omit `skipWaiting` or set it to `false`, you have to activate the new service worker manually:
+但是如果你不设置 `skipWaiting` 或设置为 `false` ，你就需要手动激活新的 Service Worker 。
 
-- For users, you can use our [pwa-popup](./pwa-popup.md) plugin together.
-- For developers, you can use our [composition API](#composition-api) to take control of the service worker behavior.
+- 对于用户，你可以配合我们提供的 [pwa-popup](./pwa-popup.md) 插件一起使用。
+- 对于开发者，你可以使用该插件提供的 [Composition API](#composition-api) 来控制 Service Worker 的行为。
 
 ### serviceWorkerFilename
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'service-worker.js'`
+- 默认值： `'service-worker.js'`
 
-- Details:
+- 详情：
 
-  File path of the generated service worker file, which is relative to the [dest](../config.md#dest) directory.
+  生成的 Service Worker 文件路径，该路径是 [dest](../config.md#dest) 目录的相对路径。
 
-  The service worker file will only be generated in `build` mode.
+  Service Worker 文件只会在 `build` 模式下生成。
 
 ## Composition API
 
 ### usePwaEvent
 
-- Details:
+- 详情：
 
-  Returns the event emitter of this plugin.
-  
-  You can add listener function to events that provided by [register-service-worker](https://github.com/yyx990803/register-service-worker).
+  返回该插件的 Event Emitter 。
 
-- Example:
+  你可以为 [register-service-worker](https://github.com/yyx990803/register-service-worker) 提供的事件添加事件监听器。
+
+- 示例：
 
 ```ts
 import { usePwaEvent } from '@vuepress/plugin-pwa/client'
@@ -137,7 +137,7 @@ export default {
   setup() {
     const event = usePwaEvent()
     event.on('ready', (registration) => {
-      console.log('Service worker is active.')
+      console.log('Service worker 已经生效。')
     })
   },
 }
@@ -145,17 +145,17 @@ export default {
 
 ### useSkipWaiting
 
-- Parameters:
+- 参数：
 
-|  Parameter   | Type                        | Description                                              |
-| ------------ | --------------------------- | -------------------------------------------------------- |
-| registration | `ServiceWorkerRegistration` | The registration of the service worker you want activate |
+|  参数         | 类型                        | 描述                                       |
+| ------------ | --------------------------- | ----------------------------------------- |
+| registration | `ServiceWorkerRegistration` | 你想要激活的 Service Worker 的 Registration  |
 
-- Details:
+- 详情：
 
-  Call [skipWaiting()](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/skipWaiting) to activate the waiting service worker.
+  调用 [skipWaiting()](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/skipWaiting) 来激活处于 Waiting 状态的 Service Worker 。
 
-- Example:
+- 示例：
 
 ```ts
 import {
@@ -167,8 +167,8 @@ export default {
   setup() {
     const event = usePwaEvent()
     event.on('updated', (registration) => {
-      console.log('The waiting service worker is available.')
-      // activate the waiting service worker
+      console.log('在 Waiting 状态的 Service Worker 已经就绪。')
+      // 激活 Waiting 状态的 Service Worker
       useSkipWaiting(registration)
     })
   },

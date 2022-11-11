@@ -1,4 +1,4 @@
-# Config
+# 配置
 
 <NpmBadge package="@vuepress/theme-default" />
 
@@ -7,99 +7,99 @@ import { defaultTheme } from '@vuepress/theme-default'
 
 export default {
   theme: defaultTheme({
-    // set config here
+    // 在这里进行配置
   }),
 }
 ```
 
-## Basic Config
+## 基础配置
 
 ### locales
 
-- Type: `{ [path: string]: Partial<DefaultThemeLocaleData> }`
+- 类型： `{ [path: string]: Partial<DefaultThemeLocaleData> }`
 
-- Default: `{}`
+- 默认值： `{}`
 
-- Details:
+- 详情：
 
-  Specify locales for i18n support.
+  多语言支持的各个语言 locales 。
 
-  All the options inside the [Locale Config](#locale-config) section can be used in locales.
+  所有在 [Locale 配置](#locale-配置) 章节内的配置项都可以在 locales 中使用。
 
-  This option will only take effect in default theme, so don't confuse with `locales` in [Site Config](../config.md#locales).
+  该配置项仅能在默认主题内生效，注意不要和 [站点配置](../config.md#locales) 中的 `locales` 混淆。
 
-- Also see:
-  - [Guide > I18n](../../guide/i18n.md)
+- 参考：
+  - [指南 > 多语言支持](../../guide/i18n.md)
 
-## Locale Config
+## Locale 配置
 
-Config of this section can be used as normal config, and can also be used in the [locales](#locales) option.
+该章节内的配置项可以作为一般配置使用，也可以使用在 [locales](#locales) 内。
 
 ### colorMode
 
-- Type: `'auto' | 'light' | 'dark'`
+- 类型： `'auto' | 'light' | 'dark'`
 
-- Default: `'auto'`
+- 默认值： `'auto'`
 
-- Details:
+- 详情：
 
-  Default color mode.
+  默认颜色模式。
 
-  If set to `'auto'`, the initial color mode will be automatically set according to [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme).
+  如果设置为 `'auto'` ，则会根据 [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) 自动设置初始颜色模式。
 
-- Also see:
-  - [Default Theme > Config > colorModeSwitch](#colormodeswitch)
+- 参考：
+  - [默认主题 > 配置 > colorModeSwitch](#colormodeswitch)
 
 ### colorModeSwitch
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable color mode switching or not.
+  是否启用切换颜色模式的功能。
 
-  If set to `true`, a button to switch color mode will be displayed in the navbar.
+  如果设置为 `true` ，将会在导航栏展示一个切换颜色模式的按钮。
 
-- Also see:
-  - [Default Theme > Config > colorMode](#colormode)
-  - [Default Theme > Config > toggleColorMode](#togglecolormode)
+- 参考：
+  - [默认主题 > 配置 > colorMode](#colormode)
+  - [默认主题 > 配置 > toggleColorMode](#togglecolormode)
 
 ### home
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `/`
+- 默认值： `/`
 
-- Details:
+- 详情：
 
-  Specify the path of the homepage.
+  首页的路径。
 
-  This will be used for:
+  它将被用于：
 
-  - the logo link of the navbar
-  - the _back to home_ link of the 404 page
+  - 导航栏中 Logo 的链接
+  - 404 页面的 _返回首页_ 链接
 
 ### navbar
 
-- Type: `false | (NavbarItem | NavbarGroup | string)[]`
+- 类型： `false | (NavbarItem | NavbarGroup | string)[]`
 
-- Default: `[]`
+- 默认值： `[]`
 
-- Details:
+- 详情：
 
-  Configuration of navbar.
+  导航栏配置。
 
-  Set to `false` to disable navbar.
+  设置为 `false` 可以禁用导航栏。
 
-  To configure the navbar items, you can set it to a _navbar array_, each item of which could be a `NavbarItem` object, a `NavbarGroup` object, or a string:
+  为了配置导航栏元素，你可以将其设置为 _导航栏数组_ ，其中的每个元素是 `NavbarItem` 对象、 `NavbarGroup` 对象、或者字符串：
 
-  - A `NavbarItem` object should have a `text` field and a `link` field, could have an optional `activeMatch` field.
-  - A `NavbarGroup` object should have a `text` field and a `children` field. The `children` field should be a _navbar array_, too.
-  - A string should be the path to the target page file. It will be converted to a `NavbarItem` object, using the page title as `text`, and the page route path as `link`.
+  - `NavbarItem` 对象应该有一个 `text` 字段和一个 `link` 字段，还有一个可选的 `activeMatch` 字段。
+  - `NavbarGroup` 对象应该有一个 `text` 字段和一个 `children` 字段。 `children` 字段同样是一个 _导航栏数组_ 。
+  - 字符串应为目标页面文件的路径。它将会被转换为 `NavbarItem` 对象，将页面标题作为 `text` ，将页面路由路径作为 `link` 。
 
-- Example 1:
+- 示例 1：
 
 ```ts
 export default {
@@ -115,20 +115,20 @@ export default {
         text: 'Group',
         children: ['/group/foo.md', '/group/bar.md'],
       },
-      // string - page file path
+      // 字符串 - 页面文件路径
       '/bar/README.md',
     ],
   }),
 }
 ```
 
-- Example 2:
+- 示例 2：
 
 ```ts
 export default {
   theme: defaultTheme({
     navbar: [
-      // nested group - max depth is 2
+      // 嵌套 Group - 最大深度为 2
       {
         text: 'Group',
         children: [
@@ -138,21 +138,21 @@ export default {
           },
         ],
       },
-      // control when should the item be active
+      // 控制元素何时被激活
       {
         text: 'Group 2',
         children: [
           {
             text: 'Always active',
             link: '/',
-            // this item will always be active
+            // 该元素将一直处于激活状态
             activeMatch: '/',
           },
           {
             text: 'Active on /foo/',
             link: '/not-foo/',
-            // this item will be active when current route path starts with /foo/
-            // regular expression is supported
+            // 该元素在当前路由路径是 /foo/ 开头时激活
+            // 支持正则表达式
             activeMatch: '^/foo/',
           },
         ],
@@ -164,65 +164,65 @@ export default {
 
 ### logo
 
-- Type: `null | string`
+- 类型： `null | string `
 
-- Details:
+- 详情：
 
-  Specify the url of logo image.
+  Logo 图片的 URL。
 
-  The logo image will be displayed at the left end of the navbar.
+  Logo 图片将会显示在导航栏的左端。
 
-  Set to `null` to disable logo.
+  设置为 `null` 可以禁用 Logo 。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
   theme: defaultTheme({
-    // public file path
-    logo: '/hero.png',
-    // url
+    // Public 文件路径
+    logo: '/images/hero.png',
+    // URL
     logo: 'https://vuejs.org/images/logo.png',
   }),
 }
 ```
 
-- Also see:
-  - [Guide > Assets > Public Files](../../guide/assets.md#public-files)
+- 参考：
+  - [指南 > 静态资源 > Public 文件](../../guide/assets.md#public-文件)
 
 ### logoDark
 
-- Type: `null | string`
+- 类型： `null | string`
 
-- Details:
+- 详情：
 
-  Specify the url of logo image to be used in dark mode.
+  在夜间模式中使用的 Logo 图片的 URL。
 
-  You can make use of this option if you want to use different logo config in dark mode.
+  如果你想在夜间模式中使用不同的 Logo 图片，就可以使用该配置项。
 
-  Set to `null` to disable logo in dark mode. Omit this option to use [logo](#logo) in dark mode.
+  设置为 `null` 可以在夜间模式下禁用 Logo 。忽略该配置项将会在夜间模式中使用 [logo](#logo) 配置。
 
-- Also see:
-  - [Default Theme > Config > logo](#logo)
-  - [Default Theme > Config > colorMode](#colormode)
+- 参考：
+  - [默认主题 > 配置 > logo](#logo)
+  - [默认主题 > 配置 > colorMode](#colormode)
 
 ### repo
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the repository url of your project.
+  项目仓库的 URL。
 
-  This will be used as the link of the _repository link_, which will be displayed as the last item of the navbar.
+  它将被用作 _仓库链接_ 的链接。_仓库链接_ 将会显示为导航栏的最后一个元素。
 
 ```ts
 export default {
   theme: defaultTheme({
-    // If you set it in the form of `organization/repository`
-    // we will take it as a GitHub repo
+    // 如果你按照 `organization/repository` 的格式设置它
+    // 我们会将它作为一个 GitHub 仓库
     repo: 'vuejs/vuepress',
-    // You can also set it to a URL directly
+    // 你也可以直接将它设置为一个 URL
     repo: 'https://gitlab.com/foo/bar',
   }),
 }
@@ -230,47 +230,47 @@ export default {
 
 ### repoLabel
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the repository label of your project.
+  项目仓库的标签。
 
-  This will be used as the text of the _repository link_, which will be displayed as the last item of the navbar.
+  它将被用作 _仓库链接_ 的文字。_仓库链接_ 将会显示为导航栏的最后一个元素。
 
-  If you don't set this option explicitly, it will be automatically inferred from the [repo](#repo) option.
+  如果你不明确指定该配置项，它将会根据 [repo](#repo) 配置项自动推断。
 
 ### selectLanguageText
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the text of the _select language menu_.
+  _选择语言菜单_ 的文字。
 
-  The _select language menu_ will appear next to the repository button in the navbar when you set multiple [locales](../config.md#locales) in your site config.
+  如果你在站点配置中设置了多个 [locales](../config.md#locales) ，那么 _选择语言菜单_ 就会显示在导航栏中仓库按钮的旁边。
 
 ### selectLanguageAriaLabel
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the `aria-label` attribute of the _select language menu_.
+  _选择语言菜单_ 的 `aria-label` 属性。
 
-  This is mainly for a11y purpose.
+  它主要是为了站点的可访问性 (a11y) 。
 
 ### selectLanguageName
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the name of the language of a locale.
+  Locale 的语言名称。
 
-  This option will **only take effect inside** the [locales](#locales) of your theme config. It will be used as the language name of the locale, which will be displayed in the _select language menu_.
+  该配置项 **仅能在主题配置的 [locales](#locales) 的内部生效** 。它将被用作 locale 的语言名称，展示在 _选择语言菜单_ 内。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -297,37 +297,37 @@ export default {
 
 ### sidebar
 
-- Type: `false | 'auto' | SidebarConfigArray | SidebarConfigObject`
+- 类型： `false | 'auto' | SidebarConfigArray | SidebarConfigObject`
 
-- Default: `'auto'`
+- 默认值： `'auto'`
 
-- Details:
+- 详情：
 
-  Configuration of sidebar.
+  侧边栏配置。
 
-  You can override this global option via [sidebar](./frontmatter.md#sidebar) frontmatter in your pages.
+  你可以通过页面的 [sidebar](./frontmatter.md#sidebar) frontmatter 来覆盖这个全局配置。
 
-  Set to `false` to disable sidebar.
+  设置为 `false` 可以禁用侧边栏。
 
-  If you set it to `'auto'`, the sidebar will be automatically generated from the page headers.
+  如果你设置为 `'auto'`，侧边栏会根据页面标题自动生成。
 
-  To configure the sidebar items manually, you can set this option to a _sidebar array_, each item of which could be a `SidebarItem` object or a string:
+  为了手动配置侧边栏元素，你可以将其设置为 _侧边栏数组_ ，其中的每个元素是一个 `SidebarItem` 对象或者一个字符串：
 
-  - A `SidebarItem` object should have a `text` field, could have an optional `link` field and an optional `children` field. The `children` field should be a _sidebar array_. When a `SidebarItem` object is placed at the root-level, it could have an extra optional `collapsible` field to control whether it is collapsible.
-  - A string should be the path to the target page file. It will be converted to a `SidebarItem` object, whose `text` is the page title, `link` is the page route path, and `children` is automatically generated from the page headers.
+  - `SidebarItem` 对象应该有一个 `text` 字段，有一个可选的 `link` 字段和一个可选的 `children` 字段。 `children` 字段同样是一个 _侧边栏数组_ 。当 `SidebarItem` 对象处于根节点时，它还有一个额外可选的 `collapsible` 字段来控制它是否可折叠。
+  - 字符串应为目标页面文件的路径。它将会被转换为 `SidebarItem` 对象，将页面标题作为 `text` ，将页面路由路径作为 `link` ，并根据页面小标题自动生成 `children` 。
 
-  If you want to set different sidebar for different sub paths, you can set this option to a _sidebar object_:
+  如果你想在不同子路径中使用不同的侧边栏，你可以将该配置项设置为 _侧边栏对象_ ：
 
-  - The key should be the path prefix.
-  - The value should be a _sidebar array_.
+  - Key 为路径前缀。
+  - Value 为 _侧边栏数组_ 。
 
-- Example 1:
+- 示例 1：
 
 ```ts
 export default {
   theme: defaultTheme({
-    // sidebar array
-    // all pages will use the same sidebar
+    // 侧边栏数组
+    // 所有页面会使用相同的侧边栏
     sidebar: [
       // SidebarItem
       {
@@ -340,24 +340,24 @@ export default {
             link: 'https://github.com',
             children: [],
           },
-          // string - page file path
+          // 字符串 - 页面文件路径
           '/foo/bar.md',
         ],
       },
-      // string - page file path
+      // 字符串 - 页面文件路径
       '/bar/README.md',
     ],
   }),
 }
 ```
 
-- Example 2:
+- 示例 2：
 
 ```ts
 export default {
   theme: defaultTheme({
-    // sidebar object
-    // pages under different sub paths will use different sidebar
+    // 侧边栏对象
+    // 不同子路径下的页面会使用不同的侧边栏
     sidebar: {
       '/guide/': [
         {
@@ -376,12 +376,12 @@ export default {
 }
 ```
 
-- Example 3:
+- 示例 3：
 
 ```ts
 export default {
   theme: defaultTheme({
-    // collapsible sidebar
+    // 可折叠的侧边栏
     sidebar: {
       '/reference/': [
         {
@@ -402,68 +402,68 @@ export default {
 
 ### sidebarDepth
 
-- Type: `number`
+- 类型： `number`
 
-- Default: `2`
+- 默认值： `2`
 
-- Details:
+- 详情：
 
-  Set the maximum depth of the sidebar children which are automatically generated from the page headers.
+  设置根据页面标题自动生成的侧边栏的最大深度。
 
-  - Set to `0` to disable all levels of headers.
-  - Set to `1` to include `<h2>` headers.
-  - Set to `2` to include `<h2>` and `<h3>` headers.
+  - 设为 `0` 来禁用所有级别的页面标题。
+  - 设为 `1` 来包含 `<h2>` 标题。
+  - 设为 `2` 来包含 `<h2>` 和 `<h3>` 标题。
   - ...
 
-  The max value depends on which levels of headers you have extracted via [markdown.headers.level](../config.md#markdown-headers).
+  最大值取决于你通过 [markdown.headers.level](../config.md#markdown-headers) 提取了哪些级别的标题。
 
-  The default value of `markdown.headers.level` is `[2, 3]`, so the default max value of `sidebarDepth` is `2`.
+  由于 `markdown.headers.level` 的默认值是 `[2, 3]` ，因此 `sidebarDepth` 的默认最大值是 `2` 。
 
-  You can override this global option via [sidebarDepth](./frontmatter.md#sidebardepth) frontmatter in your pages.
+  你可以通过页面的 [sidebarDepth](./frontmatter.md#sidebardepth) frontmatter 来覆盖这个全局配置。
 
 ### editLink
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable the _edit this page_ link or not.
+  是否启用 _编辑此页_ 链接。
 
-  You can override this global option via [editLink](./frontmatter.md#editlink) frontmatter in your pages.
+  你可以通过页面的 [editLink](./frontmatter.md#editlink) frontmatter 来覆盖这个全局配置。
 
 ### editLinkText
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'Edit this page'`
+- 默认值： `'Edit this page'`
 
-- Details:
+- 详情：
 
-  Specify the text of the _edit this page_ link.
+  _编辑此页_ 链接的文字。
 
 ### editLinkPattern
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the pattern of the _edit this page_ link.
+  _编辑此页_ 链接的 Pattern 。
 
-  This will be used for generating the _edit this page_ link.
+  它将会用于生成 _编辑此页_ 的链接。
 
-  If you don't set this option, the pattern will be inferred from the [docsRepo](#docsrepo) option. But if your documentation repository is not hosted on a common platform, for example, GitHub, GitLab, Bitbucket, Gitee, etc., you have to set this option explicitly to make the _edit this page_ link work.
+  如果你不设置该选项，则会根据 [docsRepo](#docsrepo) 配置项来推断 Pattern 。但是如果你的文档仓库没有托管在常用的平台上，比如 GitHub 、 GitLab 、 Bitbucket 、 Gitee 等，那么你必须设置该选项才能使 _编辑此页_ 链接正常工作。
 
-- Usage:
+- 用法：
 
-  | Pattern   | Description                                                                                         |
-  | --------- | --------------------------------------------------------------------------------------------------- |
-  | `:repo`   | The docs repo url, i.e. [docsRepo](#docsrepo)                                                       |
-  | `:branch` | The docs repo branch, i.e. [docsBranch](#docsbranch)                                                |
-  | `:path`   | The path of the page source file, i.e. [docsDir](#docsdir) joins the relative path of the page file |
+  | Pattern   | 描述                                                              |
+  | --------- | ----------------------------------------------------------------- |
+  | `:repo`   | 文档仓库 URL ，即 [docsRepo](#docsrepo)                           |
+  | `:branch` | 文档仓库分支 ，即 [docsBranch](#docsbranch)                       |
+  | `:path`   | 页面源文件的路径，即 [docsDir](#docsdir) 拼接上页面文件的相对路径 |
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -476,221 +476,221 @@ export default {
 }
 ```
 
-The generated link will look like `'https://gitlab.com/owner/name/-/edit/master/docs/path/to/file.md'`.
+则会生成类似于 `'https://gitlab.com/owner/name/-/edit/master/docs/path/to/file.md'` 的链接。
 
 ### docsRepo
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the repository url of your documentation source files.
+  文档源文件的仓库 URL 。
 
-  This will be used for generating the _edit this page_ link.
+  它将会用于生成 _编辑此页_ 的链接。
 
-  If you don't set this option, it will use the [repo](#repo) option by default. But if your documentation source files are in a different repository, you will need to set this option.
+  如果你不设置该选项，则默认会使用 [repo](#repo) 配置项。但是如果你的文档源文件是在一个不同的仓库内，你就需要设置该配置项了。
 
 ### docsBranch
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'main'`
+- 默认值： `'main'`
 
-- Details:
+- 详情：
 
-  Specify the repository branch of your documentation source files.
+  文档源文件的仓库分支。
 
-  This will be used for generating the _edit this page_ link.
+  它将会用于生成 _编辑此页_ 的链接。
 
 ### docsDir
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `''`
+- 默认值： `''`
 
-- Details:
+- 详情：
 
-  Specify the directory of your documentation source files in the repository.
+  文档源文件存放在仓库中的目录名。
 
-  This will be used for generating the _edit this page_ link.
+  它将会用于生成 _编辑此页_ 的链接。
 
 ### lastUpdated
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable the _last updated timestamp_ or not.
+  是否启用 _最近更新时间戳_ 。
 
-  You can override this global option via [lastUpdated](./frontmatter.md#lastupdated) frontmatter in your pages. Notice that if you have already set this option to `false`, this feature will be disabled totally and could not be enabled in locales nor page frontmatter.
+  你可以通过页面的 [lastUpdated](./frontmatter.md#lastupdated) frontmatter 来覆盖这个全局配置。要注意的是，如果你已经将该选项设为了 `false` ，那么这个功能会被完全禁用，并且无法在 locales 或页面 frontmatter 中启用。
 
 ### lastUpdatedText
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'Last Updated'`
+- 默认值： `'Last Updated'`
 
-- Details:
+- 详情：
 
-  Specify the text of the _last updated timestamp_ label.
+  _最近更新时间戳_ 标签的文字。
 
 ### contributors
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable the _contributors list_ or not.
+  是否启用 _贡献者列表_ 。
 
-  You can override this global option via [contributors](./frontmatter.md#contributors) frontmatter in your pages. Notice that if you have already set this option to `false`, this feature will be disabled totally and could not be enabled in locales nor page frontmatter.
+  你可以通过页面的 [contributors](./frontmatter.md#contributors) frontmatter 来覆盖这个全局配置。要注意的是，如果你已经将该选项设为了 `false` ，那么这个功能会被完全禁用，并且无法在 locales 或页面 frontmatter 中启用。
 
 ### contributorsText
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'Contributors'`
+- 默认值： `'Contributors'`
 
-- Details:
+- 详情：
 
-  Specify the text of the _contributors list_ label.
+  _贡献者列表_ 标签的文字。
 
 ### tip
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'TIP'`
+- 默认值： `'TIP'`
 
-- Details:
+- 详情：
 
-  Specify the default title of the tip [custom containers](./markdown.md#custom-containers).
+  Tip [自定义容器](./markdown.md#自定义容器) 的默认标题。
 
 ### warning
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'WARNING'`
+- 默认值： `'WARNING'`
 
-- Details:
+- 详情：
 
-  Specify the default title of the warning [custom containers](./markdown.md#custom-containers).
+  Warning [自定义容器](./markdown.md#自定义容器) 的默认标题。
 
 ### danger
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'DANGER'`
+- 默认值： `'DANGER'`
 
-- Details:
+- 详情：
 
-  Specify the default title of the danger [custom containers](./markdown.md#custom-containers).
+  Danger [自定义容器](./markdown.md#自定义容器) 的默认标题。
 
 ### notFound
 
-- Type: `string[]`
+- 类型： `string[]`
 
-- Default: `['Not Found']`
+- 默认值： `['Not Found']`
 
-- Details:
+- 详情：
 
-  Specify the messages of the 404 page.
+  404 页面的提示信息。
 
-  The message will be randomly picked from the array when users enter the 404 page.
+  当用户进入 404 页面时，会从数组中随机选取一条信息进行展示。
 
 ### backToHome
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'Back to home'`
+- 默认值： `'Back to home'`
 
-- Details:
+- 详情：
 
-  Specify the text of the _back to home_ link in the 404 page.
+  404 页面中 _返回首页_ 链接的文字。
 
 ### openInNewWindow
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'open in new window'`
+- 默认值： `'open in new window'`
 
-- Details:
+- 详情：
 
-  Specify the `sr-only` text of the [ExternalLinkIcon](../plugin/external-link-icon.md#externallinkicon).
+  [ExternalLinkIcon](../plugin/external-link-icon.md#externallinkicon). 链接内的 `sr-only` 文字。
 
-  This is mainly for a11y purpose.
+  它主要是为了站点的可访问性 (a11y) 。
 
-- Also see:
-  - [Default Theme > Config Reference > themePlugins.externalLinkIcon](#themeplugins-externallinkicon)
+- 参考：
+  - [默认主题 > 配置 > themePlugins.externalLinkIcon](#themeplugins-externallinkicon)
 
 ### toggleColorMode
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'toggle color mode'`
+- 默认值： `'toggle color mode'`
 
-- Details:
+- 详情：
 
-  Title text for the color mode toggle button.
+  切换颜色模式按钮的标题文字。
 
-  This is mainly for a11y purpose.
+  它主要是为了站点的可访问性 (a11y) 。
 
-- Also see:
-  - [Default Theme > Config > colorModeSwitch](#colormodeswitch)
+- 参考：
+  - [默认主题 > 配置 > colorModeSwitch](#colormodeswitch)
 
 ### toggleSidebar
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'toggle sidebar'`
+- 默认值： `'toggle sidebar'`
 
-- Details:
+- 详情：
 
-  Title text for sidebar toggle button.
+  切换侧边栏按钮的标题文字。
 
-  This is mainly for a11y purpose.
+  它主要是为了站点的可访问性 (a11y) 。
 
-## Plugins Config
+## 插件配置
 
 ### themePlugins
 
-- Details:
+- 详情：
 
-  Configure the plugins that used by default theme.
+  设置默认主题使用的插件。
 
-  Default theme is using some plugins by default. You can disable a plugin if you really do not want to use it. Make sure you understand what the plugin is for before disabling it.
+  默认主题使用了一些插件，如果你确实不需要该插件，你可以选择禁用它。在禁用插件之前，请确保你已了解它的用途。
 
 ### themePlugins.activeHeaderLinks
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable [@vuepress/plugin-active-header-links](../plugin/active-header-links.md) or not.
+  是否启用 [@vuepress/plugin-active-header-links](../plugin/active-header-links.md) 。
 
-### themePlugins.backToTop
+#### themePlugins.backToTop
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable [@vuepress/plugin-back-to-top](../plugin/back-to-top.md) or not.
+  是否启用 [@vuepress/plugin-back-to-top](../plugin/back-to-top.md) 。
 
 ### themePlugins.container
 
-- Type: `Record<ContainerType, boolean>`
+- 类型： `Record<ContainerType, boolean>`
 
-- Details:
+- 详情：
 
-  Enable custom containers that powered by [@vuepress/plugin-container](../plugin/container.md) or not.
+  是否启用由 [@vuepress/plugin-container](../plugin/container.md) 支持的自定义容器。
 
-  `ContainerType` type is:
+  `ContainerType` 类型为：
 
   - `tip`
   - `warning`
@@ -699,45 +699,45 @@ The generated link will look like `'https://gitlab.com/owner/name/-/edit/master/
   - `codeGroup`
   - `codeGroupItem`
 
-- Also see:
-  - [Default Theme > Markdown > Custom Containers](./markdown.md#custom-containers)
+- 参考：
+  - [默认主题 > Markdown > 自定义容器](./markdown.md#自定义容器)
 
 ### themePlugins.externalLinkIcon
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable [@vuepress/plugin-external-link-icon](../plugin/external-link-icon.md) or not.
+  是否启用 [@vuepress/plugin-external-link-icon](../plugin/external-link-icon.md) 。
 
 ### themePlugins.git
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable [@vuepress/plugin-git](../plugin/git.md) or not.
+  是否启用 [@vuepress/plugin-git](../plugin/git.md) 。
 
 ### themePlugins.mediumZoom
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable [@vuepress/plugin-medium-zoom](../plugin/medium-zoom.md) or not.
+  是否启用 [@vuepress/plugin-medium-zoom](../plugin/medium-zoom.md) 。
 
 ### themePlugins.nprogress
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Enable [@vuepress/plugin-nprogress](../plugin/nprogress.md) or not.
+  是否启用 [@vuepress/plugin-nprogress](../plugin/nprogress.md) 。

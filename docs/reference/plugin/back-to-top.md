@@ -2,11 +2,11 @@
 
 <NpmBadge package="@vuepress/plugin-back-to-top" />
 
-This plugin will add a _back to top_ button to your site. The button will be displayed in the bottom right corner of the page when scrolling down. By clicking the button, the page will scroll to the top.
+该插件会给你的站点添加一个 _返回顶部_ 按钮。当页面向下滚动时，该按钮会显示在页面的右下角，点击它就会滚动到页面顶部。
 
-This plugin has been integrated into the default theme.
+该插件已经集成到默认主题中。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-back-to-top@next
@@ -22,8 +22,8 @@ export default {
 }
 ```
 
-## Styles
+## 样式
 
-You can customize the style of the _back to top_ button via CSS variables:
+你可以通过 CSS 变量来自定义 _返回顶部_ 按钮的样式：
 
 @[code css](@vuepress/plugin-back-to-top/src/client/styles/vars.css)

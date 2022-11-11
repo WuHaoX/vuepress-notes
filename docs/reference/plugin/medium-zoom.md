@@ -2,11 +2,11 @@
 
 <NpmBadge package="@vuepress/plugin-medium-zoom" />
 
-Integrate [medium-zoom](https://github.com/francoischalifour/medium-zoom#readme) into VuePress, which can provide the ability to zoom images.
+将 [medium-zoom](https://github.com/francoischalifour/medium-zoom#readme) 集成到 VuePress 中，为图片提供可缩放的功能。
 
-This plugin has been integrated into the default theme.
+该插件已经集成到默认主题中。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-medium-zoom@next
@@ -18,52 +18,52 @@ import { mediumZoomPlugin } from '@vuepress/plugin-medium-zoom'
 export default {
   plugins: [
     mediumZoomPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Options
+## 配置项
 
 ### selector
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `':not(a) > img'`
+- 默认值： `':not(a) > img'`
 
-- Details:
+- 详情：
 
-  Selector of zoomable images.
+  可缩放的图片的选择器。
 
-  By default this plugin will make all images zoomable except those inside `<a>` tags.
+  默认情况下，该插件会使 `<a>` 标签以外的所有图片都支持缩放。
 
 ### delay
 
-- Type: `number`
+- 类型： `number`
 
-- Default: `500`
+- 默认值： `500`
 
-- Details:
+- 详情：
 
-  Delay in milliseconds.
+  以毫秒为单位的延迟。
 
-  After navigating to a new page, this plugin will make images zoomable with a delay.
+  在切换路由进入一个新页面时，该插件会在一定延迟后才使页面内的图片支持缩放。
 
 ### zoomOptions
 
-- Type: `Object`
+- 类型： `Object`
 
-- Details:
+- 详情：
 
-  Options for medium-zoom.
+  medium-zoom 的配置项。
 
-- Also see:
+- 参考：
   - [medium-zoom > Options](https://github.com/francoischalifour/medium-zoom#options)
 
-## Styles
+## 样式
 
-You can customize most of the zoom styles via [zoomOptions](#zoomoptions), while this plugin also provides some CSS variables for additional customization:
+你可以通过 [zoomOptions](#zoomoptions) 对大部分的缩放样式进行自定义，不过作为补充，该插件同样提供了一些 CSS 变量：
 
 @[code css](@vuepress/plugin-medium-zoom/src/client/styles/vars.css)
 
@@ -71,15 +71,15 @@ You can customize most of the zoom styles via [zoomOptions](#zoomoptions), while
 
 ### useMediumZoom
 
-- Details:
+- 详情：
 
-  Returns the `Zoom` instance that used by this plugin, so that you can use the instance [methods](https://github.com/francoischalifour/medium-zoom#methods) directly.
+  返回该插件使用的 `Zoom` 实例，便于你直接使用实例上的 [methods](https://github.com/francoischalifour/medium-zoom#methods) 。
 
-  This plugin will make images zoomable after navigating to current page. But if you are going to add new images dynamically, you may need this method to make those new images zoomable, too.
+  该插件会在切换路由进入当前页面时使图片支持缩放。但如果你要动态添加新图片，那么你可能就需要这个方法来让这些新图片也支持缩放。
 
-  This plugin adds an extra `refresh` method on the `Zoom` instance, which will call `zoom.detach()` then `zoom.attach()` with the [selector](#selector) as the default parameter. It will help you to refresh the zoomable images for current page.
+  该插件在 `Zoom` 实例上额外添加了一个 `refresh` 方法，它将使用 [selector](#selector) 作为默认参数，先调用 `zoom.detach()` 再调用 `zoom.attach()` ，便于你快速刷新当前页面图片的缩放状态。
 
-- Example:
+- 示例：
 
 ```ts
 import { nextTick } from 'vue'
@@ -89,9 +89,9 @@ export default {
   setup() {
     const zoom = useMediumZoom()
 
-    // ... do something to add new images in current page
-  
-    // then you may need to call `refresh` manually to make those new images zoomable
+    // ... 进行了一些操作，在当前页面添加了新的图片
+
+    // 此时你可能需要手动调用 `refresh` 来让这些新图片支持缩放
     nextTick(() => {
       zoom.refresh()
     })

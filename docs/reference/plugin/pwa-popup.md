@@ -2,13 +2,13 @@
 
 <NpmBadge package="@vuepress/plugin-pwa-popup" />
 
-Provide a popup component for users to activate the new PWA service worker manually.
+提供一个弹窗组件，允许用户手动刷新 PWA Service Worker 。
 
-This plugin must be used together with [pwa plugin](./pwa.md), and the `skipWaiting` option must not be set to `true`.
+该插件必须和 [pwa 插件](./pwa.md) 一起使用，并且 `skipWaiting` 配置项不能设置为 `true` 。
 
-When the new service worker is ready, a popup will appear in the right bottom of the page to ask users to activate the waiting service worker.
+当新的 Service Worker 就绪时，会在页面右下角出现一个弹窗，询问用户是否需要激活处于 Waiting 状态的 Service Worker 。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-pwa-popup@next
@@ -22,25 +22,25 @@ export default {
   plugins: [
     pwaPlugin(),
     pwaPopupPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Options
+## 配置项
 
 ### locales
 
-- Type: `Record<string, { message: string, buttonText: string }>`
+- 类型： `Record<string, { message: string, buttonText: string }>`
 
-- Details:
+- 详情：
 
-  The messages of the popup in different locales.
+  弹窗在不同 locales 下的信息。
 
-  If this option is not specified, it will fallback to default messages.
+  如果没有指定该配置项，它会降级使用默认信息。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -62,11 +62,11 @@ export default {
 }
 ```
 
-- Also see:
-  - [Guide > I18n](../../guide/i18n.md)
+- 参考：
+  - [指南 > 多语言支持](../../guide/i18n.md)
 
-## Styles
+## 样式
 
-You can customize the style of the popup via CSS variables:
+你可以通过 CSS 变量来自定义弹窗的样式：
 
 @[code css](@vuepress/plugin-pwa-popup/src/client/styles/vars.css)

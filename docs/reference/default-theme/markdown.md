@@ -2,9 +2,9 @@
 
 <NpmBadge package="@vuepress/theme-default" />
 
-## Custom Containers
+## 自定义容器
 
-- Usage:
+- 使用：
 
   ```md
   ::: <type> [title]
@@ -12,88 +12,88 @@
   :::
   ```
 
-  The `type` is required, and the `title` and `content` are optional.
+  `type` 是必需的， `title` 和 `content` 是可选的。
 
-  Supported `type` :
+  支持的 `type` 有：
     - `tip`
     - `warning`
     - `danger`
     - `details`
-    - Alias of [CodeGroup](./components.md#codegroup) and [CodeGroupItem](./components.md#codegroupitem):
+    - [CodeGroup](./components.md#codegroup) 和 [CodeGroupItem](./components.md#codegroupitem) 的别名：
       - `code-group`
       - `code-group-item`
 
-- Example 1 (default title):
+- 示例 1 （默认标题）：
 
-**Input**
+**输入**
 
 ```md
 ::: tip
-This is a tip
+这是一个提示
 :::
 
 ::: warning
-This is a warning
+这是一个警告
 :::
 
 ::: danger
-This is a dangerous warning
+这是一个危险警告
 :::
 
 ::: details
-This is a details block
+这是一个 details 标签
 :::
 ```
 
-**Output**
+**输出**
 
 ::: tip
-This is a tip
+这是一个提示
 :::
 
 ::: warning
-This is a warning
+这是一个警告
 :::
 
 ::: danger
-This is a dangerous warning
+这是一个危险警告
 :::
 
 ::: details
-This is a details block
+这是一个 details 标签
 :::
 
-- Example 2 (custom title):
+- 示例 2 （自定义标题）：
 
-**Input**
+**输入**
 
 ````md
 ::: danger STOP
-Danger zone, do not proceed
+危险区域，禁止通行
 :::
 
-::: details Click me to view the code
+::: details 点击查看代码
 ```ts
-console.log('Hello, VuePress!')
+console.log('你好，VuePress！')
 ```
 :::
 ````
 
-**Output**
+**输出**
 
 ::: danger STOP
-Danger zone, do not proceed
+危险区域，禁止通行
 :::
 
-::: details Click me to view the code
+::: details 点击查看代码
 ```ts
-console.log('Hello, VuePress!')
+console.log('你好，VuePress！')
 ```
 :::
 
-- Example 3 (code group alias):
+- 示例 3 （Code Group 别名）：
 
-**Input**
+**输入**
 
 ````md
 :::: code-group
@@ -110,7 +110,7 @@ const bar = 'bar'
 ::::
 ````
 
-**Output**
+**输出**
 
 :::: code-group
 ::: code-group-item FOO
