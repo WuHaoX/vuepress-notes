@@ -1,31 +1,31 @@
-# Getting Started
+# 快速上手
 
 ::: warning
-VuePress v2 is currently in `beta` stage. It's ready to be used for building your site, but the config and API are not stable enough, which is likely to have breaking changes between minor releases. So make sure to read the [changelog](https://github.com/vuepress/vuepress-next/blob/main/CHANGELOG.md) carefully each time you upgrade a beta version.
+VuePress v2 目前仍处于 `beta` 阶段。你已经可以用它来构建你的站点，但是它的配置和 API 还不够稳定，很可能会在 Minor 版本中发生 Breaking Changes 。因此，在每次更新 beta 版本之后，请一定要仔细阅读 [更新日志](https://github.com/vuepress/vuepress-next/blob/main/CHANGELOG.md)。
 :::
 
-## Prerequisites
+## 依赖环境
 
 - [Node.js v14.18.0+](https://nodejs.org/)
-- [Yarn v1 classic](https://classic.yarnpkg.com/en/) (Optional)
+- [Yarn v1 classic](https://classic.yarnpkg.com/zh-Hans/) （可选）
 
 ::: tip
-- With [pnpm](https://pnpm.io/), you may need to install `vue` and `@vuepress/client` as peer-dependencies, i.e. `pnpm add -D vue @vuepress/client@next`.
-- With [yarn 2](https://yarnpkg.com/), you need to set `nodeLinker: 'node-modules'` in your [`.yarnrc.yml`](https://yarnpkg.com/configuration/yarnrc#nodeLinker) file.
+- 使用 [pnpm](https://pnpm.io/zh/) 时，你可能需要安装 `vue` 和 `@vuepress/client` 作为 peer-dependencies ，即 `pnpm add -D vue @vuepress/client@next` 。
+- 使用 [yarn 2](https://yarnpkg.com/) 时，你需要在 [`.yarnrc.yml`](https://yarnpkg.com/configuration/yarnrc#nodeLinker) 文件中设置 `nodeLinker: 'node-modules'` 。
 :::
 
-## Manual Installation
+## 手动安装
 
-This section will help you build a basic VuePress documentation site from ground up. If you already have an existing project and would like to keep documentation inside the project, start from Step 3.
+这一章节会帮助你从头搭建一个简单的 VuePress 文档网站。如果你想在一个现有项目中使用 VuePress 管理文档，从步骤 3 开始。
 
-- **Step 1**: Create and change into a new directory
+- **步骤1**: 创建并进入一个新目录
 
 ```bash
 mkdir vuepress-starter
 cd vuepress-starter
 ```
 
-- **Step 2**: Initialize your project
+- **步骤2**: 初始化项目
 
 <CodeGroup>
   <CodeGroupItem title="YARN" active>
@@ -47,7 +47,8 @@ npm init
   </CodeGroupItem>
 </CodeGroup>
 
-- **Step 3**: Install VuePress locally
+
+- **步骤3**: 将 VuePress 安装为本地依赖
 
 <CodeGroup>
   <CodeGroupItem title="YARN" active>
@@ -67,7 +68,7 @@ npm install -D vuepress@next
   </CodeGroupItem>
 </CodeGroup>
 
-- **Step 4**: Add some [scripts](https://classic.yarnpkg.com/en/docs/package-json#toc-scripts) to `package.json`
+- **步骤4**: 在 `package.json` 中添加一些 [scripts](https://classic.yarnpkg.com/zh-Hans/docs/package-json#toc-scripts)
 
 ```json
 {
@@ -78,7 +79,7 @@ npm install -D vuepress@next
 }
 ```
 
-- **Step 5**: Add the default temp and cache directory to `.gitignore` file
+- **步骤5**: 将默认的临时目录和缓存目录添加到 `.gitignore` 文件中
 
 ```bash
 echo 'node_modules' >> .gitignore
@@ -86,14 +87,14 @@ echo '.temp' >> .gitignore
 echo '.cache' >> .gitignore
 ```
 
-- **Step 6**: Create your first document
+- **步骤6**: 创建你的第一篇文档
 
 ```bash
 mkdir docs
 echo '# Hello VuePress' > docs/README.md
 ```
 
-- **Step 7**: Serve the documentation site in the local server
+- **步骤7**: 在本地启动服务器来开发你的文档网站
 
 <CodeGroup>
   <CodeGroupItem title="YARN" active>
@@ -113,6 +114,6 @@ npm run docs:dev
   </CodeGroupItem>
 </CodeGroup>
 
-  VuePress will start a hot-reloading development server at [http://localhost:8080](http://localhost:8080). When you modify your markdown files, the content in the browser will be auto updated.
+  VuePress 会在 [http://localhost:8080](http://localhost:8080) 启动一个热重载的开发服务器。当你修改你的 Markdown 文件时，浏览器中的内容也会自动更新。
 
-By now, you should have a basic but functional VuePress documentation site. Next, learn about the basics of [configuration](./configuration.md) in VuePress.
+现在，你应该已经有了一个简单可用的 VuePress 文档网站。接下来，了解一下 VuePress [配置](./configuration.md) 相关的内容。

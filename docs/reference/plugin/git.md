@@ -2,13 +2,13 @@
 
 <NpmBadge package="@vuepress/plugin-git" />
 
-This plugin will collect git information of your pages, including the created and updated time, the contributors, etc.
+该插件会收集你的页面的 Git 信息，包括创建和更新时间、贡献者等。
 
-The [lastUpdated](../default-theme/config.md#lastupdated) and [contributors](../default-theme/config.md#contributors) of default theme is powered by this plugin.
+默认主题的 [lastUpdated](../default-theme/config.md#lastupdated) 和 [contributors](../default-theme/config.md#contributors) 就是由该插件支持的。
 
-This plugin is mainly used to develop themes. You won't need to use it directly in most cases.
+该插件主要用于开发主题，大部分情况下你不需要直接使用它。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-git@next
@@ -20,65 +20,66 @@ import { gitPlugin } from '@vuepress/plugin-git'
 export default {
   plugins: [
     gitPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Git Repository
+## Git 仓库
 
-This plugin requires your project to be inside a [Git Repository](https://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository), so that it can collect information from the commit history.
+该插件要求你的项目在 [Git 仓库](https://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository) 下，这样它才能从提交历史记录中收集信息。
 
-You should ensure all commits are available when building your site. For example, CI workflows usually clone your repository with [--depth 1](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt) to avoid fetching all commits, so you should disable the behavior to make this plugin work properly in CI.
+在构建站点时，你应该确保所有的提交记录是可以获取到的。举例来说， CI 工作流通常会在克隆你的仓库时添加 [--depth 1](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt) 参数来避免拉取全部的提交记录，因此你需要禁用这个功能，以便该插件在 CI 可以中正常使用。
 
 ::: warning
-This plugin will significantly slow down the speed of data preparation, especially when you have a lot of pages. You can consider disabling this plugin in `dev` mode to get better development experience.
+该插件会显著降低准备数据的速度，特别是在你的页面数量很多的时候。你可以考虑在 `dev` 模式下禁用该插件来获取更好的开发体验。
 :::
 
-## Options
+## 配置项
 
 ### createdTime
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Whether to collect page created time or not.
+  是否收集页面的创建时间。
 
 ### updatedTime
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Whether to collect page updated time or not.
+  是否收集页面的更新时间。
 
 ### contributors
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `true`
+- 默认值： `true`
 
-- Details:
+- 详情：
 
-  Whether to collect page contributors or not.
+  是否收集页面的贡献者。
+
 
 ## Frontmatter
 
 ### gitInclude
 
-- Type: `string[]`
+- 类型： `string[]`
 
-- Details:
+- 详情：
 
-  An array of relative paths to be included when calculating page data.
+  文件相对路径组成的数组，该数组中的文件会在计算页面数据时被包含在内。
 
-- Example:
+- 示例：
 
 ```md
 ---
@@ -88,11 +89,11 @@ gitInclude:
 ---
 ```
 
-## Page Data
+## 页面数据
 
-This plugin will add a `git` field to page data.
+该插件会向页面数据中添加一个 `git` 字段。
 
-After using this plugin, you can get the collected git information in page data:
+在使用该插件后，可以在页面数据中获取该插件收集到的 Git 信息：
 
 ```ts
 import { usePageData } from '@vuepress/client'
@@ -108,27 +109,27 @@ export default {
 
 ### git.createdTime
 
-- Type: `number`
+- 类型： `number`
 
-- Details:
+- 详情：
 
-  Unix timestamp in milliseconds of the first commit of the page.
+  页面第一次提交的 Unix 毫秒时间戳。
 
-  This attribute would take the minimum of the first commit timestamps of the current page and the files listed in [gitInclude](#gitinclude).
+  该属性将取当前页面及 [gitInclude](#gitinclude) 中所列文件的第一次提交的时间戳的最小值。
 
 ### git.updatedTime
 
-- Type: `number`
+- 类型： `number`
 
-- Details:
+- 详情：
 
-  Unix timestamp in milliseconds of the last commit of the page.
+  页面最后一次提交的 Unix 毫秒时间戳。
 
-  This attribute would take the maximum of the last commit timestamps of the current page and the files listed in [gitInclude](#gitinclude).
+  该属性将取当前页面及 [gitInclude](#gitinclude) 中所列文件的最后一次提交的时间戳的最大值。
 
 ### git.contributors
 
-- Type: `GitContributor[]`
+- 类型： `GitContributor[]`
 
 ```ts
 interface GitContributor {
@@ -138,8 +139,8 @@ interface GitContributor {
 }
 ```
 
-- Details:
+- 详情：
 
-  The contributors information of the page.
+  页面的贡献者信息。
 
-  This attribute would also include contributors to the files listed in [gitInclude](#gitinclude).
+  该属性将会包含 [gitInclude](#gitinclude) 所列文件的贡献者。

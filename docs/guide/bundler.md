@@ -1,12 +1,12 @@
-# Bundler
+# 打包工具
 
-VuePress has been using [Webpack](https://webpack.js.org/) as the bundler to dev and build sites. Since VuePress v2, other bundlers are also supported, and now we are using [Vite](https://vitejs.dev/) as the default bundler. Of course, you can still choose to use Webpack.
+VuePress 一直以来都在使用 [Webpack](https://webpack.js.org/) 作为打包工具来进行网站的开发和构建。从 VuePress v2 开始，我们还支持使用其他的打包工具，并且现在使用 [Vite](https://vitejs.dev/) 作为默认的打包工具。当然，你仍然可以选择使用 Webpack 。 
 
-## Choose a Bundler
+## 选择一个打包工具
 
-When using the [vuepress](https://www.npmjs.com/package/vuepress) package, Vite bundler is installed and used automatically.
+在使用 [vuepress](https://www.npmjs.com/package/vuepress) 包时，会自动安装和使用 Vite 打包工具。
 
-If you want to use Webpack bundler instead, you can remove it and install the [vuepress-webpack](https://www.npmjs.com/package/vuepress-webpack) package instead:
+如果你想改为使用 Webpack 打包工具，那么你可以移除它，改为安装 [vuepress-webpack](https://www.npmjs.com/package/vuepress-webpack) 包：
 
 <CodeGroup>
   <CodeGroupItem title="YARN" active>
@@ -29,14 +29,14 @@ npm install -D vuepress-webpack@next
 </CodeGroup>
 
 ::: tip
-In fact, the [vuepress](https://www.npmjs.com/package/vuepress) package is just a wrapper of the [vuepress-vite](https://www.npmjs.com/package/vuepress-vite) package.
+实际上， [vuepress](https://www.npmjs.com/package/vuepress) 包只是 [vuepress-vite](https://www.npmjs.com/package/vuepress-vite) 包的一个封装而已。
 :::
 
-## Configure Bundler
+## 配置打包工具
 
-Generally, you could use a bundler without extra configuration, because we have already configured them properly to work with VuePress.
+一般情况下，你不要任何额外配置就可以使用打包工具，因为我们已经帮你配置好了它们。
 
-You can configure bundler for advanced usage via the [bundler](../reference/config.md#bundler) option:
+通过 [bundler](../reference/config.md#bundler) 配置项，你可以对打包工具进行进阶配置：
 
 ```ts
 import { viteBundler } from 'vuepress'
@@ -55,4 +55,4 @@ export default {
 }
 ```
 
-You can refer to [Bundlers > Vite](../reference/bundler/vite.md) and [Bundlers > Webpack](../reference/bundler/webpack.md) to check out all options of the corresponding bundler.
+你可以参考 [打包工具 > Vite](../reference/bundler/vite.md) 和 [打包工具 > Webpack](../reference/bundler/webpack.md) 来查看对应打包工具的所有配置项。

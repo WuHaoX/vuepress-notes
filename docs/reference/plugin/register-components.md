@@ -2,9 +2,9 @@
 
 <NpmBadge package="@vuepress/plugin-register-components" />
 
-Register Vue components from component files or directory automatically.
+根据组件文件或目录自动注册 Vue 组件。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-register-components@next
@@ -16,29 +16,29 @@ import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 export default {
   plugins: [
     registerComponentsPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Options
+## 配置项
 
 ### components
 
-- Type: `Record<string, string>`
+- 类型： `Record<string, string>`
 
-- Default: `{}`
+- 默认值： `{}`
 
-- Details:
+- 详情：
 
-  An object that defines name of components and their corresponding file path.
+  一个定义了组件名称和其对应文件路径的对象。
 
-  The key will be used as the component name, and the value is an absolute path of the component file.
+  键会被用作组件名称，值是组件文件的绝对路径。
 
-  If the component name from this option conflicts with [componentsDir](#componentsdir) option, this option will have a higher priority.
+  如果该配置项中的组件名称和 [componentsDir](#componentsdir) 配置项发生冲突，那么该配置项会有更高的优先级。
 
-- Example:
+- 示例：
 
 ```ts
 import { getDirname, path } from '@vuepress/utils'
@@ -58,17 +58,17 @@ export default {
 
 ### componentsDir
 
-- Type: `string | null`
+- 类型： `string | null`
 
-- Default: `null`
+- 默认值： `null`
 
-- Details:
+- 详情：
 
-  Absolute path to the components directory.
+  组件目录的绝对路径。
 
-  Files in this directory which are matched with [componentsPatterns](#componentspatterns) will be registered as Vue components automatically.
+  该目录下匹配 [componentsPatterns](#componentspatterns) 的文件会被自动注册为 Vue 组件。
 
-- Example:
+- 示例：
 
 ```ts
 import { getDirname, path } from '@vuepress/utils'
@@ -84,7 +84,7 @@ export default {
 }
 ```
 
-Components directory:
+组件目录：
 
 ```bash
 components
@@ -92,7 +92,7 @@ components
 └─ Baz.vue
 ```
 
-Components will be registered like this:
+组件会像这样被注册：
 
 ```ts
 import { defineAsyncComponent } from 'vue'
@@ -110,26 +110,26 @@ app.component(
 
 ### componentsPatterns
 
-- Type: `string[]`
+- 类型： `string[]`
 
-- Default: `['**/*.vue']`
+- 默认值： `['**/*.vue']`
 
-- Details:
+- 详情：
 
-  Patterns to match component files using [globby](https://github.com/sindresorhus/globby).
+  使用 [globby](https://github.com/sindresorhus/globby) 来匹配组件文件的 Patterns 。
 
-  The patterns are relative to [componentsDir](#componentsdir).
+  该 Patterns 是相对于 [componentsDir](#componentsdir) 目录的。
 
 ### getComponentName
 
-- Type: `(filename: string) => string`
+- 类型： `(filename: string) => string`
 
-- Default: `(filename) => path.trimExt(filename.replace(/\/|\\/g, '-'))`
+- 默认值： `(filename) => path.trimExt(filename.replace(/\/|\\/g, '-'))`
 
-- Details:
+- 详情：
 
-  A function to get component name from the filename.
+  用于从文件名获取对应组件名称的函数。
   
-  It will only take effect on the files in the [componentsDir](#componentsdir) which are matched with the [componentsPatterns](#componentspatterns).
+  它只会对 [componentsDir](#componentsdir) 目录下匹配了 [componentsPatterns](#componentspatterns) 的文件生效。
 
-  Notice that the `filename` is a filepath relative to [componentsDir](#componentsdir).
+  注意，这里的 `filename` 是相对于 [componentsPatterns](#componentspatterns) 目录的文件路径。

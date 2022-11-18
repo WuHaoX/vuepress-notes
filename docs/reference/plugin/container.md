@@ -2,13 +2,13 @@
 
 <NpmBadge package="@vuepress/plugin-container" />
 
-Register markdown custom containers in your VuePress site.
+为你的 VuePress 站点注册自定义容器。
 
-This plugin simplifies the use of [markdown-it-container](https://github.com/markdown-it/markdown-it-container), but also retains its original capabilities.
+该插件简化了 [markdown-it-container](https://github.com/markdown-it/markdown-it-container) 的使用方法，但同时也保留了其原本的能力。
 
-The [Custom Containers](../default-theme/markdown.md#custom-containers) of default theme is powered by this plugin.
+默认主题的 [自定义容器](../default-theme/markdown.md#自定义容器) 就是由该插件支持的。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-container@next
@@ -20,13 +20,13 @@ import { containerPlugin } from '@vuepress/plugin-container'
 export default {
   plugins: [
     containerPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Container Syntax
+## 容器语法
 
 ```md
 ::: <type> [info]
@@ -34,37 +34,37 @@ export default {
 :::
 ```
 
-- The `type` is required and should be specified via [type](#type) option.
-- The `info` is optional, and the default value can be specified via `defaultInfo` in [locales](#locales) option.
-- The `content` can be any valid markdown content.
+- `type` 是必需的，应通过 [type](#type) 配置项来指定。
+- `info` 是可选的，其默认值可以通过 [locales](#locales) 的 `defaultInfo` 配置项来指定。
+- `content` 可是任何合法的 Markdown 内容。
 
 ::: tip
-This plugin can be used multiple times to support different types of containers.
+该插件可以被多次使用，以便支持不同类型的容器。
 :::
 
-## Options
+## 配置项
 
 ### type
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  The type of the container.
+  容器的类型。
 
-  It will be used as the `name` param of [markdown-it-container](https://github.com/markdown-it/markdown-it-container#api).
+  它将会被用作 [markdown-it-container](https://github.com/markdown-it/markdown-it-container#api) 的 `name` 参数。
 
 ### locales
 
-- Type: `Record<string, { defaultInfo: string }>`
+- 类型： `Record<string, { defaultInfo: string }>`
 
-- Details:
+- 详情：
 
-  The default `info` of the container in different locales.
+  容器在不同 locales 下的默认 `info` 。
 
-  If this option is not specified, the default `info` will fallback to the uppercase of the [type](#type) option.
+  如果没有指定该配置项，默认 `info` 会使用大写的 [type](#type) 。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -84,49 +84,49 @@ export default {
 }
 ```
 
-- Also see:
-  - [Guide > I18n](../../guide/i18n.md)
+- 参考：
+  - [指南 > 多语言支持](../../guide/i18n.md)
 
 ### before
 
-- Type: `(info: string) => string`
+- 类型： `(info: string) => string`
 
-- Default:
+- 默认值：
 
 ```ts
 (info: string): string =>
   `<div class="custom-container ${type}">${info ? `<p class="custom-container-title">${info}</p>` : ''}\n`
 ```
 
-- Details:
+- 详情：
 
-  A function to render the starting tag of the container.
+  一个用于渲染容器起始标签的函数。
 
-  The first param is the `info` part of [container syntax](#container-syntax).
+  第一个参数是 [容器语法](#容器语法) 的 `info` 部分。
 
-  This option will not take effect if you don't specify the [after](#after) option.
+  如果你没有设置 [after](#after) 配置项，则该配置项也不会生效。
 
 ### after
 
-- Type: `(info: string) => string`
+- 类型： `(info: string) => string`
 
-- Default:
+- 默认值：
 
 ```ts
 (): string => '</div>\n'
 ```
 
-- Details:
+- 详情：
 
-  A function to render the ending tag of the container.
+  一个用于渲染容器结束标签的函数。
 
-  The first param is the `info` part of [container syntax](#container-syntax).
+  第一个参数是 [容器语法](#容器语法) 的 `info` 部分。
 
-  This option will not take effect if you don't specify the [before](#before) option.
+  如果你没有设置 [before](#before) 配置项，则该配置项也不会生效。
 
 ### render
 
-- Type:
+- 类型：
 
 ```ts
 type MarkdownItContainerRenderFunction = (
@@ -138,24 +138,24 @@ type MarkdownItContainerRenderFunction = (
 ) => string
 ```
 
-- Details:
+- 详情：
 
-  The `render` option of [markdown-it-container](https://github.com/markdown-it/markdown-it-container#api).
+  [markdown-it-container](https://github.com/markdown-it/markdown-it-container#api) 的 `render` 配置项。
 
-  This plugin uses a default `render` function. If you specify this option, the default `render` function will be replaced, and the [locales](#locales), [before](#before) and [after](#after) options will be ignored.
+  该插件使用了一个默认的 `render` 函数。但如果你指定了该配置项，那么默认的 `render` 函数就会被替换掉，此时 [locales](#locales) 、 [before](#before) 和 [after](#after) 配置项都会被忽略。
 
 ### validate
 
-- Type: `(params: string) => boolean`
+- 类型： `(params: string) => boolean`
 
-- Details:
+- 详情：
 
-  The `validate` option of [markdown-it-container](https://github.com/markdown-it/markdown-it-container#api).
+  [markdown-it-container](https://github.com/markdown-it/markdown-it-container#api) 的 `validate` 配置项。
 
 ### marker
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  The `marker` option of [markdown-it-container](https://github.com/markdown-it/markdown-it-container#api).
+  [markdown-it-container](https://github.com/markdown-it/markdown-it-container#api) 的 `marker` 配置项。

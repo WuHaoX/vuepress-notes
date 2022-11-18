@@ -2,15 +2,15 @@
 
 <NpmBadge package="@vuepress/bundler-vite" />
 
-Vite bundler is provided by [@vuepress/bundler-vite](https://www.npmjs.com/package/@vuepress/bundler-vite) package. It is a dependency of the [vuepress](https://www.npmjs.com/package/vuepress) package, and you can also install it separately.
+Vite 打包工具是由 [@vuepress/bundler-vite](https://www.npmjs.com/package/@vuepress/bundler-vite) 包提供的。它是 [vuepress](https://www.npmjs.com/package/vuepress) 包的依赖之一，当然你也可以单独安装它：
 
 ```bash
 npm i -D @vuepress/bundler-vite@next
 ```
 
-## Options
+## 配置项
 
-Reference of vite bundler options:
+Vite 打包工具的配置项：
 
 ```ts
 import { viteBundler } from '@vuepress/bundler-vite'
@@ -26,18 +26,18 @@ export default defineUserConfig({
 
 ### viteOptions
 
-- Details:
+- 详情：
 
-  Accepts all options of Vite.
+  接收 Vite 的所有配置项。
 
-- Also see:
-  - [Vite > Config](https://vitejs.dev/config/)
+- 参考：
+  - [Vite > Config](https://cn.vitejs.dev/config/)
 
 ### vuePluginOptions
 
-- Details:
+- 详情：
 
-  Accepts all options of [@vitejs/plugin-vue](https://www.npmjs.com/package/@vitejs/plugin-vue).
+  接收 [@vitejs/plugin-vue](https://www.npmjs.com/package/@vitejs/plugin-vue) 的所有配置项。
 
-- Also see:
-  - [Vite > Plugins > Official Plugins](https://vitejs.dev/plugins/#vitejs-plugin-vue)
+- 参考：
+  - [Vite > 插件 > 官方插件](https://cn.vitejs.dev/plugins/#vitejsplugin-vue)

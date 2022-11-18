@@ -1,4 +1,4 @@
-# Built-in Components
+# 内置组件
 
 <NpmBadge package="@vuepress/theme-default" />
 
@@ -6,18 +6,18 @@
 
 - Props:
   - type
-    - Type: `'tip' | 'warning' | 'danger'`
-    - Default: `'tip'`
+    - 类型： `'tip' | 'warning' | 'danger'`
+    - 默认值： `'tip'`
   - text
-    - Type: `string`
-    - Default: `''`
+    - 类型： `string`
+    - 默认值： `''`
   - vertical
-    - Type: `'top' | 'middle' | 'bottom' | undefined`
-    - Default: `undefined`
+    - 类型： `'top' | 'middle' | 'bottom' | undefined`
+    - 默认值： `undefined`
 
-- Example:
+- 示例：
 
-**Input**
+**输入**
 
 ```md
 - VuePress - <Badge type="tip" text="v2" vertical="top" />
@@ -25,7 +25,7 @@
 - VuePress - <Badge type="danger" text="v2" vertical="bottom" />
 ```
 
-**Output**
+**输出**
 
 - VuePress - <Badge type="tip" text="v2" vertical="top" />
 - VuePress - <Badge type="warning" text="v2" vertical="middle" />
@@ -33,29 +33,29 @@
 
 ## CodeGroup
 
-- Details:
+- 详情：
 
-  Wrapper of the [CodeGroupItem](#codegroupitem) components.
+  [CodeGroupItem](#codegroupitem) 组件的 Wrapper 。
 
 ## CodeGroupItem
 
 - Props:
   - title
-    - Type: `string`
-    - Required: `true`
+    - 类型： `string`
+    - 是否必需： `true`
   - active
-    - Type: `boolean`
-    - Default: `false`
+    - 类型： `boolean`
+    - 默认值： `false`
 
-- Details:
+- 详情：
 
-  This component must be placed inside a [CodeGroup](#codegroup) component.
+  该组件必须放置在 [CodeGroup](#codegroup) 组件的内部。
 
-  Use the `active` prop to set the initial active item, or the first item will be activated by default.
+  可以通过 `active` Prop 来设置初始激活的元素。如果不设置，默认激活第一个元素。
 
-- Example:
+- 示例：
 
-**Input**
+**输入**
 
 ````md
 <CodeGroup>
@@ -77,7 +77,7 @@ npm install
 </CodeGroup>
 ````
 
-**Output**
+**输出**
 
 <CodeGroup>
   <CodeGroupItem title="YARN">
@@ -98,11 +98,11 @@ npm install
 </CodeGroup>
 
 ::: warning
-You must add an empty line between the starting tag of `<CodeGroupItem>` and the code fence, otherwise the code fence will not be parsed correctly by Markdown.
+你必须在 `<CodeGroupItem>` 的开始标签和代码块之间添加一个空行，否则代码块无法被 Markdown 正确解析。
 
-All content must be valid Markdown first, and then a Vue SFC.
+所有内容首先都必须是合法的 Markdown ，然后才是一个 Vue SFC 。
 
-Learn more: [Cookbook > Markdown and Vue SFC](../../advanced/cookbook/markdown-and-vue-sfc.md)
+了解更多： [Cookbook > Markdown 与 Vue SFC](../../advanced/cookbook/markdown-and-vue-sfc.md)
 
-Alternatively, you can use the [custom containers](./markdown.md#custom-containers).
+或者你可以选择使用 [自定义容器](./markdown.md#自定义容器) 。
 :::

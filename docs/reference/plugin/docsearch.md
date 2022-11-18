@@ -2,15 +2,15 @@
 
 <NpmBadge package="@vuepress/plugin-docsearch" />
 
-Integrate [Algolia DocSearch](https://docsearch.algolia.com/) into VuePress, which can provide search to your documentation site.
+将 [Algolia DocSearch](https://docsearch.algolia.com/) 集成到 VuePress 中，为你的文档网站提供搜索功能。
 
 ::: tip
-Default theme will add DocSearch to the navbar once you configure this plugin correctly.
+当你正确配置该插件后，默认主题会把 DocSearch 按钮添加到导航栏。
 
-This plugin may not be used directly in other themes, so you'd better refer to the documentation of your theme for more details.
+该插件不一定能在其他主题中直接使用，因此你应参考主题本身的文档来获取更多信息。
 :::
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-docsearch@next
@@ -22,55 +22,54 @@ import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 export default {
   plugins: [
     docsearchPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Get Search Index
+## 获取搜索索引
 
-You need to [submit the URL of your site](https://docsearch.algolia.com/apply/) to join the DocSearch program. The DocSearch team will send [apiKey](#apikey) and [indexName](#indexname) to your email once the index is generated. Then you can configure this plugin to enable DocSearch in VuePress.
+你需要 [提交你的网站 URL](https://docsearch.algolia.com/apply/) 来加入 DocSearch 项目。当你的索引成功创建后， DocSearch 团队会将 [apiKey](#apikey) 和 [indexName](#indexname) 发送到你的邮箱。接下来，你就可以配置该插件，在 VuePress 中启用 DocSearch 了。
 
-Alternatively, you can [run your own crawler](https://docsearch.algolia.com/docs/run-your-own/) to generate the index, and then use your own [appId](#appId), [apiKey](#apikey) and [indexName](#indexname) to configure this plugin.
+或者，你也可以 [运行你自己的爬虫](https://docsearch.algolia.com/docs/run-your-own/) 来创建索引，然后使用你自己的 [appId](#appId), [apiKey](#apikey) 和 [indexName](#indexname) 来配置该插件。
 
-::: details Official crawler config
+::: details 官方爬虫配置示例
 
-```js{35-50,59}
+```js{34-49,57}
 new Crawler({
   appId: 'YOUR_APP_ID',
   apiKey: 'YOUR_API_KEY',
   rateLimit: 8,
   startUrls: [
-    // These are urls which algolia start to craw
-    // If your site is divided in to mutiple parts,
-    // you may want to set mutiple entry links
+    // 这是 Algolia 开始抓取网站的初始地址
+    // 如果你的网站被分为数个独立部分，你可能需要在此设置多个入口链接
     'https://YOUR_WEBSITE_URL/',
   ],
   sitemaps: [
-    // if you are using sitemap plugins (e.g.: vuepress-plugin-sitemap2), you may provide one
+    // 如果你在使用 Sitemap 插件 (如: vuepress-plugin-sitemap2)，你可以提供 Sitemap 链接
     'https://YOUR_WEBSITE_URL/sitemap.xml',
   ],
   ignoreCanonicalTo: false,
   exclusionPatterns: [
-    // You can use this to stop algolia crawing some paths
+    // 你可以通过它阻止 Algolia 抓取某些 URL
   ],
   discoveryPatterns: [
-    // These are urls which algolia looking for,
+    // 这是 Algolia 抓取 URL 的范围
     'https://YOUR_WEBSITE_URL/**',
   ],
-  // Crawler schedule, set it according to your docs update frequency
+  // 爬虫执行的计划时间，可根据文档更新频率设置
   schedule: 'at 02:00 every 1 day',
   actions: [
-    // you may have mutiple actions, especially when you are deploying mutiple docs under one domain
+    // 你可以拥有多个 action，特别是你在一个域名下部署多个文档时
     {
-      // name the index with name you like
+      // 使用适当的名称为索引命名
       indexName: 'YOUR_INDEX_NAME',
-      // paths where the index take effect
+      // 索引生效的路径
       pathsToMatch: ['https://YOUR_WEBSITE_URL/**'],
-      // controls how algolia extracts records from your site
+      // 控制 Algolia 如何抓取你的站点
       recordExtractor: ({ $, helpers }) => {
-        // options for @vuepress/theme-default
+        // @vuepress/theme-default 的选项
         return helpers.docsearch({
           recordProps: {
             lvl0: {
@@ -91,9 +90,8 @@ new Crawler({
     },
   ],
   initialIndexSettings: {
-    // controls how index are initialized
-    // only has effects before index are initialize
-    // you may need to delete your index and recraw after modification
+    // 控制索引如何被初始化，这仅当索引尚未生成时有效
+    // 你可能需要在修改后手动删除并重新生成新的索引
     YOUR_INDEX_NAME: {
       attributesForFaceting: ['type', 'lang'],
       attributesToRetrieve: ['hierarchy', 'content', 'anchor', 'url'],
@@ -162,127 +160,128 @@ new Crawler({
 })
 ```
 
-The above `recordProps` is the configuration used for the default theme. You can modify them according to the theme you are using.
+上述 `recordProps` 是用于默认主题的配置，你可以根据你使用的主题来修改它们。
 
-Notice that the `initialIndexSettings.YOUR_INDEX_NAME.attributesForFaceting` fields must include `'lang'` to make this plugin work properly.
+注意 `initialIndexSettings.YOUR_INDEX_NAME.attributesForFaceting` 字段**必须**包含 `'lang'`，否则该插件将无法正常工作。
+
 :::
 
 ::: tip
-If you are not using default theme, or you meet any problems when using docsearch, you can also check the above example crawler config, and ahead to [Algolia Crawler](https://crawler.algolia.com/admin/crawlers/), and edit your config with 'Editor' panel in project sidebar.
+如果你使用的不是默认主题，或者在使用 Docsearch 的时候遇到了任何问题，你也可以检查上述的爬虫配置示例，然后前往 [Algolia Crawler](https://crawler.algolia.com/admin/crawlers/) 仓库，在你项目侧边栏中的 Editor 页面中修改你的配置。
 :::
 
-## Options
+## 配置项
 
 ### apiKey
 
-- Type: `string`
+- 类型： `string`
 
-- Required: `true`
+- 是否必需： `true`
 
-- Details:
+- 详情：
 
-  The `apiKey` that you received from the DocSearch team, or generated by yourself.
+  从 DocSearch 团队收到的 `apiKey` ，或者由你自己生成。
 
-- Also see:
+- 参考：
   - [DocSearch > Options > apiKey](https://docsearch.algolia.com/docs/api#apikey)
 
 ### indexName
 
-- Type: `string`
+- 类型： `string`
 
-- Required: `true`
+- 是否必需： `true`
 
-- Details:
+- 详情：
 
-  The `indexName` that you received from the DocSearch team, or generated by yourself.
+  从 DocSearch 团队收到的 `indexName` ，或者由你自己生成。
 
-- Also see:
+- 参考：
   - [DocSearch > Options > indexName](https://docsearch.algolia.com/docs/api#indexname)
 
 ### appId
 
-- Type: `string`
+- 类型： `string`
 
-- Required: `true`
+- 是否必需： `true`
 
-- Details:
+- 详情：
 
-  It defines your own application ID.
+  用于设置你的 Application ID。
 
-- Also see:
+- 参考：
   - [DocSearch > Options > appId](https://docsearch.algolia.com/docs/api#appid)
 
 ### searchParameters
 
-- Type: `SearchParameters`
+- 类型： `SearchParameters`
 
-- Details:
+- 详情：
 
-  Parameters of Algolia Search API.
+  Algolia 搜索 API 参数。
 
-- Also see:
+- 参考：
   - [DocSearch > Options > searchParameters](https://docsearch.algolia.com/docs/api/#searchparameters)
   - [Algolia > Search API Parameters](https://www.algolia.com/doc/api-reference/search-api-parameters/)
 
 ### placeholder
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'Search docs'`
+- 默认值： `'Search docs'`
 
-- Details:
+- 详情：
 
-  The placeholder attribute of the search input.
+  搜索输入框的 placeholder 属性。
 
-- Also see:
-  - [DocSearch > Options > placeholder](https://docsearch.algolia.com/docs/api/#placeholder)
+- 参考：
+  - [DocSearch > Options > placeholder](https://docsearch.algolia.com/docs/api#placeholder)
 
 ### disableUserPersonalization
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Default: `false`
+- 默认值： `false`
 
-- Details:
+- 详情：
 
-  Whether to disable all personalized features: recent searches, favorite searches, etc.
+  是否禁用所有的个性化功能：最近的搜索、收藏的搜索结果等。
 
-- Also see:
-  - [DocSearch > Options > disableUserPersonalization](https://docsearch.algolia.com/docs/api/#disableuserpersonalization)
+- 参考：
+  - [DocSearch > Options > disableUserPersonalization](https://docsearch.algolia.com/docs/api#disableuserpersonalization)
 
 ### initialQuery
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  The initial query when the modal opens.
+  打开弹窗时的初始请求。
 
-- Also see:
-  - [DocSearch > Options > initialQuery](https://docsearch.algolia.com/docs/api/#initialquery)
+- 参考：
+  - [DocSearch > Options > initialQuery](https://docsearch.algolia.com/docs/api#initialquery)
 
 ### translations
 
-- Type: `Partial<DocSearchTranslations>`
+- 类型： `Partial<DocSearchTranslations>`
 
-- Details:
+- 详情：
 
-  Allow replacing the default text in the DocSearch button or modal.
+  允许替换 DocSearch 按钮和弹窗内的默认文字。
 
-- Also see:
+- 参考：
   - [DocSearch > Options > translations](https://docsearch.algolia.com/docs/api/#translations)
 
 ### locales
 
-- Type: `Record<string, DocsearchPluginOptions>`
+- 类型： `Record<string, DocsearchPluginOptions>`
 
-- Details:
+- 详情：
 
-  Options of this plugin in different locales.
+  在不同 locales 下对该插件进行不同的配置。
 
-  All other options of this plugin are acceptable in locale config.
+  该插件的所有其他选项都可以在 locale 中进行配置。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -313,12 +312,12 @@ export default {
 }
 ```
 
-- Also see:
-  - [Guide > I18n](../../guide/i18n.md)
+- 参考：
+  - [指南 > 多语言支持](../../guide/i18n.md)
 
-## Styles
+## 样式
 
-You can customize styles via CSS variables that provided by [@docsearch/css](https://docsearch.algolia.com/docs/styling):
+你可以通过 [@docsearch/css](https://docsearch.algolia.com/docs/styling) 提供的 CSS 变量来自定义样式：
 
 ```css
 :root {
@@ -367,16 +366,16 @@ You can customize styles via CSS variables that provided by [@docsearch/css](htt
 }
 ```
 
-## Components
+## 组件
 
 ### Docsearch
 
-- Details:
+- 详情：
 
-  This plugin will register a `<Docsearch />` component globally, and you can use it without any props.
+  该插件会全局注册一个 `<Docsearch />` 组件，你可以不传入任何 Props 来使用它。
 
-  Put this component to where you want to place the docsearch button. For example, default theme puts this component to the end of the navbar.
+  将该组件放置在你想要显示 docsearch 按钮的地方。例如，默认主题将这个组件放在了导航栏的末尾。
 
 ::: tip
-This component is mainly used for theme development. You don't need to use it directly in most cases.
+该组件主要用于主题开发。在大多数情况下你不需要直接使用该组件。
 :::

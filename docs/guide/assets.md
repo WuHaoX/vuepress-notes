@@ -1,40 +1,40 @@
-# Assets
+# 静态资源
 
-## Relative URLs
+## 相对路径
 
-You can reference any assets using relative URLs in your Markdown content:
+你可以在你的 Markdown 内容中使用相对路径来引用静态资源：
 
 ```md
-![An image](./image.png)
+![图片](./image.png)
 ```
 
-This is generally the suggested way to import images, as users usually place images near the Markdown file that references them.
+一般情况下，我们推荐你使用这种方式来引用图片，因为人们通常会把图片放在引用它的 Markdown 文件附近。
 
-## Public Files
+## Public 文件
 
-You can put some static assets inside public directory, and they will be copied to the root of the generated directory.
+你可以把一些静态资源放在 Public 目录中，它们会被复制到最终生成的网站的根目录下。
 
-The default public directory is `.vuepress/public`, which can be changed by [public](../reference/config.md#public) option.
+默认的 Public 目录是 `.vuepress/public` ，可以通过 [public](../reference/config.md#public) 配置项来修改。
 
-It would be useful in some cases:
+在下列这些情况中，你可能会用到它：
 
-- You may need to provide static assets that are not directly referenced in any of your Markdown files, for example, favicon and PWA icons.
-- You may need to serve some shared static assets, which may even be referenced outside your site, for example, logo images.
-- You may want to reference images using absolute URLs in your Markdown content.
+- 你可能需要提供一些静态资源，但是它们并不直接被你的 Markdown 文件引用，比如 favicon 和 PWA 图标。
+- 你可能想要托管一些共享的静态资源，甚至可能需要在你的网站外部引用它，比如 Logo 图片。
+- 你可能想在你的 Markdown 内容中通过绝对路径来引入图片。
 
-Take our documentation source files as an example, we are putting the logo of VuePress inside the public directory:
+以我们文档的源文件为例，我们把 VuePress 的 Logo 放在了 Public 目录下：
 
 ```bash
 └─ docs
    ├─ .vuepress
    |  └─ public
    |     └─ images
-   |        └─ hero.png  # <- Logo file
+   |        └─ hero.png  # <- Logo 文件
    └─ guide
-      └─ assets.md       # <- Here we are
+      └─ assets.md       # <- 我们在这里
 ```
 
-We can reference our logo in current page like this:
+我们可以这样在当前页面引用 Logo ：
 
 **Input**
 
@@ -48,16 +48,16 @@ We can reference our logo in current page like this:
 
 ### Base Helper
 
-If your site is deployed to a non-root URL, for example, `https://foo.github.io/bar/`, then the [base](../reference/config.md#base) should be set to `'/bar/'`. Obviously, your public files would be served like `https://foo.github.io/bar/images/hero.png` after deployment.
+如果你的网站部署在非根路径下，例如 `https://foo.github.io/bar/` ，那么你应该把 [base](../reference/config.md#base) 设置为 `'/bar/'`。显然，此时你的 Public 文件会被部署在 `https://foo.github.io/bar/images/hero.png` 这样的链接下。
 
-In most cases, you don't need to worry about the reference path of those public files, as VuePress will automatically handle `base` for you:
+在大多数情况下，你不需要担心这些 Public 文件的引用路径，因为 VuePress 会自动帮你处理 `base` 前缀：
 
 ```md
-<!-- you don't need to prepend `/bar/` to `/images/hero.png` manually -->
+<!-- 你不需要给 `/images/hero.png` 手动添加 `/bar/` 前缀 -->
 ![VuePress Logo](/images/hero.png)
 ```
 
-However, sometimes you may have some dynamical links referencing public files, especially when you are authoring a custom theme. In such case, the `base` could not be handled automatically. To help with that, VuePress provides a [withBase](../reference/client-api.md#withbase) helper to prepend `base` for you:
+然而，有些情况下，你可能会有一些指向 Public 文件的动态路径，尤其是在你开发一个自定义主题的时候。在这种情况下， `base` 无法被自动处理。为了解决这个问题，VuePress 提供了 [withBase](../reference/client-api.md#withbase) 工具函数，它可以帮助你添加 `base` 前缀：
 
 ```vue
 <template>
@@ -72,25 +72,25 @@ const logoPath = ref('/images/hero.png')
 </script>
 ```
 
-You can also access the helper by `$withBase` directly:
+你也可以通过 `$withBase` 来直接使用这个工具函数：
 
 ```md
 <img :src="$withBase('/images/hero.png')" alt="VuePress Logo">
 ```
 
-## Packages and Path Aliases
+## 依赖包和路径别名
 
-Although it is not a common usage, you can reference images from dependent packages:
+尽管这不是常见用法，但是你可以从依赖包中引用图片：
 
 ```bash
 npm install -D package-name
 ```
 
 ```md
-![Image from dependency](package-name/image.png)
+![来自依赖包的图片](package-name/image.png)
 ```
 
-The path aliases that set in config file are also supported:
+在配置文件中设置的路径别名也同样支持：
 
 ```ts
 import { getDirname, path } from '@vuepress/utils'
@@ -105,9 +105,9 @@ export default {
 ```
 
 ```md
-![Image from path alias](@alias/image.png)
+![来自路径别名的图片](@alias/image.png)
 ```
 
 ::: tip
-Config reference: [alias](../reference/plugin-api.md#alias)
+配置参考： [alias](../reference/plugin-api.md#alias)
 :::

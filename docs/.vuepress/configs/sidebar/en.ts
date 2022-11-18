@@ -3,7 +3,7 @@ import type { SidebarConfig } from '@vuepress/theme-default'
 export const sidebarEn: SidebarConfig = {
   '/guide/': [
     {
-      text: 'Guide',
+      text: '指南',
       children: [
         '/guide/README.md',
         '/guide/getting-started.md',
@@ -22,7 +22,7 @@ export const sidebarEn: SidebarConfig = {
   ],
   '/advanced/': [
     {
-      text: 'Advanced',
+      text: '深入',
       children: [
         '/advanced/architecture.md',
         '/advanced/plugin.md',
@@ -43,7 +43,7 @@ export const sidebarEn: SidebarConfig = {
   ],
   '/reference/': [
     {
-      text: 'VuePress Reference',
+      text: 'VuePress 参考',
       collapsible: true,
       children: [
         '/reference/cli.md',
@@ -57,12 +57,15 @@ export const sidebarEn: SidebarConfig = {
       ],
     },
     {
-      text: 'Bundlers Reference',
+      text: '打包工具参考',
       collapsible: true,
-      children: ['/reference/bundler/vite.md', '/reference/bundler/webpack.md'],
+      children: [
+        '/reference/bundler/vite.md',
+        '/reference/bundler/webpack.md',
+      ],
     },
     {
-      text: 'Default Theme Reference',
+      text: '默认主题参考',
       collapsible: true,
       children: [
         '/reference/default-theme/config.md',
@@ -74,11 +77,11 @@ export const sidebarEn: SidebarConfig = {
       ],
     },
     {
-      text: 'Official Plugins Reference',
+      text: '官方插件参考',
       collapsible: true,
       children: [
         {
-          text: 'Common Features',
+          text: '常用功能',
           children: [
             '/reference/plugin/back-to-top.md',
             '/reference/plugin/container.md',
@@ -90,7 +93,7 @@ export const sidebarEn: SidebarConfig = {
           ],
         },
         {
-          text: 'Content Search',
+          text: '内容搜索',
           children: [
             '/reference/plugin/docsearch.md',
             '/reference/plugin/search.md',
@@ -104,14 +107,14 @@ export const sidebarEn: SidebarConfig = {
           ],
         },
         {
-          text: 'Syntax Highlighting',
+          text: '语法高亮',
           children: [
             '/reference/plugin/prismjs.md',
             '/reference/plugin/shiki.md',
           ],
         },
         {
-          text: 'Theme Development',
+          text: '主题开发',
           children: [
             '/reference/plugin/active-header-links.md',
             '/reference/plugin/git.md',

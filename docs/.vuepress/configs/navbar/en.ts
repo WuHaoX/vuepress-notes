@@ -3,19 +3,16 @@ import { version } from '../meta.js'
 
 export const navbarEn: NavbarConfig = [
   {
-    text: 'Guide',
+    text: '指南',
     link: '/guide/',
   },
   {
-    text: 'Reference',
+    text: '参考',
     children: [
       {
         text: 'VuePress',
         children: [
-          {
-            text: 'CLI',
-            link: '/reference/cli.html',
-          },
+          '/reference/cli.md',
           '/reference/config.md',
           '/reference/frontmatter.md',
           '/reference/components.md',
@@ -26,14 +23,14 @@ export const navbarEn: NavbarConfig = [
         ],
       },
       {
-        text: 'Bundlers',
+        text: '打包工具',
         children: [
           '/reference/bundler/vite.md',
           '/reference/bundler/webpack.md',
         ],
       },
       {
-        text: 'Default Theme',
+        text: '默认主题',
         children: [
           '/reference/default-theme/config.md',
           '/reference/default-theme/frontmatter.md',
@@ -46,10 +43,10 @@ export const navbarEn: NavbarConfig = [
     ],
   },
   {
-    text: 'Plugins',
+    text: '插件',
     children: [
       {
-        text: 'Common Features',
+        text: '常用功能',
         children: [
           '/reference/plugin/back-to-top.md',
           '/reference/plugin/container.md',
@@ -61,7 +58,7 @@ export const navbarEn: NavbarConfig = [
         ],
       },
       {
-        text: 'Content Search',
+        text: '内容搜索',
         children: [
           '/reference/plugin/docsearch.md',
           '/reference/plugin/search.md',
@@ -75,14 +72,14 @@ export const navbarEn: NavbarConfig = [
         ],
       },
       {
-        text: 'Syntax Highlighting',
+        text: '语法高亮',
         children: [
           '/reference/plugin/prismjs.md',
           '/reference/plugin/shiki.md',
         ],
       },
       {
-        text: 'Theme Development',
+        text: '主题开发',
         children: [
           '/reference/plugin/active-header-links.md',
           '/reference/plugin/git.md',
@@ -94,10 +91,10 @@ export const navbarEn: NavbarConfig = [
     ],
   },
   {
-    text: 'Learn More',
+    text: '了解更多',
     children: [
       {
-        text: 'Advanced',
+        text: '深入',
         children: [
           '/advanced/architecture.md',
           '/advanced/plugin.md',
@@ -109,7 +106,7 @@ export const navbarEn: NavbarConfig = [
         ],
       },
       {
-        text: 'Resources',
+        text: '其他资源',
         children: [
           '/contributing.md',
           {
@@ -124,16 +121,16 @@ export const navbarEn: NavbarConfig = [
     text: `v${version}`,
     children: [
       {
-        text: 'Changelog',
+        text: '更新日志',
         link: 'https://github.com/vuepress/vuepress-next/blob/main/CHANGELOG.md',
       },
       {
         text: 'v1.x',
-        link: 'https://v1.vuepress.vuejs.org',
+        link: 'https://v1.vuepress.vuejs.org/',
       },
       {
         text: 'v0.x',
-        link: 'https://v0.vuepress.vuejs.org',
+        link: 'https://v0.vuepress.vuejs.org/',
       },
     ],
   },

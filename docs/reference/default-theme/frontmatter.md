@@ -2,43 +2,43 @@
 
 <NpmBadge package="@vuepress/theme-default" />
 
-## All Pages
+## 所有页面
 
-Frontmatter in this section will take effect in all types of pages.
+本章节中的 Frontmatter 会在所有类型的页面中生效。
 
 ### externalLinkIcon
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Provided by [@vuepress/plugin-external-link-icon](../plugin/external-link-icon.md#externallinkicon).
+  由[@vuepress/plugin-external-link-icon](../plugin/external-link-icon.md#externallinkicon) 提供。
 
-- Also see:
-  - [Default Theme > Config Reference > themePlugins.externalLinkIcon](./config.md#themeplugins-externallinkicon)
+- 参考：
+  - [默认主题 > 配置 > themePlugins.externalLinkIcon](./config.md#themeplugins-externallinkicon)
 
 ### navbar
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Show navbar on this page or not.
+  是否在当前页面展示导航栏。
 
-  If you disable navbar in theme config, this frontmatter will not take effect.
+  如果你在主题配置中禁用了导航栏，那么该 Frontmatter 将不会生效。
 
-- Also see:
-  - [Default Theme > Config > navbar](./config.md#navbar)
+- 参考：
+  - [默认主题 > 配置 > navbar](./config.md#navbar)
 
 ### pageClass
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Add extra class name to this page.
+  为当前页面添加额外的类名。
 
-- Example:
+- 示例：
 
 ```md
 ---
@@ -46,126 +46,126 @@ pageClass: custom-page-class
 ---
 ```
 
-Then you can customize styles of this page in `.vuepress/styles/index.scss` file:
+然后你可以在 `.vuepress/styles/index.scss` 文件中为这个页面添加自定义样式：
 
 ```scss
 .theme-container.custom-page-class {
-  /* page styles */
+  /* 页面样式 */
 }
 ```
 
-- Also see:
-  - [Default Theme > Styles > Style File](./styles.md#style-file)
+- 参考：
+  - [默认主题 > 样式 > Style 文件](./styles.md#style-文件)
 
-## Home Page
+## 首页
 
-Frontmatter in this section will only take effect in home pages.
+本章节中的 Frontmatter 只会在首页中生效。
 
 ### home
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Specify whether the page is homepage or a normal page.
+  设定该页面是首页还是普通页面。
 
-  If you don't set this frontmatter or set it to `false`, the page would be a [normal page](#normal-page).
+  如果你不设置该 Frontmatter 或将其设为 `false` ，则该页面会是一个 [普通页面](#普通页面)
 
-- Example:
+- 示例：
 
-```md
----
-home: true
----
-```
+  ```md
+  ---
+  home: true
+  ---
+  ```
 
 ### heroImage
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the url of the hero image.
+  首页图片的 URL 。
 
-- Example:
+- 示例：
 
-```md
----
-# public file path
-heroImage: /images/hero.png
-# url
-heroImage: https://vuejs.org/images/logo.png
----
-```
+  ```md
+  ---
+  # Public 文件路径
+  heroImage: /images/hero.png
+  # URL
+  heroImage: https://vuejs.org/images/logo.png
+  ---
+  ```
 
-- Also see:
-  - [Guide > Assets > Public Files](../../guide/assets.md#public-files)
+- 参考：
+  - [指南 > 静态资源 > Public 文件](../../guide/assets.md#public-文件)
 
 ### heroImageDark
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the url of hero image to be used in dark mode.
+  在夜间模式中使用的首页图片的 URL 。
 
-  You can make use of this option if you want to use different heroImage config in dark mode.
+  如果你想在夜间模式中使用不同的首页图片，就可以使用该配置项。
 
-- Also see:
-  - [Default Theme > Frontmatter > heroImage](#heroimage)
-  - [Default Theme > Config > colorMode](./config.md#colormode)
+- 参考：
+  - [默认主题 > Frontmatter > heroImage](#heroimage)
+  - [默认主题 > 配置 > colorMode](./config.md#colormode)
 
 ### heroAlt
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the `alt` attribute of the hero image.
+  首页图片的 `alt` 属性。
 
-  This will fallback to the [heroText](#heroText).
+  如果不设置，则默认使用 [heroText](#heroText) 。
 
 ### heroHeight
 
-- Type: `number`
+- 类型： `number`
 
-- Default: `280`
+- 默认值： `280`
 
-- Details:
+- 详情：
 
-  Specify the `height` attribute of the hero `<img>` tag.
+  首页图片 `<img>` 标签的 `height` 属性。
 
-  You may need to reduce this value if the height of your hero image is less than the default value.
+  当你的首页图片高度小于默认值时，你可能需要减小该属性。
 
-  Notice that the height is also constrained by CSS. This attribute is to reduce [Cumulative Layout Shift (CLS)](https://web.dev/cls/) that caused by the loading of the hero image.
+  需要注意的是，首页图片的高度同样受到了 CSS 的约束。设置这个属性主要是为了减少由加载首页图片引起的 [累积布局偏移 (CLS)](https://web.dev/cls/) 。
 
 ### heroText
 
-- Type: `string | null`
+- 类型： `string | null`
 
-- Details:
+- 详情：
 
-  Specify the the hero text.
+  首页的大标题。
 
-  This will fallback to the site [title](../config.md#title).
+  如果不设置，则默认使用站点 [title](../config.md#title) 。
 
-  Set to `null` to disable hero text.
+  设置为 `null` 来禁用首页大标题。
 
 ### tagline
 
-- Type: `string | null`
+- 类型： `string | null`
 
-- Details:
+- 详情：
 
-  Specify the the tagline.
+  首页的标语。
 
-  This will fallback to the site [description](../config.md#description).
+  如果不设置，则默认使用站点 [description](../config.md#description) 。
 
-  Set to `null` to disable tagline.
+  设置为 `null` 来禁用首页标语。
 
 ### actions
 
-- Type:
+- 类型：
 
 ```ts
 Array<{
@@ -175,19 +175,19 @@ Array<{
 }>
 ```
 
-- Details:
+- 详情：
 
-  Configuration of the action buttons.
+  配置首页按钮。
 
-- Example:
+- 示例：
 
 ```md
 ---
 actions:
-  - text: Get Started
-    link: /guide/getting-started.html
+  - text: 快速上手
+    link: /zh/guide/getting-started.html
     type: primary
-  - text: Introduction
+  - text: 项目简介
     link: /guide/
     type: secondary
 ---
@@ -195,7 +195,7 @@ actions:
 
 ### features
 
-- Type:
+- 类型：
 
 ```ts
 Array<{
@@ -204,128 +204,128 @@ Array<{
 }>
 ```
 
-- Details:
+- 详情：
 
-  Configuration of the features list.
+  配置首页特性列表。
 
-- Example:
+- 示例：
 
 ```md
 ---
 features:
-  - title: Simplicity First
-    details: Minimal setup with markdown-centered project structure helps you focus on writing.
-  - title: Vue-Powered
-    details: Enjoy the dev experience of Vue, use Vue components in markdown, and develop custom themes with Vue.
-  - title: Performant
-    details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
+  - title: 简洁至上
+    details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
+  - title: Vue 驱动
+    details: 享受 Vue 的开发体验，可以在 Markdown 中使用 Vue 组件，又可以使用 Vue 来开发自定义主题。
+  - title: 高性能
+    details: VuePress 会为每个页面预渲染生成静态的 HTML，同时，每个页面被加载的时候，将作为 SPA 运行。
 ---
 ```
 
 ### footer
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the content of the footer.
+  首页的页脚。
 
 ### footerHtml
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Allow HTML in footer or not.
+  是否允许页脚中使用 HTML 。
 
-  If you set it to `true`, the [footer](#footer) will be treated as HTML code.
+  如果设置为 `true` ，那么 [footer](#footer) 会被作为 HTML 代码处理。
 
-## Normal Page
+## 普通页面
 
-Frontmatter in this section will only take effect in normal pages.
+本章节中的 Frontmatter 只会在普通页面中生效。
 
 ### editLink
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Enable the _edit this page_ link in this page or not.
+  是否在本页面中启用 _编辑此页_ 链接。
 
-- Also see:
-  - [Default Theme > Config > editLink](./config.md#editlink)
+- 参考：
+  - [默认主题 > 配置 > editLink](./config.md#editlink)
 
 ### editLinkPattern
 
-- Type: `string`
+- 类型： `string`
 
-- Details:
+- 详情：
 
-  Specify the pattern of the _edit this page_ link of this page.
+  本页面中 _编辑此页_ 链接的 Pattern 。
 
-- Also see:
-  - [Default Theme > Config > editLinkPattern](./config.md#editlinkpattern)
+- 参考：
+  - [默认主题 > 配置 > editLinkPattern](./config.md#editlinkpattern)
 
 ### lastUpdated
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Enable the _last updated timestamp_ in this page or not.
+  是否在本页面中启用 _最近更新时间戳_ 。
 
-- Also see:
-  - [Default Theme > Config > lastUpdated](./config.md#lastupdated)
+- 参考：
+  - [默认主题 > 配置 > lastUpdated](./config.md#lastupdated)
 
 ### contributors
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Enable the _contributors list_ in this page or not.
+  是否在本页面中启用 _贡献者列表_ 。
 
-- Also see:
-  - [Default Theme > Config > contributors](./config.md#contributors)
+- 参考：
+  - [默认主题 > 配置 > contributors](./config.md#contributors)
 
 ### sidebar
 
-- Type: `false | 'auto' | SidebarConfigArray | SidebarConfigObject`
+- 类型： `false | 'auto' | SidebarConfigArray | SidebarConfigObject`
 
-- Details:
+- 详情：
 
-  Configure the sidebar of this page.
+  配置本页面的侧边栏。
 
-- Also see:
-  - [Default Theme > Config > sidebar](./config.md#sidebar)
+- 参考：
+  - [默认主题 > 配置 > sidebar](./config.md#sidebar)
 
 ### sidebarDepth
 
-- Type: `number`
+- 类型： `number`
 
-- Details:
+- 详情：
 
-  Configure the sidebar depth of this page.
+  配置本页面的侧边栏深度。
 
-- Also see:
-  - [Default Theme > Config > sidebarDepth](./config.md#sidebardepth)
+- 参考：
+  - [默认主题 > 配置 > sidebarDepth](./config.md#sidebardepth)
 
 ### prev
 
-- Type: `NavLink | string`
+- 类型： `NavLink | string`
 
-- Details:
+- 详情：
 
-  Specify the link of the previous page.
+  上一个页面的链接。
 
-  If you don't set this frontmatter, the link will be inferred from the sidebar config.
+  如果你不设置该 Frontmatter ，该链接会自动根据侧边栏配置进行推断。
 
-  To configure the prev link manually, you can set this frontmatter to a `NavLink` object or a string:
+  为了手动配置上一页面的链接，你可以将其设置为一个 `NavLink` 对象或者一个字符串：
 
-  - A `NavLink` object should have a `text` field and a `link` field.
-  - A string should be the path to the target page file. It will be converted to a `NavLink` object, whose `text` is the page title, and `link` is the page route path.
+  - `NavLink` 对象应该有一个 `text` 字段和一个 `link` 字段。
+  - 字符串应为目标页面文件的路径。它将会被转换为 `NavLink` 对象，将页面标题作为 `text` ，将页面路由路径作为 `link` 。
 
-- Example:
+- 示例：
 
 ```md
 ---
@@ -334,27 +334,27 @@ prev:
   text: Get Started
   link: /guide/getting-started.html
 
-# NavLink - external url
+# NavLink - 外部 URL
 prev:
   text: GitHub
   link: https://github.com
 
-# string - page file path
+# 字符串 - 页面文件路径
 prev: /guide/getting-started.md
 
-# string - page file relative path
+# 字符串 - 页面文件相对路径
 prev: ../../guide/getting-started.md
 ---
 ```
 
 ### next
 
-- Type: `NavLink | string`
+- 类型： `NavLink | string`
 
-- Details:
+- 详情：
 
-  Specify the link of the next page.
+  下一个页面的链接。
 
-  If you don't set this frontmatter, the link will be inferred from the sidebar config.
+  如果你不设置该 Frontmatter ，该链接会自动根据侧边栏配置进行推断。
 
-  The type is the same as [prev](#prev) frontmatter.
+  类型和 [prev](#prev) Frontmatter 相同。

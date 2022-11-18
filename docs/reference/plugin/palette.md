@@ -2,13 +2,13 @@
 
 <NpmBadge package="@vuepress/plugin-palette" />
 
-Provide palette support for your theme.
+为你的主题提供调色板功能。
 
-This plugin is mainly used to develop themes, and has been integrated into the default theme. You won't need to use it directly in most cases.
+该插件主要用于开发主题，并且已经集成到默认主题中。大部分情况下你不需要直接使用它。
 
-For theme authors, this plugin will help you to provide styles customization for users.
+对于主题作者，该插件可以帮助你提供用户自定义样式的能力。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-palette@next
@@ -20,23 +20,23 @@ import { palettePlugin } from '@vuepress/plugin-palette'
 export default {
   plugins: [
     palettePlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Palette and Style
+## 调色板和样式
 
-This plugin will provide a `@vuepress/plugin-palette/palette` (palette file) and a `@vuepress/plugin-palette/style` (style file) to be imported in your theme styles.
+该插件会提供一个 `@vuepress/plugin-palette/palette` （调色板文件）和一个 `@vuepress/plugin-palette/style` （样式文件），用于在你的主题样式中引入。
 
-The palette file is used for defining style variables, so it's likely to be imported at the beginning of your theme styles. For example, users can define [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties), [SASS variables](https://sass-lang.com/documentation/variables), [LESS variables](http://lesscss.org/features/#variables-feature) or [Stylus variables](https://stylus-lang.com/docs/variables.html) in the palette, and then you can use those variables in your theme styles.
+调色板文件用于定义样式变量，因此它一般会在你主题样式的开头引入。举例来说，用户可以在调色板中定义 [CSS 变量](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) 、 [SASS 变量](https://sass-lang.com/documentation/variables) 、 [LESS 变量](http://lesscss.org/features/#variables-feature) 或 [Stylus 变量](https://stylus-lang.com/docs/variables.html) ，然后你可以在你的主题样式中使用这些变量。
 
-The style file is used for overriding the default styles or adding extra styles, so it's likely to be imported at the end of your theme styles.
+样式文件用于覆盖默认样式或添加额外样式，因此它一般会在你主题样式的末尾引入。
 
-## Usage
+## 使用
 
-Use this plugin in your theme, assuming you are using SASS:
+在你的主题中使用该插件，假设你使用 SASS 作为 CSS 预处理器：
 
 ```ts
 export default {
@@ -47,47 +47,47 @@ export default {
 }
 ```
 
-### Usage of Palette
+### 使用调色板
 
-Import the plugin's palette file where your theme needs to use the corresponding variables, such as in the `Layout.vue` file:
+在你主题需要使用对应变量的地方引入该插件的调色板文件，比如在 `Layout.vue` 中：
 
 ```vue
 <template>
-  <h1 class="palette-title">Hello, Palette!</h1>
+  <h1 class="palette-title">你好，调色板！</h1>
 </template>
 
 <style lang="scss">
-/* import variables from the plugin's palette file */
+/* 从该插件的调色板中引入变量 */
 @import '@vuepress/plugin-palette/palette';
 
-/* set default value for variables */
+/* 设置变量的默认值 */
 $color: red !default;
 
-/* use variables in your styles */
+/* 在你的样式中使用变量 */
 .palette-title {
   color: $color;
 }
 </style>
 ```
 
-Then users can customize variables in `.vuepress/styles/palette.scss`:
+然后，用户就可以在 `.vuepress/styles/palette.scss` 中自定义变量：
 
 ```scss
 $color: green;
 ```
 
-### Usage of Style
+### 使用样式
 
-Import the plugin's style file after your theme's styles, for example, in the `clientConfigFile`:
+在你主题的样式之后引入该插件的样式文件，比如在 `clientConfigFile` 中：
 
 ```ts
-// import your theme's style file
+// 引入你主题本身的样式文件
 import 'path/to/your/theme/style'
-// import the plugin's style file
+// 引入该插件的样式文件
 import '@vuepress/plugin-palette/style'
 ```
 
-Then users can add extra styles in `.vuepress/styles/index.scss` and override the default styles of your theme:
+然后，用户就可以在 `.vuepress/styles/index.scss` 中添加额外样式，并可以覆盖你主题本身的样式：
 
 ```scss
 h1 {
@@ -95,106 +95,106 @@ h1 {
 }
 ```
 
-## Options
+## 配置项
 
 ### preset
 
-- Type: `'css' | 'sass' | 'less' | 'stylus'`
+- 类型： `'css' | 'sass' | 'less' | 'stylus'`
 
-- Default: `'css'`
+- 默认值： `'css'`
 
-- Details:
+- 详情：
 
-  Set preset for other options.
+  设置其他选项的预设。
 
-  If you don't need advanced customization of the plugin, it's recommended to only set this option and omit other options.
+  如果你没有对该插件进行进阶定制化的需要，建议只设置该配置项并忽略其他选项。
 
 ### userPaletteFile
 
-- Type: `string`
+- 类型： `string`
 
-- Default:
+- 默认值：
   - css: `'.vuepress/styles/palette.css'`
   - sass: `'.vuepress/styles/palette.scss'`
   - less: `'.vuepress/styles/palette.less'`
   - stylus: `'.vuepress/styles/palette.styl'`
 
-- Details:
+- 详情：
 
-  File path of the user palette file, relative to source directory.
+  用户调色板文件的路径，是针对源文件目录的相对路径。
 
-  The default value depends on the [preset](#preset) option.
+  默认值依赖于 [preset](#preset) 配置项。
 
-  The file is where users define style variables, and it's recommended to keep the default file path as a convention.
+  该文件用于用户定义样式变量，建议保持默认值作为约定的文件路径。
 
 ### tempPaletteFile
 
-- Type: `string`
+- 类型： `string`
 
-- Default:
+- 默认值：
   - css: `'styles/palette.css'`
   - sass: `'styles/palette.scss'`
   - less: `'styles/palette.less'`
   - stylus: `'styles/palette.styl'`
 
-- Details:
+- 详情：
 
-  File path of the generated palette temp file, relative to temp directory.
+  生成的调色板临时文件的路径，是针对临时文件文件目录的相对路径。
 
-  The default value depends on the [preset](#preset) option.
+  默认值依赖于 [preset](#preset) 配置项。
 
-  You should import the palette file via `'@vuepress/plugin-palette/palette'` alias, so you don't need to change this option in most cases.
+  你应该使用 `'@vuepress/plugin-palette/palette'` 别名来引入调色板文件，因此在绝大多数情况下你不需要修改该配置项。
 
 ### userStyleFile
 
-- Type: `string`
+- 类型： `string`
 
-- Default:
+- 默认值：
   - css: `'.vuepress/styles/index.css'`
   - sass: `'.vuepress/styles/index.scss'`
   - less: `'.vuepress/styles/index.less'`
   - stylus: `'.vuepress/styles/index.styl'`
 
-- Details:
+- 详情：
 
-  File path of the user style file, relative to source directory.
+  用户样式文件的路径，是针对源文件目录的相对路径。
 
-  The default value depends on the [preset](#preset) option.
+  默认值依赖于 [preset](#preset) 配置项。
 
-  The file is where users override default styles or add extra styles, and it's recommended to keep the default file path as a convention.
+  该文件用于用户覆盖默认样式和添加额外样式，建议保持默认值作为约定的文件路径。
 
 ### tempStyleFile
 
-- Type: `string`
+- 类型： `string`
 
-- Default:
+- 默认值：
   - css: `'styles/index.css'`
   - sass: `'styles/index.scss'`
   - less: `'styles/index.less'`
   - stylus: `'styles/index.styl'`
 
-- Details:
+- 详情：
 
-  File path of the generated style temp file, relative to temp directory.
+  生成的样式临时文件的路径，是针对临时文件文件目录的相对路径。
 
-  The default value depends on the [preset](#preset) option.
+  默认值依赖于 [preset](#preset) 配置项。
 
-  You should import the style file via `'@vuepress/plugin-palette/style'` alias, so you don't need to change this option in most cases.
+  你应该使用 `'@vuepress/plugin-palette/style'` 别名来引入样式文件，因此在绝大多数情况下你不需要修改该配置项。
 
 ### importCode
 
-- Type: `(filePath: string) => string`
+- 类型： `(filePath: string) => string`
 
-- Default:
+- 默认值：
   - css: `` (filePath) => `@import '${filePath}';\n` ``
   - sass: `` (filePath) => `@forward 'file:///${filePath}';\n` ``
   - less: `` (filePath) => `@import '${filePath}';\n` ``
   - stylus: `` (filePath) => `@require '${filePath}';\n` ``
 
-- Details:
+- 详情：
 
-  Function to generate import code.
+  用于生成引入代码的函数。
 
-  The default value depends on the [preset](#preset) option.
+  默认值依赖于 [preset](#preset) 配置项。
 
-  This option is used for generating [tempPaletteFile](#temppalettefile) and [tempStyleFile](#tempstylefile), and you don't need to change this option in most cases.
+  该配置项用于生成 [tempPaletteFile](#temppalettefile) 和 [tempStyleFile](#tempstylefile) ，在绝大多数情况下你不需要修改该配置项。

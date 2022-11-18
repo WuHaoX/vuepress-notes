@@ -2,9 +2,9 @@
 
 <NpmBadge package="@vuepress/plugin-toc" />
 
-This plugin will provide a table-of-contents (TOC) component.
+该插件会提供一个目录 (table-of-contents, TOC) 组件。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-toc@next
@@ -16,59 +16,58 @@ import { tocPlugin } from '@vuepress/plugin-toc'
 export default {
   plugins: [
     tocPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
-```
 
-## Differences with Markdown TOC Syntax
+## 与 Markdown 目录语法的区别
 
-Similar to the [Table of Contents Markdown Syntax](../../guide/markdown.md#table-of-contents), the TOC component that provided by this plugin could be used in your markdown content directly:
+与 [Markdown 目录语法](../../guide/markdown.md#目录) 类似，该插件提供的目录组件可以直接在你的 Markdown 内容中使用：
 
 ```md
-<!-- markdown toc syntax -->
+<!-- Markdown 目录语法 -->
 [[toc]]
 
-<!-- vue toc component -->
+<!-- Vue 目录组件 -->
 <Toc />
 ```
 
-Both of them can be pre-rendered correctly in build mode. However, there are some differences between them.
+在 Build 模式中，它们都可以被正确地预渲染。然而，它们之间存在一些区别。
 
-The markdown syntax `[[toc]]` could only be used in markdown files. It is parsed by markdown-it, and the generated TOC is static content.
+Markdown 语法 `[[toc]]` 仅能在 Markdown 文件中使用。它是由 markdown-it 解析的，生成的目录是静态内容。
 
-The component `<Toc/>` could be used in both markdown files and vue files. It is loaded by vue, and the generated TOC is a vue component.
+组件 `<Toc/>` 既可以用在 Markdown 文件中，也可以用在 Vue 文件中。它是由 Vue 加载的，生成的目录是一个 Vue 组件。
 
-This plugin could work together with [@vuepress/plugin-active-header-links](./active-header-links.md) by setting the [headerLinkSelector](./active-header-links.md#headerlinkselector) to match the `linkClass` option. When the page scroll to a certain header anchor, this corresponding link will be added `linkActiveClass` class name.
+该插件可以和 [@vuepress/plugin-active-header-links](./active-header-links.md) 协同工作，你只需要将 [headerLinkSelector](./active-header-links.md#headerlinkselector) 与该插件的 `linkClass` 匹配即可。当页面滚动至某个标题锚点后，对应的链接就会被加上 `linkActiveClass` 类名。
 
-Therefore, this plugin is more useful for theme developers.
+因此，该插件对于主题开发者来说更为有用。
 
-## Options
+## 配置项
 
 ### componentName
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'Toc'`
+- 默认值： `'Toc'`
 
-- Details:
+- 详情：
 
-  Specify the name of the TOC component.
+  指定目录组件的名称。
 
 ### defaultPropsOptions
 
-- Type: `Partial<TocPropsOptions>`
+- 类型： `Partial<TocPropsOptions>`
 
-- Default: `{}`
+- 默认值： `{}`
 
-- Details:
+- 详情：
 
-  Override the default values of the component [options](#options-1) prop.
+  覆盖组件 [options](#options) Prop 的默认值。
 
-## Component Props
+## 组件 Props
 
-The TOC component also accepts props for customization.
+目录组件可以通过 Props 来进行自定义。
 
 ```vue
 <template>
@@ -78,7 +77,7 @@ The TOC component also accepts props for customization.
 
 ### headers
 
-- Type: `PageHeader[]`
+- 类型： `PageHeader[]`
 
 ```ts
 interface PageHeader {
@@ -89,15 +88,15 @@ interface PageHeader {
 }
 ```
 
-- Details:
+- 详情：
 
-  Specify the headers array to render.
+  指定要渲染的标题数组。
 
-  If this prop is not specified, the headers of current page will be used.
+  如果该 Prop 没有被设置，默认会使用当前页面的标题。
 
 ### options
 
-- Type: `Partial<TocPropsOptions>`
+- 类型： `Partial<TocPropsOptions>`
 
 ```ts
 interface TocPropsOptions {
@@ -112,9 +111,9 @@ interface TocPropsOptions {
 }
 ```
 
-- Default:
+- 默认值：
 
-  Following default values can be overridden by [defaultPropsOptions](#defaultpropsoptions).
+  下列默认值可以用过 [defaultPropsOptions](#defaultpropsoptions) 来覆盖：
 
 ```ts
 const defaultOptions = {
@@ -129,15 +128,15 @@ const defaultOptions = {
 }
 ```
 
-- Details:
+- 详情：
 
-  Customize the TOC component.
+  自定义目录组件。
 
-  If the `containerTag` is set to an empty string `''`, the `<nav>` container will be removed totally.
+  如果 `containerTag` 设置为空字符串 `''` ，那么最外层的 `<nav>` Container 会被完全移除。
 
-- Example:
+- 示例：
 
-  The rendered TOC component with default options looks like:
+  使用默认 options 的目录组件的渲染结果类似以下结构：
 
 ```vue
 <template>

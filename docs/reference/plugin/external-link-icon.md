@@ -2,11 +2,11 @@
 
 <NpmBadge package="@vuepress/plugin-external-link-icon" />
 
-This plugin will add an icon to the external link in your markdown content, i.e. <ExternalLinkIcon />
+该插件会为你 Markdown 内容中的外部链接添加一个图标，即 <ExternalLinkIcon />
 
-This plugin has been integrated into the default theme.
+该插件已经集成到默认主题中。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-external-link-icon@next
@@ -18,25 +18,25 @@ import { externalLinkIconPlugin } from '@vuepress/plugin-external-link-icon'
 export default {
   plugins: [
     externalLinkIconPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Options
+## 配置项
 
 ### locales
 
-- Type: `Record<string, { openInNewWindow: string }>`
+- 类型： `Record<string, { openInNewWindow: string }>`
 
-- Details:
+- 详情：
 
-  The a11y text of the external link icon in different locales.
+  外部链接图标在不同 locales 下的 A11y 文字。
 
-  If this option is not specified, it will fallback to default text.
+  如果没有指定该配置项，它会降级使用默认文字。
 
-- Example:
+- 示例：
 
 ```ts
 export default {
@@ -55,33 +55,33 @@ export default {
 }
 ```
 
-- Also see:
-  - [Guide > I18n](../../guide/i18n.md)
+- 参考：
+  - [指南 > 多语言支持](../../guide/i18n.md)
 
 ## Frontmatter
 
 ### externalLinkIcon
 
-- Type: `boolean`
+- 类型： `boolean`
 
-- Details:
+- 详情：
 
-  Whether to append an external link icon to external links in current page.
+  是否在当前页面的外部链接的后面添加外部链接图标。
 
-## Styles
+## 样式
 
-You can customize the style of the external link icon via CSS variables:
+你可以通过 CSS 变量来自定义外部链接图标的样式：
 
 @[code css](@vuepress/plugin-external-link-icon/src/client/styles/vars.css)
 
-## Components
+## 组件
 
 ### ExternalLinkIcon
 
-- Details:
+- 详情：
 
-  This plugin will register a `<ExternalLinkIcon />` component globally, and you can use it without any props.
+  该插件会全局注册一个 `<ExternalLinkIcon />` 组件，你可以不传入任何 Props 来使用它。
 
 ::: tip
-This component is mainly used for theme development. You don't need to use it directly in most cases.
+该组件主要用于主题开发。在大多数情况下你不需要直接使用该组件。
 :::

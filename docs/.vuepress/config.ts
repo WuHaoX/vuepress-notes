@@ -30,8 +30,8 @@ export default defineUserConfig({
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'VuePress',
-      description: 'Vue-powered Static Site Generator',
+      title: 'WuHaoX',
+      description: '基于 VuePress 的学习笔记',
     },
     '/zh/': {
       lang: 'zh-CN',

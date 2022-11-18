@@ -1,26 +1,26 @@
-# Styles
+# 样式
 
 <NpmBadge package="@vuepress/theme-default" />
 
-Default theme uses [SASS](https://sass-lang.com/) as the CSS pre-processor.
+默认主题使用 [SASS](https://sass-lang.com/) 作为 CSS 预处理器。
 
-Users can custom style variables via [palette file](#palette-file), and add extra styles via [style file](#style-file).
+用户可以通过 [palette 文件](#palette-文件) 来自定义样式变量，还可以通过 [style 文件](#style-文件) 来添加额外的样式。
 
-## Palette File
+## Palette 文件
 
-The path of palette file is `.vuepress/styles/palette.scss`.
+Palette 文件的路径是 `.vuepress/styles/palette.scss` 。
 
-You can make use of it to override predefined SASS variables of default theme.
+你可以利用它来覆盖默认主题的预定义 SASS 变量。
 
-::: details Click to expand SASS variables
+::: details 点击查看 SASS 变量
 @[code{3-} scss](@vuepress/theme-default/src/client/styles/_variables.scss)
 :::
 
-## Style File
+## Style 文件
 
-The path of style file is `.vuepress/styles/index.scss`.
+Style 文件的路径是 `.vuepress/styles/index.scss` 。
 
-You can add extra styles here, or override default styles:
+你可以在这里添加额外的样式，或者覆盖默认样式：
 
 ```scss
 :root {
@@ -28,12 +28,12 @@ You can add extra styles here, or override default styles:
 }
 ```
 
-You can also make use of it to override predefined CSS variables of default theme.
+你也可以利用它来覆盖默认主题的预定义 CSS 变量。
 
-::: details Click to expand CSS variables
+::: details 点击查看 CSS 变量
 @[code scss](@vuepress/theme-default/src/client/styles/vars.scss)
 :::
 
-::: details Click to expand dark mode CSS variables
+::: details 点击查看暗黑模式 CSS 变量
 @[code scss](@vuepress/theme-default/src/client/styles/vars-dark.scss)
 :::

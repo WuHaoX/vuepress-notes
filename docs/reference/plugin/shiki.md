@@ -2,15 +2,15 @@
 
 <NpmBadge package="@vuepress/plugin-shiki" />
 
-This plugin will enable syntax highlighting for markdown code fence with [Shiki](https://shiki.matsu.io/).
+该插件使用 [Shiki](https://shiki.matsu.io/) 来为 Markdown 代码块启用代码高亮。
 
 ::: tip
-[Shiki](https://shiki.matsu.io/) is the syntax highlighter being used by VSCode. It has higher fidelity, but it is slower than [Prism.js](https://prismjs.com/).
+[Shiki](https://shiki.matsu.io/) 是 VSCode 正在使用的代码高亮器。它具有更高的保真度，但比 [Prism.js](https://prismjs.com/) 要慢一些，特别是在有大量代码块需要处理的时候。
 
-You could consider disabling this plugin in `dev` mode to get better development experience.
+你可以考虑在 `dev` 模式下禁用该插件来获取更好的开发体验。
 :::
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-shiki@next
@@ -22,42 +22,42 @@ import { shikiPlugin } from '@vuepress/plugin-shiki'
 export default {
   plugins: [
     shikiPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Options
+## 配置项
 
 ### theme
 
-- Type: `IThemeRegistration`
+- 类型： `IThemeRegistration`
 
-- Default: `'nord'`
+- 默认值： `'nord'`
 
-- Details:
+- 详情：
 
-  Theme of shiki.
+  Shiki 的主题。
 
-  This option will be forwarded to `getHighlighter()` method of shiki. 
+  该配置项会被传递到 Shiki 的 `getHighlighter()` 方法中。
 
-- Also see:
+- 参考：
   - [shiki > themes](https://github.com/shikijs/shiki/blob/master/docs/themes.md)
 
 ### langs
 
-- Type: `(Lang | ILanguageRegistration)[]`
+- 类型： `(Lang | ILanguageRegistration)[]`
 
-- Default: `[]`
+- 默认值： `[]`
 
-- Details:
+- 详情：
 
-  Languages of shiki.
+  Shiki 的语言。
 
-  This option will be forwarded to `getHighlighter()` method of shiki. 
+  该配置项会被传递到 Shiki 的 `getHighlighter()` 方法中。
 
-  If no languages are provided, shiki will load all available languages automatically.
+  如果没有传入语言， Shiki 会自动加载所有可用的语言。
 
-- Also see:
+- 参考：
   - [shiki > languages](https://github.com/shikijs/shiki/blob/master/docs/languages.md)

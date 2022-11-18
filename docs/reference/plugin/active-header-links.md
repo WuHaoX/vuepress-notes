@@ -2,11 +2,11 @@
 
 <NpmBadge package="@vuepress/plugin-active-header-links" />
 
-This plugin will listen to page scroll event. When the page scrolls to a certain _header anchor_, this plugin will change the route hash to that _header anchor_ if there is a corresponding _header link_.
+该插件会监听页面滚动事件。当页面滚动至某个 _标题锚点_ 后，如果存在对应的 _标题链接_ ，那么该插件会将路由 Hash 更改为该 _标题锚点_ 。
 
-This plugin is mainly used to develop themes, and has been integrated into the default theme. You won't need to use it directly in most cases.
+该插件主要用于开发主题，并且已经集成到默认主题中。大部分情况下你不需要直接使用它。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-active-header-links@next
@@ -18,57 +18,57 @@ import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links'
 export default {
   plugins: [
     activeHeaderLinksPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Options
+## 配置项
 
 ### headerLinkSelector
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'a.sidebar-item'`
+- 默认值： `'a.sidebar-item'`
 
-- Details:
+- 详情：
 
-  Selector of _header link_.
+  _标题链接_ 的选择器。
 
-  If a _header anchor_ does not have a corresponding _header link_, this plugin won't change the route hash to that anchor when scrolling to it.
+  如果一个 _标题锚点_ 没有对应的 _标题链接_ ，那么即使滚动到这个 _标题锚点_ ，该插件也不会更改路由 Hash 。
 
 ### headerAnchorSelector
 
-- Type: `string`
+- 类型： `string`
 
-- Default: `'.header-anchor'`
+- 默认值： `'.header-anchor'`
 
-- Details:
+- 详情：
 
-  Selector of _header anchor_.
+  _标题锚点_ 的选择器。
 
-  You don't need to specify this option unless you have changed the `permalinkClass` option of [markdown-it-anchor](https://github.com/valeriangalliat/markdown-it-anchor#readme) via [markdown.anchor](../config.md#markdown-anchor).
+  你通常不需要设置该选项，除非你通过 [markdown.anchor](../config.md#markdown-anchor) 修改了 [markdown-it-anchor](https://github.com/valeriangalliat/markdown-it-anchor#readme) 的 `permalinkClass` 选项。
 
-- Also see:
-  - [Guide > Markdown > Syntax Extensions > Header Anchors](../../guide/markdown.md#header-anchors)
+- 参考：
+  - [指南 > Markdown > 语法扩展 > 标题锚点](../../guide/markdown.md#标题锚点)
 
 ### delay
 
-- Type: `number`
+- 类型： `number`
 
-- Default: `200`
+- 默认值： `200`
 
-- Details:
+- 详情：
 
-  The delay of the debounced scroll event listener.
+  滚动事件监听器的 Debounce 延迟。
 
 ### offset
 
-- Type: `number`
+- 类型： `number`
 
-- Default: `5`
+- 默认值： `5`
 
-- Details:
+- 详情：
 
-  Even if you click the link of the _header anchor_ directly, the `scrollTop` might not be exactly equal to `offsetTop` of the _header anchor_, so we add an offset to avoid the error.
+  即便直接点击 _标题锚点_ 的链接， `scrollTop` 也可能不会完全等于 _标题锚点_ 的 `offsetTop` ，所以我们添加一个 Offset 偏移量来避免这个误差。

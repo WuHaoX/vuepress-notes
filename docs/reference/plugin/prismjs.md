@@ -2,13 +2,13 @@
 
 <NpmBadge package="@vuepress/plugin-prismjs" />
 
-This plugin will enable syntax highlighting for markdown code fence with [Prism.js](https://prismjs.com/).
+该插件使用 [Prism.js](https://prismjs.com/) 来为 Markdown 代码块启用代码高亮。
 
-This plugin has been integrated into the default theme.
+该插件已经集成到默认主题中。
 
-Notice that this plugin would only tokenize the code fence without adding styles. When using it with a custom theme, you may need to choose and import Prism.js style theme yourself.
+需要注意的是，该插件仅会给代码块添加 HTML 标记，而不会添加样式。当你在一个自定义主题中使用它时，可能需要自己选择并引入 Prism.js 样式主题。
 
-## Usage
+## 使用方法
 
 ```bash
 npm i -D @vuepress/plugin-prismjs@next
@@ -20,24 +20,24 @@ import { prismjsPlugin } from '@vuepress/plugin-prismjs'
 export default {
   plugins: [
     prismjsPlugin({
-      // options
+      // 配置项
     }),
   ],
 }
 ```
 
-## Options
+## 配置项
 
 ### preloadLanguages
 
-- Type: `string[]`
+- 类型： `string[]`
 
-- Default: `['markdown', 'jsdoc', 'yaml']`
+- 默认值： `['markdown', 'jsdoc', 'yaml']`
 
-- Details:
+- 详情：
 
-  Languages to preload.
+  需要预加载的语言。
 
-  By default, languages will be loaded on demand when parsing markdown files.
+  默认情况下，语言会在解析 Markdown 文件时按需加载。
 
-  However, Prism.js has [some potential issues](https://github.com/PrismJS/prism/issues/2716) about loading languages dynamically. To avoid them, you can preload languages via this option.
+  然而， Prism.js 在动态加载语言时可能会遇到 [一些潜在的问题](https://github.com/PrismJS/prism/issues/2716) 。为了避免这些问题，你可以使用该配置项来预加载一些语言。
