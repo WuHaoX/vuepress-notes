@@ -35,8 +35,8 @@ export default defineUserConfig({
     },
     '/zh/': {
       lang: 'zh-CN',
-      title: 'VuePress',
-      description: 'Vue 驱动的静态网站生成器',
+      title: 'WuHaoX',
+      description: '基于 VuePress 的学习笔记',
     },
   },
 
@@ -47,7 +47,8 @@ export default defineUserConfig({
   // configure default theme
   theme: defaultTheme({
     logo: '/images/hero.png',
-    repo: 'vuepress/vuepress-next',
+    //它将被用作 仓库链接 的链接。仓库链接 将会显示为导航栏的最后一个元素。
+    repo: 'WuHaoX/vuepress-notes',
     docsDir: 'docs',
 
     // theme-level locales config
