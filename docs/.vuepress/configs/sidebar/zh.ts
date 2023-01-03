@@ -41,6 +41,42 @@ export const sidebarZh: SidebarConfig = {
       ],
     },
   ],
+  '/zh/study/': [
+    {
+      text: '路线介绍',
+      collapsible: true,
+      children: [
+        '/zh/study/explain.md'
+      ],
+    },
+    {
+      text: 'MarkDown语法',
+      collapsible: true,
+      children: [
+        '/zh/study/MarkDown/explain.md',
+        '/zh/study/MarkDown/basic.md',
+        '/zh/study/MarkDown/title.md',
+        '/zh/study/MarkDown/paragraph.md',
+        '/zh/study/MarkDown/lineFeed.md',
+        '/zh/study/MarkDown/emphasize.md',
+        '/zh/study/MarkDown/reference.md',
+        '/zh/study/MarkDown/list.md',
+        '/zh/study/MarkDown/code.md',
+        '/zh/study/MarkDown/lineBetween.md',
+        '/zh/study/MarkDown/link.md',
+        '/zh/study/MarkDown/image.md',
+        '/zh/study/MarkDown/ESC.md',
+        '/zh/study/MarkDown/HTML.md',
+      ]
+    },
+    {
+      text: 'JavaScript',
+      collapsible: true,
+      children: [
+        '/zh/study/JavaScript/explain.md',
+      ]
+    }
+  ],
   '/zh/reference/': [
     {
       text: 'VuePress 参考',

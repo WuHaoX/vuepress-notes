@@ -7,6 +7,40 @@ export const navbarZh: NavbarConfig = [
     link: '/zh/guide/',
   },
   {
+    text: '学习',
+    children: [
+      {
+        text: '学习之路',
+        children: [
+          '/zh/study/explain.md'
+        ],
+      },
+      {
+        text: 'MarkDown语法',
+        children: [
+          '/zh/study/MarkDown/explain.md'
+        ],
+      },
+      {
+        text: 'JavaScript',
+        children: [
+          '/zh/study/JavaScript/explain.md'
+        ],
+      }
+    ],
+  },
+  {
+    text: '工作记录',
+    children: [
+      {
+        text: '日常问题',
+        children: [
+          '/zh/work/explain.md'
+        ],
+      }
+    ]
+  },
+  {
     text: '参考',
     children: [
       {
