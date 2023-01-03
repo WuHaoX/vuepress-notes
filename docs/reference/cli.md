@@ -1,4 +1,4 @@
-# 经销商
+# 三级分销
 
 <NpmBadge package="@vuepress/cli" />
 
