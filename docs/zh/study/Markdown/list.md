@@ -90,7 +90,7 @@ PS:**在添加处的上一行列表处注意使用**[换行语法](./lineFeed.md
 渲染效果如下
 1. 第一列
 2. 第二列
-![hand](../../../../docs/.vuepress/public/images/hero.png)  
+![图片加载中](../../../../docs/.vuepress/public/images/hero.png)  
 3. 第三列
 
 PS:需要注意的是图片在Markdown里不能设置宽高，需要用HTML`<img />`标签来设置图片的宽高

@@ -20,6 +20,16 @@ export const sidebarZh: SidebarConfig = {
       ],
     },
   ],
+  '/zh/util/': [
+    {
+      text: '工具',
+      children: [
+        '/zh/util/README.md',
+        '/zh/util/Coding.md',
+        '/zh/util/nvm.md',
+      ],
+    },
+  ],
   '/zh/advanced/': [
     {
       text: '深入',

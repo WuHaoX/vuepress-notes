@@ -77,6 +77,10 @@ export const navbarZh: NavbarConfig = [
     ],
   },
   {
+    text: '工具',
+    link: '/zh/util/',
+  },
+  {
     text: `更新日志`,
     link:'zh/advanced/cookbook/',
   },
