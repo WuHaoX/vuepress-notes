@@ -63,7 +63,6 @@ export const sidebarZh: SidebarConfig = {
       text: 'MarkDown语法',
       collapsible: true,
       children: [
-        '/zh/study/MarkDown/explain.md',
         '/zh/study/MarkDown/basic.md',
         '/zh/study/MarkDown/title.md',
         '/zh/study/MarkDown/paragraph.md',
@@ -77,6 +76,11 @@ export const sidebarZh: SidebarConfig = {
         '/zh/study/MarkDown/image.md',
         '/zh/study/MarkDown/ESC.md',
         '/zh/study/MarkDown/HTML.md',
+        '/zh/study/MarkDown/MarkdownExtend.md',
+        '/zh/study/MarkDown/table.md',
+        '/zh/study/MarkDown/footnote.md',
+        '/zh/study/MarkDown/DeleteLine.md',
+        '/zh/study/MarkDown/VuePressMarkdown.md',
       ]
     },
     {

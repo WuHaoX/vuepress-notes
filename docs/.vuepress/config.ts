@@ -8,6 +8,7 @@ import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 import { shikiPlugin } from '@vuepress/plugin-shiki'
 import { defaultTheme } from '@vuepress/theme-default'
 import { getDirname, path } from '@vuepress/utils'
+import footnote  from 'markdown-it-footnote'
 import {
   head,
   navbarEn,
@@ -116,6 +117,10 @@ export default defineUserConfig({
       handleImportPath: (str) =>
         str.replace(/^@vuepress/, path.resolve(__dirname, '../../ecosystem')),
     },
+  },
+
+  extendsMarkdown: (md) => {
+    md.use(footnote)
   },
 
   // use plugins

@@ -16,9 +16,10 @@ export const navbarZh: NavbarConfig = [
         ],
       },
       {
-        text: 'MarkDown语法',
+        text: 'MarkDown',
         children: [
-          '/zh/study/MarkDown/explain.md'
+          '/zh/study/MarkDown/basic.md',
+          '/zh/study/MarkDown/MarkdownExtend.md'
         ],
       },
       {
