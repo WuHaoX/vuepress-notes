@@ -78,7 +78,9 @@ export const sidebarZh: SidebarConfig = {
         '/zh/study/MarkDown/HTML.md',
         '/zh/study/MarkDown/MarkdownExtend.md',
         '/zh/study/MarkDown/table.md',
+        '/zh/study/MarkDown/includeCode.md',
         '/zh/study/MarkDown/footnote.md',
+        '/zh/study/MarkDown/titleNumber.md',
         '/zh/study/MarkDown/DeleteLine.md',
         '/zh/study/MarkDown/VuePressMarkdown.md',
       ]
