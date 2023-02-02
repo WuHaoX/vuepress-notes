@@ -7,7 +7,7 @@ export const navbarZh: NavbarConfig = [
     link: '/zh/guide/',
   },
   {
-    text: '学习',
+    text: '前端学习',
     children: [
       {
         text: '学习之路',
@@ -28,6 +28,23 @@ export const navbarZh: NavbarConfig = [
           '/zh/study/JavaScript/explain.md'
         ],
       }
+    ],
+  },
+  {
+    text: '后端学习',
+    children: [
+      {
+        text: '学习之路',
+        children: [
+          '/zh/backEndStudy/explain.md'
+        ],
+      },
+      {
+        text: '中间件',
+        children: [
+          '/zh/backEndStudy/middleware/kafka.md',
+        ],
+      },
     ],
   },
   {
