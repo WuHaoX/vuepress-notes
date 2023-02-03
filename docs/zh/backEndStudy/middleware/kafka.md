@@ -94,6 +94,85 @@
 Topic中的数据分割为一个或多个Partition。每个Topic至少有一个Partition。每个Partition中的数据使用多个Segment文件存储。Partition中的数据是有序的，不同Partition间的数据丢失了数据的顺序。如果Topic有多个Partition，消费数据时就不能保证数据的顺序。在需要严格保证消息的消费顺序的场景下，需要将Partition数目设为1。
 
 ### 6. Segment
+
+Partition物理上由多个segment组成，每个Segment存着message信息。
+
 ### 7. Broker
+
+Kafka集群包含一个或多个服务器，服务器节点称为Broker。
+
+Broker存储Topic的数据。如果某Topic有N个Partition，集群有N个Broker，那么每个Broker存储该Topic的一个Partition。
+
+如果某个Topic有N个Partition，集群有（N+M）个Broker，那么其中有N个Broker存储该Topic的一个Partition，剩下的M个Broker不存储该Topic的Partition数据。
+
+如果某个Topic有N个Partition，集群中Broker数目少于N个，那么一个Broke存储该Topic的一个或多个Partition。在实际生产环境中，尽量避免这种情况的发生，这种情况容易导致Kafka集群数据不均衡。
+
 ### 8. Leader
+
+每个Partition由多个副本，其中有且仅有一个作为Leader，Leader是当前负责数据的读写的Partition。
+
 ### 9. Follower
+
+Follower跟随Leader，所有写请求都通过Leader路由，数据变更会广播给所有Follower，Follower与Leader保持数据同步。如果Leader失效，则从Follower中选举出一个新的Leader。当Follower与Leader挂掉、卡住或者同步太慢，Leader会把这个Follower从“in sync replicas”(ISR)列表中删除，重新创建一个Follower。
+
+## 深入了解Kafka
+
+1. Kafka的消息是存储在文件系统之上的。
+
+Kafka高度依赖文件系统来存储和缓存消息，一般的人认为”磁盘是缓慢的“，所以对这样的设计持怀疑态度。实际上，磁盘比人们预想的块很多也慢很多，这取决于它们如何被使用；一个好的磁盘结构设计可以使速度与网络一样块。
+
+现代的操作系统针对磁盘的读写已经做了一些优化方案来加快磁盘的访问速度。比如，**预读**会提前将一个比较大的磁盘快读入内存。**后写**会将很多小的逻辑写操作合并起来组合成一个大的物理写操作。并且，操作系统还会将主内存剩余的所有空闲内存空间都用作磁盘的缓存，所有的磁盘读写操作都会经过统一的磁盘缓存（除了直接I/O会绕过磁盘缓存）。综合这几点优化特点，如果是针对磁盘的顺序访问，某些情况下它可能比随机的内存访问都要快，甚至可以和网络的速度相差无几。
+
+上文相关术语解释中的[Topic]()其实是逻辑上的概念，面向消费者和生产者，物理上存储的其实是[Partition]()，每一个Partition最终对应一个文件目录，里面存储所有的消息和索引文件。默认情况下，每一个Topic在创建时如果不指定Partition数量时只会创建1个Partition。比如，我创建了一个Topic名字为test，没有指定Partition的数量，那么会默认创建一个`test-0`的文件目录，这里的命名规则是：
+
+`<Topic_name>-<Topic_id>`
+
+任何发布到Partition的消息都会被追加到Partition数据文件的尾部，这样的顺序写磁盘操作让Kafka的效率非常高。
+
+2. Kafka中的底层存储设计
+
+假设我们现在Kafka集群只有一个Broker，我们创建2个Topic名称分别为（Topic1）和（Topic2），Partition数量分别在Topic1中为1、Topic2中为2，那么我们的根目录下就会创建三个文件夹：
+
+```
+├─ topic1-0
+├─ topic2-0
+├─ topic2-1
+```
+
+在Kafka的文件存储中，同一个Topic下有多个不同的Partition，每个Partition都是一个文件目录，而每个文件目录又被平均分配成多个大小相等的[Segment File]()，Segment File 又由index file和data file 组成，它们总是成对出现，后缀名分别是”.index“、”.log“分别表示Segment索引文件和数据文件。
+
+现在假设我们设置每个Segment大小为500MB，并启动生产者向Topic1中写入大量数据，topic-0文件目录中就会产生类似如下的一些文件：
+
+```
+├─ topic1-0
+|  └─ 00000000000000000000.index
+|  └─ 00000000000000000000.log
+|  └─ 00000000000000368769.index
+|  └─ 00000000000000368769.log
+|  └─ 00000000000000737337.index
+|  └─ 00000000000000737337.log
+|  └─ 00000000000001105814.index
+|  └─ 00000000000001105814.log
+├─ topic2-0
+├─ topic2-1
+```
+
+Segment是Kafka文件存储的最小单位。Segment文件命名规则：Partition全局的第一个Segment从0开始，后续每个Segment文件为上一个Segment文件最后一条消息的offset值。数值最大为64位long大小，19位数字字符长度，没有数字用0填充。
+
+说明一下索引文件和数据文件对应关系：
+
+![图片加载中](../../../.vuepress/public/images/content/Kafka/索引文件数据文件的关系.jpg)
+
+其中以索引文件元数据[3,497]为例，依次在数据文件中表示第3个message（在全局Partition表示第 368769 + 3 = 368772个message）以及该消息物理偏移地址为497。
+
+注意该index文件并不是从0开始，也不是每次递增1的，这是因为Kafka采取稀疏索引存储的方式，每隔一定字节的数据建立一条索引，它减少了索引文件大小，使得能把index映射到内存，降低了查询时的磁盘IO开销，同时也并没有给查询带来太多的时间消耗。
+
+因为其文件名为上一个Segment最后一条消息的offset，所以当需要查找一个指定offset的message时，通过在所有Segment的文件名中进行二分查找就能找到它归属的Segment，再在其index文件中找到其对应到文件上的物理位置就能拿到对应message。
+
+由于消息再Partition的Segment数据文件中时顺序读写的，且消息消费后不会删除（删除策略时针对过期的Segment文件）。
+
+Kafka定义了标准的数据存储结构，再Partition中的每一条message都包含了以下三个属性
+
+* offset：表示 message 在当前 Partition 中的偏移量，是一个逻辑上的值，唯一确定了 Partition 中的一条 message，可以简单的认为是一个 id；
+* MessageSize：表示 message 内容 data 的大小；
+* data：message 的具体内容
