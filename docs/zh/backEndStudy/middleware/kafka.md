@@ -37,6 +37,7 @@
 ## Kafka的优点
 
 1. **解耦**
+
 如图所示。假设有系统B、C、D都需要系统A的数据，于是系统A调用三个方法发送数据到B、C、D。这时，系统D不需要数据了，那就需要在系统A把相关的代码删掉。假设这时有个新的系统E需要数据，这是系统A又要增加调用系统E的代码。为了降低这种强耦合，就可以用消息中间件，系统A只需要把数据发送到消息中间件，其它系统如果需要数据，则从数据中间件获取即可。
 
 ![图片加载中](../../../.vuepress/public/images/content/Kafka/解耦.png)
@@ -171,8 +172,10 @@ Segment是Kafka文件存储的最小单位。Segment文件命名规则：Partiti
 
 由于消息再Partition的Segment数据文件中时顺序读写的，且消息消费后不会删除（删除策略时针对过期的Segment文件）。
 
+::: tip
 Kafka定义了标准的数据存储结构，再Partition中的每一条message都包含了以下三个属性
 
 * offset：表示 message 在当前 Partition 中的偏移量，是一个逻辑上的值，唯一确定了 Partition 中的一条 message，可以简单的认为是一个 id；
 * MessageSize：表示 message 内容 data 的大小；
 * data：message 的具体内容
+:::

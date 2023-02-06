@@ -19,7 +19,10 @@ Markdown基本语法允许你通过将行缩进四个空格或一个制表符来
     "age"：18,
 }
 ```
-PS:在围栏代码块中使用反引号（ ` ）？请参考[转义字符语法](./ESC.md)。
+
+::: tip
+在围栏代码块中使用反引号（ ` ）？请参考[转义字符语法](./ESC.md)。
+:::
 
 ## 语法高亮
 
@@ -206,9 +209,10 @@ v-pre扩展是由VurPress的内置[markdown.code.vPre.block](https://v2.vuepress
 @[code{3-10} md{3}:no-line-number](./includeCode.md)
 ```
 
-PS
+::: tip
 1. `@[code]`中的code不能更改为其它单词。
 2. 需要注意的是，路径别名在导入代码语法中不会生效。你可以通过下面的配置来自行处理路径别名：
+:::
 
 ```ts
 import { getDirname, path } from '@vuepress/utils'

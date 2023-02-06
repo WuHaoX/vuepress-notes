@@ -30,6 +30,22 @@ export const sidebarZh: SidebarConfig = {
       ],
     },
   ],
+  '/zh/mobile/': [
+    {
+      text: 'Dart',
+      collapsible: true,
+      children: [
+        '/zh/mobile/Dart/Dart.md',
+      ],
+    },
+    {
+      text: 'Flutter',
+      collapsible: true,
+      children: [
+        '/zh/mobile/Flutter/Flutter.md',
+      ],
+    },
+  ],
   '/zh/advanced/': [
     {
       text: '深入',

@@ -48,6 +48,23 @@ export const navbarZh: NavbarConfig = [
     ],
   },
   {
+    text: '移动端',
+    children: [
+      {
+        text: '学习之路',
+        children: [
+          '/zh/mobile/explain.md'
+        ],
+      },
+      {
+        text: 'Dart',
+        children: [
+          '/zh/mobile/Dart/Dart.md',
+        ],
+      },
+    ],
+  },
+  {
     text: '工作记录',
     children: [
       {

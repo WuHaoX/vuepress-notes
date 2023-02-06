@@ -22,5 +22,7 @@
       <head>
       </head>
     </html>
-`
-PS:要创建不用缩进的代码块，请使用[围栏式代码块](./expand/codeExpand.md)。
+
+::: tip
+要创建不用缩进的代码块，请使用[围栏式代码块](./expand/codeExpand.md)。
+:::

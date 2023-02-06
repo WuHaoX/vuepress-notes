@@ -14,7 +14,9 @@
 
 表情显示 :tada: !
 
-PS:Emoji扩展由markdown-it-emoji()支持。
+::: tip
+Emoji扩展由markdown-it-emoji()支持。
+:::
 
 ## 在Markdown中使用Vue
 
@@ -53,17 +55,19 @@ PS:Emoji扩展由markdown-it-emoji()支持。
 
  这是默认主题内置的`<Badge />`组件 <Badge text="演示" />
 
- PS:
- 前往[VuePress内置组件](./https://v2.vuepress.vuejs.org/zh/reference/components.html)查看所有组件。
+::: tip
+前往[VuePress内置组件](./https://v2.vuepress.vuejs.org/zh/reference/components.html)查看所有组件。
 
 前往[VuePress默认主题 > 内置组件](https://v2.vuepress.vuejs.org/zh/reference/default-theme/components.html)查看默认主题中的所有内置组件。
+:::
 
-PS:
+::: warning
 **非标准的HTML标签**
 非标准的HTML标签不会被Vue模板编译器识别成原生HTML标签。相反，Vue会尝试将这些标签解析为Vue组件，而显然这些组件通常是不存在的。例如：
 
 * 以废弃的HTML标签，比如`<center>`和`<font>`等。
 * [MathML标签](https://developer.mozilla.org/zh-CN/docs/Web/MathML)，它们可能会被一些markdown-it的LateX插件用到。
+:::
 
 如果你无论如何都要使用这些标签的话，可以尝试下面两种方法之一：
 
