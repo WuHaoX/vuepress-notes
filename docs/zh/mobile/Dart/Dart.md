@@ -847,3 +847,853 @@ void main(List<String> arguments) {
   assert(arguments[1] == 'test');
 }
 ```
+
+## 函数是一级对象
+
+可以将函数作为参数传递给另一个函数。例如：
+
+```dart
+void printElement(int element) {
+  print(element);
+}
+
+var list = [1, 2, 3];
+
+// Pass printElement as a parameter.
+list.forEach(printElement);
+```
+
+你也可以将函数赋值给一个变量，比如：
+
+```dart
+var loudify = (msg) => '!!! ${msg.toUpperCase()} !!!';
+assert(loudify('hello') == '!!! HELLO !!!');
+```
+
+该示例中使用了匿名函数。
+
+## 匿名函数
+
+大多数方法都是有名字的，比如 main() 或 printElement()。你可以创建一个没有名字的方法，称之为 匿名函数、 Lambda 表达式 或 Closure 闭包。你可以将匿名方法赋值给一个变量然后使用它，比如将该变量添加到集合或从中删除。
+
+匿名方法看起来与命名方法类似，在括号之间可以定义参数，参数之间用逗号分割。
+
+后面大括号中的内容则为函数体：
+
+```dart
+([[类型] 参数[, …]]) {
+  函数体;
+};
+```
+
+下面代码定义了只有一个参数 item 且没有参数类型的匿名方法。 List 中的每个元素都会调用这个函数，打印元素位置和值的字符串：
+
+```dart
+const list = ['apples', 'bananas', 'oranges'];
+list.map((item) {
+  return item.toUpperCase();
+}).forEach((item) {
+  print('$item: ${item.length}');
+});
+```
+
+如果函数体内只有一行返回语句，你可以使用胖箭头缩写法。
+
+```dart
+list
+    .map((item) => item.toUpperCase())
+    .forEach((item) => print('$item: ${item.length}'));
+```
+
+## 词法作用域
+
+Dart 是词法有作用域语言，变量的作用域在写代码的时候就确定了，大括号内定义的变量只能在大括号内访问，与 Java 类似。
+
+下面是一个嵌套函数中变量在多个作用域中的示例：
+
+```dart
+bool topLevel = true;
+
+void main() {
+  var insideMain = true;
+
+  void myFunction() {
+    var insideFunction = true;
+
+    void nestedFunction() {
+      var insideNestedFunction = true;
+
+      assert(topLevel);
+      assert(insideMain);
+      assert(insideFunction);
+      assert(insideNestedFunction);
+    }
+  }
+}
+```
+
+注意 `nestedFunction()` 函数可以访问包括顶层变量在内的所有的变量。
+
+## 词法闭包
+
+闭包 即一个函数对象，即使函数对象的调用在它原始作用域之外，依然能够访问在它词法作用域内的变量。
+
+闭包 即一个函数对象，即使函数对象的调用在它原始作用域之外，依然能够访问在它词法作用域内的变量。
+
+```dart
+/// Returns a function that adds [addBy] to the
+/// function's argument.
+Function makeAdder(int addBy) {
+  return (int i) => addBy + i;
+}
+
+void main() {
+  // Create a function that adds 2.
+  var add2 = makeAdder(2);
+
+  // Create a function that adds 4.
+  var add4 = makeAdder(4);
+
+  assert(add2(3) == 5);
+  assert(add4(3) == 7);
+}
+```
+
+## 返回值
+
+所有的函数都有返回值。没有显示返回语句的函数最后一行默认为执行 return null。
+
+```dart
+foo() {}
+
+assert(foo() == null);
+```
+
+### 运算符
+
+Dart 支持下表所示的操作符，它也体现了 Dart 运算符的关联性和 优先级 的从高到低的顺序。这也是 Dart 运算符关系的近似值。你可以将这些运算符实现为 一个类的成员。
+
+|        Description       |                            Operator                            | Associativity |
+|:------------------------:|:--------------------------------------------------------------:|:-------------:|
+|       unary postfix      |       expr++    expr--    ()    []    ?[]    .    ?.    !      |      None     |
+|       unary prefix       | -expr    !expr    ~expr    ++expr    --expr      await expr    |      None     |
+|      multiplicative      |                         *    /    %  ~/                        |      Left     |
+|         additive         |                             +    -                             |      Left     |
+|           shift          |                         <<    >>    >>>                        |      Left     |
+|        bitwise AND       |                                &                               |      Left     |
+|        bitwise XOR       |                                ^                               |      Left     |
+|        bitwise OR        |                               \|                               |      Left     |
+| relational and type test |              >=    >    <=    <    as    is    is!             |      None     |
+|         equality         |                           ==    !=                             |      None     |
+|        logical AND       |                               &&                               |      Left     |
+|        logical OR        |                              \|\|                              |      Left     |
+|          if null         |                               ??                               |      Left     |
+|        conditional       |                      expr1 ? expr2 : expr3                     |     Right     |
+|          cascade         |                            ..    ?..                           |      Left     |
+|        assignment        |            =    *=    /=   +=   -=   &=   ^=   etc.            |     Right     |
+
+:::tip
+上述的表格只是作为一个比较实用的指南，操作符的优先级和关联性概念是从编程语言的语法中整理发现的。
+:::
+
+一旦你使用了运算符，就创建了表达式。下面是一些运算符表达式的示例：
+
+```dart
+a++
+a + b
+a = b
+a == b
+c ? a : b
+a is T
+```
+
+在 运算符表 中，运算符的优先级按先后排列，即第一行优先级最高，最后一行优先级最低，而同一行中，最左边的优先级最高，最右边的优先级最低。例如：% 运算符优先级高于 == ，而 == 高于 &&。根据优先级规则，那么意味着以下两行代码执行的效果相同：
+
+```dart
+括号提高了可读性。
+if ((n % i == 0) && (d % i == 0)) ...
+
+更难阅读，但等效。
+if (n % i == 0 && d % i == 0) ...
+```
+
+## 算术运算符
+
+Dart 支持常用的算术运算符：
+
+|    +    |                     加                     |
+|:-------:|:------------------------------------------:|
+|    -    |                     减                     |
+| -表达式 | 一元负, 也可以作为反转（反转表达式的符号） |
+|    *    |                     乘                     |
+|    /    |                     除                     |
+|    ~/   |                  除并取整                  |
+|    %    |                    取模                    |
+
+示例：
+```dart
+assert(2 + 3 == 5);
+assert(2 - 3 == -1);
+assert(2 * 3 == 6);
+assert(5 / 2 == 2.5); // Result is a double
+assert(5 ~/ 2 == 2); // Result is an int
+assert(5 % 2 == 1); // Remainder
+
+assert('5/2 = ${5 ~/ 2} r ${5 % 2}' == '5/2 = 2 r 1');
+```
+
+Dart 还支持自增自减操作。
+
+```dart
+| Operator++var | var = var + 1 (表达式的值为 var + 1) |
+|:-------------:|:------------------------------------:|
+|     var++     |   var = var + 1 (表达式的值为 var)   |
+|     --var     | var = var - 1 (表达式的值为 var - 1) |
+|     var--     |   var = var - 1 (表达式的值为 var)   |
+```
+
+示例：
+
+```dart
+int a;
+int b;
+
+a = 0;
+b = ++a; // Increment a before b gets its value.
+assert(a == b); // 1 == 1
+
+a = 0;
+b = a++; // Increment a AFTER b gets its value.
+assert(a != b); // 1 != 0
+
+a = 0;
+b = --a; // Decrement a before b gets its value.
+assert(a == b); // -1 == -1
+
+a = 0;
+b = a--; // Decrement a AFTER b gets its value.
+assert(a != b); // -1 != 0
+```
+
+## 关系运算符
+
+下表列出了关系运算符及含义：
+
+| Operator== |   相等   |
+|:----------:|:--------:|
+|     !=     |   不等   |
+|      >     |   大于   |
+|      <     |   小于   |
+|     >=     | 大于等于 |
+|     <=     | 小于等于 |
+
+要判断两个对象 x 和 y 是否表示相同的事物使用 == 即可。（在极少数情况下，可能需要使用 `identical()` 函数来确定两个对象是否完全相同）。下面是 == 运算符的一些规则：
+
+1. 当 x 和 y 同时为空时返回 true，而只有一个为空时返回 false。
+
+2. 返回对 x 调用 == 方法的结果，参数为 y。（像 == 这样的操作符是对左侧内容进行调用的。
+
+下面的代码给出了每一种关系运算符的示例：
+
+```dart
+assert(2 == 2);
+assert(2 != 3);
+assert(3 > 2);
+assert(2 < 3);
+assert(3 >= 3);
+assert(2 <= 3);
+```
+
+## 类型判断运算符
+
+| Operator |             Meaning            |
+|:--------:|:------------------------------:|
+|    as    | 类型转换（也用作指定 库前缀)） |
+|    is    |  如果对象是指定类型则返回 true |
+|    is!   | 如果对象是指定类型则返回 false |
+
+当且仅当 obj 实现了 T 的接口，obj is T 才是 true。例如 obj is Object 总为 true，因为所有类都是 Object 的子类。
+
+仅当你确定这个对象是该类型的时候，你才可以使用 as 操作符可以把对象转换为特定的类型。例如：
+
+```dart
+(employee as Person).firstName = 'Bob';
+```
+
+如果你不确定这个对象类型是不是 T，请在转型前使用 is T 检查类型。
+
+```dart
+if (employee is Person) {
+  // Type check
+  employee.firstName = 'Bob';
+}
+```
+
+:::tip
+上述两种方式是有区别的：如果 employee 为 null 或者不为 Person 类型，则第一种方式将会抛出异常，而第二种不会。
+:::
+
+```dart
+// Assign value to a
+a = value;
+// 如果 b 为空，则为 b 赋值;否则，b 保持不变
+b ??= value;
+```
+
+像 += 这样的赋值运算符将算数运算符和赋值运算符组合在了一起。
+
+|  = |  *= |  %= | >>>= |  ^= |
+|:--:|:---:|:---:|:----:|:---:|
+| += |  /= | <<= |  &=  | \|= |
+| -= | ~/= | >>= |      |     |
+
+下表解释了复合运算符的原理：
+
+|        场景       | 复合运算 | 等效表达式 |
+|:-----------------:|:--------:|:----------:|
+| 假设有运算符 op： |  a op= b | a = a op b |
+|       示例：      |  a += b  |  a = a + b |
+
+下面的例子展示了如何使用赋值以及复合赋值运算符：
+
+```dart
+var a = 2; // Assign using =
+a *= 3; // Assign and multiply: a = a * 3
+assert(a == 6);
+```
+
+## 逻辑运算符
+
+使用逻辑运算符你可以反转或组合布尔表达式。
+
+|  运算符 |                            描述                           |
+|:-------:|:---------------------------------------------------------:|
+| !表达式 | 对表达式结果取反（即将 true 变为 false，false 变为 true） |
+|   \|\|  |                           逻辑或                          |
+|    &&   |                           逻辑与                          |
+
+下面是使用逻辑表达式的示例：
+
+```dart
+if (!done && (col == 0 || col == 3)) {
+  // ...Do something...
+}
+```
+
+## 按位和移位运算符
+
+在 Dart 中，二进制位运算符可以操作二进制的某一位，但仅适用于整数。
+
+|  运算符 |                     描述                    |
+|:-------:|:-------------------------------------------:|
+|    &    |                    按位与                   |
+|    \|   |                    按位或                   |
+|    ^    |                   按位异或                  |
+| ~表达式 | 按位取反（即将 “0” 变为 “1”，“1” 变为 “0”） |
+|    <<   |                    位左移                   |
+|    >>   |                    位右移                   |
+|   >>>   |                  无符号右移                 |
+
+下面是使用按位和移位运算符的示例：
+
+```dart
+final value = 0x22;
+final bitmask = 0x0f;
+
+assert((value & bitmask) == 0x02); // AND
+assert((value & ~bitmask) == 0x20); // AND NOT
+assert((value | bitmask) == 0x2f); // OR
+assert((value ^ bitmask) == 0x2d); // XOR
+assert((value << 4) == 0x220); // Shift left
+assert((value >> 4) == 0x02); // Shift right
+assert((value >>> 4) == 0x02); // Unsigned shift right
+assert((-value >> 4) == -0x03); // Shift right
+assert((-value >>> 4) > 0); // Unsigned shift right
+```
+
+:::tip
+>>> 操作符在 2.14 以上的 Dart 版本 中可用。
+:::
+
+## 条件表达式
+
+Dart 有两个特殊的运算符可以用来替代 if-else 语句：
+
+```dart
+条件 ? 表达式 1 : 表达式 2
+```
+
+如果条件为 true，执行表达式 1并返回执行结果，否则执行表达式 2 并返回执行结果。
+
+```dart
+表达式 1 ?? 表达式 2
+```
+
+如果表达式 1 为非 null 则返回其值，否则执行表达式 2 并返回其值。
+
+根据布尔表达式确定赋值时，请考虑使用 ? 和 :
+
+```dart
+var visibility = isPublic ? 'public' : 'private';
+```
+
+如果赋值是根据判定是否为 null 则考虑使用 ??。
+
+```dart
+String playerName(String? name) => name ?? 'Guest';
+```
+
+上述示例还可以写成至少下面两种不同的形式，只是不够简洁：
+
+```dart
+// Slightly longer version uses ?: operator.
+String playerName(String? name) => name != null ? name : 'Guest';
+
+// Very long version uses if-else statement.
+String playerName(String? name) {
+  if (name != null) {
+    return name;
+  } else {
+    return 'Guest';
+  }
+}
+```
+
+## 级联运算符
+
+级联运算符 (.., ?..) 可以让你在同一个对象上连续调用多个对象的变量或方法。
+
+比如下面的代码：
+
+```dart
+var paint = Paint()
+  ..color = Colors.black
+  ..strokeCap = StrokeCap.round
+  ..strokeWidth = 5.0;
+```
+
+前面的示例等效于以下代码：
+
+```dart
+var paint = Paint();
+paint.color = Colors.black;
+paint.strokeCap = StrokeCap.round;
+paint.strokeWidth = 5.0;
+```
+
+如果级联操作的对象可能为 null，比如下面的代码：
+
+```dart
+querySelector('#confirm') // Get an object.
+  ?..text = 'Confirm' // Use its members.
+  ..classes.add('important')
+  ..onClick.listen((e) => window.alert('Confirmed!'))
+  ..scrollIntoView();
+```
+
+:::tip
+?.. 运行在 2.12 和以上的 版本 中可用。
+:::
+
+上面的代码相当于：
+
+```dart
+var button = querySelector('#confirm');
+button?.text = 'Confirm';
+button?.classes.add('important');
+button?.onClick.listen((e) => window.alert('Confirmed!'));
+button?.scrollIntoView();
+```
+
+级联运算符可以嵌套，例如：
+
+```dart
+final addressBook = (AddressBookBuilder()
+      ..name = 'jenny'
+      ..email = 'jenny@example.com'
+      ..phone = (PhoneNumberBuilder()
+            ..number = '415-555-0100'
+            ..label = 'home')
+          .build())
+    .build();
+```
+
+在返回对象的函数中谨慎使用级联操作符。例如，下面的代码是错误的：
+
+```dart
+var sb = StringBuffer();
+sb.write('foo')
+  ..write('bar'); // Error: method 'write' isn't defined for 'void'.
+```
+
+:::tip
+上述代码中的 sb.write() 方法返回的是 void，返回值为 void 的方法则不能使用级联运算符。
+
+严格来说 .. 级联操作并非一个运算符而是 Dart 的特殊语法。
+:::
+
+## 其他运算符
+
+大多数其它的运算符，已经在其它的示例中使用过：
+
+| 运算符 |      名字     |                                                       描述                                                      |
+|:------:|:-------------:|:---------------------------------------------------------------------------------------------------------------:|
+|   ()   |    使用方法   |                                                 代表调用一个方法                                                |
+|   []   |   访问 List   |                                            访问 List 中特定位置的元素                                           |
+|   ?[]  | 判空访问 List |                                  左侧调用者不为空时，访问 List 中特定位置的元素                                 |
+|    .   |    访问成员   |                                                    成员访问符                                                   |
+|   ?.   |  条件访问成员 | 与上述成员访问符类似，但是左边的操作对象不能为 null，例如 foo?.bar，如果 foo 为 null 则返回 null ，否则返回 bar |
+|    !   |  空断言操作符 | 将表达式的类型转换为其基础类型，如果转换失败会抛出运行时异常。例如 foo!.bar，如果 foo 为 null，则抛出运行时异常 |
+
+## 流程控制语句
+
+你可以使用下面的语句来控制 Dart 代码的执行流程：
+
+* if 和 else
+
+* for 循环
+
+* while 和 do-while 循环
+
+* break 和 continue
+
+* switch 和 case
+
+* assert
+
+使用 try-catch 和 throw 也能影响控制流，
+
+## If 和 Else
+
+Dart 支持 if - else 语句，其中 else 是可选的，比如下面的例子。
+
+```dart
+if (isRaining()) {
+  you.bringRainCoat();
+} else if (isSnowing()) {
+  you.wearJacket();
+} else {
+  car.putTopDown();
+}
+```
+:::warning
+Dart 的 if 语句中的条件必须是布尔值而不能为其它类型。
+:::
+
+## For 循环
+
+你可以使用标准的 for 循环进行迭代。例如：
+
+```dart
+var message = StringBuffer('Dart is fun');
+for (var i = 0; i < 5; i++) {
+  message.write('!');
+}
+```
+
+在 Dart 语言中，for 循环中的闭包会自动捕获循环的 索引值 以避免 JavaScript 中一些常见的陷阱。假设有如下代码：
+
+```dart
+var callbacks = [];
+for (var i = 0; i < 2; i++) {
+  callbacks.add(i);
+}
+
+for (final c in callbacks) {
+  print(c);
+}
+```
+
+可迭代对象同时可以使用 forEach() 方法作为另一种选择：
+
+```dart
+var collection = [1, 2, 3];
+collection.forEach(print); // 1 2 3
+```
+
+## While 和 Do-While
+
+while 循环会在执行循环体前先判断条件：
+
+```dart
+while (!isDone()) {
+  doSomething();
+}
+```
+
+do-while 循环则会 先执行一遍循环体 再判断条件：
+
+```dart
+do {
+  printLine();
+} while (!atEndOfPage());
+```
+
+## Break 和 Continue
+
+使用 break 可以中断循环：
+
+```dart
+while (true) {
+  if (shutDownRequested()) break;
+  processIncomingRequests();
+}
+```
+
+使用 continue 可以跳过本次循环直接进入下一次循环：
+
+```dart
+for (int i = 0; i < candidates.length; i++) {
+  var candidate = candidates[i];
+  if (candidate.yearsExperience < 5) {
+    continue;
+  }
+  candidate.interview();
+}
+```
+
+如果你正在使用诸如 List 或 Set 之类的 Iterable 对象，你可以用以下方式重写上述例子:
+
+```dart
+candidates
+    .where((c) => c.yearsExperience >= 5)
+    .forEach((c) => c.interview());
+```
+
+## Switch 和 Case
+
+Switch 语句在 Dart 中使用 == 来比较整数、字符串或编译时常量，比较的两个对象必须是同一个类型且不能是子类并且没有重写 == 操作符。 枚举类型非常适合在 Switch 语句中使用。
+
+:::tip
+Dart 中的 Switch 语句仅适用于有限的情况，比如使用解释器和扫描器的场景。
+:::
+
+每一个非空的 case 子句都必须有一个 break 语句，也可以通过 continue、throw 或者 return 来结束非空 case 语句。
+
+不匹配任何 case 语句的情况下，会执行 default 子句中的代码：
+
+```dart
+var command = 'OPEN';
+switch (command) {
+  case 'CLOSED':
+    executeClosed();
+    break;
+  case 'PENDING':
+    executePending();
+    break;
+  case 'APPROVED':
+    executeApproved();
+    break;
+  case 'DENIED':
+    executeDenied();
+    break;
+  case 'OPEN':
+    executeOpen();
+    break;
+  default:
+    executeUnknown();
+}
+```
+
+下面的例子忽略了 case 子句的 break 语句，因此会产生错误：
+
+```dart
+var command = 'OPEN';
+switch (command) {
+  case 'OPEN':
+    executeOpen();
+    // ERROR: Missing break
+
+  case 'CLOSED':
+    executeClosed();
+    break;
+}
+```
+
+但是，Dart 支持空的 case 语句，允许其以 fall-through 的形式执行。
+
+```dart
+var command = 'CLOSED';
+switch (command) {
+  case 'CLOSED': // Empty case falls through.
+  case 'NOW_CLOSED':
+    // Runs for both CLOSED and NOW_CLOSED.
+    executeNowClosed();
+    break;
+}
+```
+
+在非空 case 语句中想要实现 fall-through 的形式，可以使用 continue 语句配合 label 的方式实现:
+
+```dart
+var command = 'CLOSED';
+switch (command) {
+  case 'CLOSED':
+    executeClosed();
+    continue nowClosed;
+  // Continues executing at the nowClosed label.
+
+  nowClosed:
+  case 'NOW_CLOSED':
+    // Runs for both CLOSED and NOW_CLOSED.
+    executeNowClosed();
+    break;
+}
+```
+
+每个 case 子句都可以有局部变量且仅在该 case 语句内可见。
+
+## 断言
+
+在开发过程中，可以在条件表达式为 false 时使用 — assert(条件, 可选信息); — 语句来打断代码的执行。你可以在本文中找到大量使用 assert 的例子。
+
+```dart
+// Make sure the variable has a non-null value.
+assert(text != null);
+
+// Make sure the value is less than 100.
+assert(number < 100);
+
+// Make sure this is an https URL.
+assert(urlString.startsWith('https'));
+```
+
+assert 的第二个参数可以为其添加一个字符串消息。
+
+```dart
+assert(urlString.startsWith('https'),
+    'URL ($urlString) should start with "https".');
+```
+
+assert 的第一个参数可以是值为布尔值的任何表达式。如果表达式的值为 true，则断言成功，继续执行。如果表达式的值为 false，则断言失败，抛出一个 AssertionError 异常。
+
+如何判断断言是否生效？断言是否生效依赖开发工具和使用的框架：
+
+* Flutter 在 调试模式 时生效。
+
+* 一些开发工具比如 [webdev serve][] 通常情况下是默认生效的。
+
+* 其他一些工具，比如 dart run 以及 [dart compile js][] 通过在运行 Dart 程序时添加命令行参数 --enable-asserts 使 assert 生效。
+
+在生产环境代码中，断言会被忽略，与此同时传入 assert 的参数不被判断。
+
+## 异常
+
+Dart 代码可以抛出和捕获异常。异常表示一些未知的错误情况，如果异常没有捕获则会被抛出从而导致抛出异常的代码终止执行。
+
+与 Java 不同的是，Dart 的所有异常都是非必检异常，方法不必声明会抛出哪些异常，并且你也不必捕获任何异常。
+
+Dart 提供了 Exception 和 Error 两种类型的异常以及它们一系列的子类，你也可以定义自己的异常类型。但是在 Dart 中可以将任何非 null 对象作为异常抛出而不局限于 Exception 或 Error 类型。
+
+## 抛出异常
+
+下面是关于抛出或者 引发 异常的示例：
+
+```dart
+throw FormatException('Expected at least 1 section');
+```
+
+你也可以抛出任意的对象：
+
+```dart
+throw 'Out of llamas!';
+```
+
+因为抛出异常是一个表达式，所以可以在 => 语句中使用，也可以在其他使用表达式的地方抛出异常：
+
+```dart
+void distanceTo(Point other) => throw UnimplementedError();
+```
+
+## 捕获异常
+
+捕获异常可以避免异常继续传递（重新抛出异常除外）。捕获一个异常可以给你处理它的机会：
+
+```dart
+try {
+  breedMoreLlamas();
+} on OutOfLlamasException {
+  buyMoreLlamas();
+}
+```
+
+对于可以抛出多种异常类型的代码，也可以指定多个 catch 语句，每个语句分别对应一个异常类型，如果 catch 语句没有指定异常类型则表示可以捕获任意异常类型：
+
+```dart
+try {
+  breedMoreLlamas();
+} on OutOfLlamasException {
+  // A specific exception
+  buyMoreLlamas();
+} on Exception catch (e) {
+  // Anything else that is an exception
+  print('Unknown exception: $e');
+} catch (e) {
+  // No specified type, handles all
+  print('Something really unknown: $e');
+}
+```
+
+如上述代码所示可以使用 `on` 或 `catch` 来捕获异常，使用 `on` 来指定异常类型，使用 `catch` 来捕获异常对象，两者可同时使用。
+
+你可以为 catch 方法指定两个参数，第一个参数为抛出的异常对象，第二个参数为栈信息 StackTrace 对象：
+
+```dart
+try {
+  // ···
+} on Exception catch (e) {
+  print('Exception details:\n $e');
+} catch (e, s) {
+  print('Exception details:\n $e');
+  print('Stack trace:\n $s');
+}
+```
+
+关键字 rethrow 可以将捕获的异常再次抛出：
+
+```dart
+void misbehave() {
+  try {
+    dynamic foo = true;
+    print(foo++); // Runtime error
+  } catch (e) {
+    print('misbehave() partially handled ${e.runtimeType}.');
+    rethrow; // Allow callers to see the exception.
+  }
+}
+
+void main() {
+  try {
+    misbehave();
+  } catch (e) {
+    print('main() finished handling ${e.runtimeType}.');
+  }
+}
+```
+
+## Finally
+
+无论是否抛出异常，finally 语句始终执行，如果没有指定 catch 语句来捕获异常，则异常会在执行完 finally 语句后抛出：
+
+```dart
+try {
+  breedMoreLlamas();
+} finally {
+  // Always clean up, even if an exception is thrown.
+  cleanLlamaStalls();
+}
+```
+
+finally 语句会在任何匹配的 catch 语句后执行：
+
+```dart
+try {
+  breedMoreLlamas();
+} catch (e) {
+  print('Error: $e'); // Handle the exception first.
+} finally {
+  cleanLlamaStalls(); // Then clean up.
+}
+```
+
+## 类
