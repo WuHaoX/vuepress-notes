@@ -134,7 +134,7 @@ PS:
 v-pre：跳过该元素及其所有子元素的编译。
 示例：
 
-```template
+```vue
 <span v-pre>{{ 这里不会被编译 }}</span>
 ```
 
