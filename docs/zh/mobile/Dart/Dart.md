@@ -2127,7 +2127,67 @@ var loggerJson = Logger.fromJson(logMap);
 
 实例方法
 
-对象的实例方法可以访问实例变量和 this。下面的 distanceTo() 方法就是一个实例方法的
+对象的实例方法可以访问实例变量和 this。下面的 distanceTo() 方法就是一个实例方法的例子：
+
+```dart
+import 'dart:math';
+
+class Point {
+  final double x;
+  final double y;
+
+  Point(this.x, this.y);
+
+  double distanceTo(Point other) {
+    var dx = x - other.x;
+    var dy = y - other.y;
+    return sqrt(dx * dx + dy * dy);
+  }
+}
+```
+
+## 操作符
+
+运算符是有着特殊名称的实例方法。 Dart 允许您使用以下名称定义运算符：
+
+|  < |  + | \| | >>> |
+|:--:|:--:|:--:|:---:|
+|  > |  / |  ^ |  [] |
+| <= | ~/ |  & | []= |
+| >= |  * | << |  ~  |
+|  - |  % | >> |  == |
+
+:::tip
+你可能注意到有一些 操作符 没有出现在列表中，例如 !=。因为它们仅仅是语法糖。表达式 e1 != e2 仅仅是 !(e1 == e2) 的一个语法糖。
+:::
+
+为了表示重写操作符，我们使用 operator 标识来进行标记。下面是重写 + 和 - 操作符的例子
+
+```dart
+class Vector {
+  final int x, y;
+
+  Vector(this.x, this.y);
+
+  Vector operator +(Vector v) => Vector(x + v.x, y + v.y);
+  Vector operator -(Vector v) => Vector(x - v.x, y - v.y);
+
+  @override
+  bool operator ==(Object other) =>
+      other is Vector && x == other.x && y == other.y;
+
+  @override
+  int get hashCode => Object.hash(x, y);
+}
+
+void main() {
+  final v = Vector(2, 3);
+  final w = Vector(2, 2);
+
+  assert(v + w == Vector(4, 5));
+  assert(v - w == Vector(0, 1));
+}
+```
 
 继承
 
