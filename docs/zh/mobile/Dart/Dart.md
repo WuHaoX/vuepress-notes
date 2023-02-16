@@ -1945,6 +1945,60 @@ class Employee extends Person {
 }
 ```
 
+## 继承示例
+
+```dart
+abstract class Animals {
+  String? name;
+  
+  enjoy();
+}
+
+class Dog extends Animals {
+  String? furColor;
+  
+  Dog(this.furColor);
+  
+  @override
+  enjoy() {
+    print('$name 高兴的在地上叫');
+  }
+}
+
+class Cat extends Animals {
+  String? eyesColor;
+  
+  Cat(this.eyesColor);
+  
+  @override
+  enjoy() {
+    print('$name 高兴的在地上打滚');
+  }
+}
+
+class Lady {
+  String? name;
+  String? pets;
+  
+  Lady(this.name, this.pets);
+  
+  static String goenjoy(String a) => a;
+}
+
+void main(){
+  Dog dog = Dog('黑色');
+  dog.name = "小黑";
+  
+  Cat cat = Cat('蓝色');
+	cat.name = "小花";
+  
+  Lady women = Lady("小王女士",cat.name);
+	String a = Lady.goenjoy("摸了一下");
+	print("${women.name}养了一只猫，叫${women.pets},${women.name}$a${women.pets},");
+	cat.enjoy();
+}
+```
+
 :::tip
 传递给父类构造函数的参数不能使用 this 关键字，因为在参数传递的这一步骤，子类构造函数尚未执行，子类的实例对象也就还未初始化，因此所有的实例成员都不能被访问，但是类成员可以。
 :::
@@ -2189,61 +2243,112 @@ void main() {
 }
 ```
 
-继承
+## Getter 和 Setter
+
+Getter 和 Setter 是一对用来读写对象属性的特殊方法，上面说过实例对象的每一个属性都有一个隐式的 Getter 方法，如果为非 final 属性的话还会有一个 Setter 方法，你可以使用 get 和 set 关键字为额外的属性添加 Getter 和 Setter 方法：
 
 ```dart
-abstract class Animals {
-  String? name;
-  
-  enjoy();
-}
+calss Rectangle {
+  double left, top, width, height;
 
-class Dog extends Animals {
-  String? furColor;
-  
-  Dog(this.furColor);
-  
-  @override
-  enjoy() {
-    print('$name 高兴的在地上叫');
-  }
-}
+  Rectangle(this.left, this.top, this.width, this.height);
 
-class Cat extends Animals {
-  String? eyesColor;
-  
-  Cat(this.eyesColor);
-  
-  @override
-  enjoy() {
-    print('$name 高兴的在地上打滚');
-  }
-}
+  double get right => left + width;
+  set right(double value) => left =value -width;
+  double get bottom => top + height;
+  set bottom(double value) => top = value - height;
 
-class Lady {
-  String? name;
-  String? pets;
-  
-  Lady(this.name, this.pets);
-  
-  static String goenjoy(String a) => a;
-}
-
-void main(){
-  Dog dog = Dog('黑色');
-  dog.name = "小黑";
-  
-  Cat cat = Cat('蓝色');
-	cat.name = "小花";
-  
-  Lady women = Lady("小王女士",cat.name);
-	String a = Lady.goenjoy("摸了一下");
-	print("${women.name}养了一只猫，叫${women.pets},${women.name}$a${women.pets},");
-	cat.enjoy();
+  void main() {
+  var rect = Rectangle(3, 4, 20, 15);
+  assert(rect.left == 3);
+  rect.right = 12;
+  assert(rect.left == -8);
 }
 ```
 
-接口
+使用 Getter 和 Setter 的好处是，你可以先使用你的实例变量，过一段时间过再将它们包裹成方法且不需要改动任何代码，即先定义后更改且不影响原有逻辑。
+
+:::tip
+像自增（++）这样的操作符不管是否定义了 Getter 方法都会正确地执行。为了避免一些不必要的异常情况，运算符只会调用 Getter 一次，然后将其值存储在一个临时变量中。
+:::
+
+## 抽象方法
+
+实例方法、Getter 方法以及 Setter 方法都可以是抽象的，定义一个接口方法而不去做具体的实现让实现它的类去实现该方法，抽象方法只能存在于 抽象类中。
+
+直接使用分号（;）替代方法体即可声明一个抽象方法：
+
+```dart
+abstract class Doer {
+  // Define instance variables and methods...
+
+  void doSomething(); // Define an abstract method.
+}
+
+class EffectiveDoer extends Doer {
+  void doSomething() {
+    // Provide an implementation, so the method is not abstract here...
+  }
+}
+```
+
+## 抽象类
+
+使用关键字 abstract 标识类可以让该类成为 抽象类，抽象类将无法被实例化。抽象类常用于声明接口方法、有时也会有具体的方法实现。如果想让抽象类同时可被实例化，可以为其定义 工厂构造函数。
+
+抽象类常常会包含 抽象方法。下面是一个声明具有抽象方法的抽象类示例：
+
+```dart
+// This class is declared abstract and thus
+// can't be instantiated.
+abstract class AbstractContainer {
+  // Define constructors, fields, methods...
+
+  void updateChildren(); // Abstract method.
+}
+```
+
+## 隐式接口
+
+每一个类都隐式地定义了一个接口并实现了该接口，这个接口包含所有这个类的实例成员以及这个类所实现的其它接口。如果想要创建一个 A 类支持调用 B 类的 API 且不想继承 B 类，则可以实现 B 类的接口。
+
+一个类可以通过关键字 implements 来实现一个或多个接口并实现每个接口定义的 API：
+
+```dart
+// A person. The implicit interface contains greet().
+class Person {
+  // In the interface, but visible only in this library.
+  final String _name;
+
+  // Not in the interface, since this is a constructor.
+  Person(this._name);
+
+  // In the interface.
+  String greet(String who) => 'Hello, $who. I am $_name.';
+}
+
+// An implementation of the Person interface.
+class Impostor implements Person {
+  String get _name => '';
+
+  String greet(String who) => 'Hi $who. Do you know who I am?';
+}
+
+String greetBob(Person person) => person.greet('Bob');
+
+void main() {
+  print(greetBob(Person('Kathy')));
+  print(greetBob(Impostor()));
+}
+```
+
+如果需要实现多个类接口，可以使用逗号分割每个接口类：
+
+```dart
+class Point implements Comparable, Location {...}
+```
+
+## 接口示例
 
 ```dart
 //抽象类
@@ -2297,3 +2402,352 @@ void main(){
   xiaomi.brand('徕卡');
 }
 ```
+
+## 扩展一个类
+
+使用 extends 关键字来创建一个子类，并可使用 super 关键字引用一个父类：
+
+```dart
+class Television {
+  void turnOn() {
+    _illuminateDisplay();
+    _activateIrSensor();
+  }
+  // ···
+}
+
+class SmartTelevision extends Television {
+  void turnOn() {
+    super.turnOn();
+    _bootNetworkInterface();
+    _initializeMemory();
+    _upgradeApps();
+  }
+  // ···
+}
+```
+
+## 重写类成员
+
+子类可以重写父类的实例方法（包括 操作符）、 Getter 以及 Setter 方法。你可以使用 @override 注解来表示你重写了一个成员：
+
+```dart
+class Television {
+  // ···
+  set contrast(int value) {...}
+}
+
+class SmartTelevision extends Television {
+  @override
+  set contrast(num value) {...}
+  // ···
+}
+```
+
+## noSuchMethod 方法
+
+如果调用了对象上不存在的方法或实例变量将会触发 noSuchMethod 方法，你可以重写 noSuchMethod 方法来追踪和记录这一行为：
+
+```dart
+class A {
+  // Unless you override noSuchMethod, using a
+  // non-existent member results in a NoSuchMethodError.
+  @override
+  void noSuchMethod(Invocation invocation) {
+    print('You tried to use a non-existent member: '
+        '${invocation.memberName}');
+  }
+}
+```
+
+只有下面其中一个条件成立时，你才能调用一个未实现的方法：
+
+* 接收方是静态的 dynamic 类型。
+
+* 接收方具有静态类型，定义了未实现的方法（抽象亦可），并且接收方的动态类型实现了 noSuchMethod 方法且具体的实现与 Object 中的不同。
+
+## 扩展方法
+
+扩展方法是向现有库添加功能的一种方式。你可能已经在不知道它是扩展方法的情况下使用了它。例如，当您在 IDE 中使用代码完成功能时，它建议将扩展方法与常规方法一起使用。
+
+这里是一个在 String 中使用扩展方法的样例，我们取名为 parseInt()，它在 string_apis.dart 中定义：
+
+```dart
+import 'string_apis.dart';
+...
+print('42'.padLeft(5)); // Use a String method.
+print('42'.parseInt()); // Use an extension method.
+```
+
+## 枚举类型
+
+枚举类型是一种特殊的类型，也称为 enumerations 或 enums，用于定义一些固定数量的常量值。
+
+:::tip
+所有的枚举都继承于 Enum 类。枚举类是封闭的，即不能被继承、被实现、被 mixin 混入或显式被实例化。
+
+抽象类和 mixin 可以显式的实现或继承 Enum，但只有枚举可以实现或混入这个类，其他类无法享有同样的操作。
+:::
+
+## 声明简单的枚举
+
+你可以使用关键字 enum 来定义简单的枚举类型和枚举值：
+
+```dart
+enum Color { red, green, blue }
+```
+
+:::tip
+声明枚举类型时还可以使用尾随逗号 以帮助防止复制粘贴错误。
+:::
+
+## 声明增强的枚举类型
+
+Dart 中的枚举也支持定义字段、方法和常量构造，常量构造只能构造出已知数量的常量实例（已定义的枚举值）。
+
+你可以使用与定义 类 类似的语句来定义增强的枚举，但是这样的定义有一些限制条件：
+
+* 实例的字段必须是 final，包括由 mixin 混入的字段。
+
+* 所有的 实例化构造 必须以 const 修饰。
+
+* 工厂构造 只能返回已知的一个枚举实例。
+
+* 由于 Enum 已经自动进行了继承，所以枚举类不能再继承其他类。
+
+* 不能重载 index、hashCode 和比较操作符 ==。
+
+* 不能声明 values 字段，否则它将与枚举本身的静态 values getter 冲突。
+
+* 在进行枚举定义时，所有的实例都需要首先进行声明，且至少要声明一个枚举实例。
+
+下方是一个增强枚举的例子，它包含多个枚举实例、成员变量、getter 并且实现了接口：
+
+```dart
+enum Vehicle implements Comparable<Vehicle> {
+  car(tires: 4, passengers: 5, carbonPerKilometer: 400),
+  bus(tires: 6, passengers: 50, carbonPerKilometer: 800),
+  bicycle(tires: 2, passengers: 1, carbonPerKilometer: 0);
+
+  const Vehicle({
+    required this.tires,
+    required this.passengers,
+    required this.carbonPerKilometer,
+  });
+
+  final int tires;
+  final int passengers;
+  final int carbonPerKilometer;
+
+  int get carbonFootprint => (carbonPerKilometer / passengers).round();
+
+  @override
+  int compareTo(Vehicle other) => carbonFootprint - other.carbonFootprint;
+}
+```
+
+:::tip
+增强枚举仅在 Dart SDK 版本 2.17 以上可用。
+:::
+
+## 使用枚举
+
+你可以像访问 静态变量 一样访问枚举值：
+
+```dart
+final favoriteColor = Color.blue;
+if (favoriteColor == Color.blue) {
+  print('Your favorite color is blue!');
+}
+```
+
+每一个枚举值都有一个名为 index 成员变量的 Getter 方法，该方法将会返回以 0 为基准索引的位置值。例如，第一个枚举值的索引是 0 ，第二个枚举值的索引是 1。以此类推。
+
+```dart
+assert(Color.red.index == 0);
+assert(Color.green.index == 1);
+assert(Color.blue.index == 2);
+```
+
+想要获得全部的枚举值，使用枚举类的 values 方法获取包含它们的列表：
+
+```dart
+List<Color> colors = Color.values;
+assert(colors[2] == Color.blue);
+```
+
+你可以在 Switch 语句中使用枚举，但是需要注意的是必须处理枚举值的每一种情况，**即每一个枚举值都必须成为一个 case 子句**，不然会出现警告：
+
+```dart
+var aColor = Color.blue;
+
+switch (aColor) {
+  case Color.red:
+    print('Red as roses!');
+    break;
+  case Color.green:
+    print('Green as grass!');
+    break;
+  default: // Without this, you see a WARNING.
+    print(aColor); // 'Color.blue'
+}
+```
+
+如果你想要获取一个枚举值的名称，例如 Color.blue 的 'blue'，请使用 .name 属性：
+
+```dart
+print(Color.blue.name); // 'blue'
+```
+
+## 使用 Mixin 为类添加功能(多继承)
+
+Mixin 是一种在多重继承中复用某个类中代码的方法模式。
+
+使用 with 关键字并在其后跟上 Mixin 类的名字来使用 Mixin 模式：
+
+```dart
+class Musician extends Performer with Musical {
+  // ···
+}
+
+class Maestro extends Person with Musical, Aggressive, Demented {
+  Maestro(String maestroName) {
+    name = maestroName;
+    canConduct = true;
+  }
+}
+```
+
+想要实现一个 Mixin，请创建一个继承自 Object 且未声明构造函数的类。除非你想让该类与普通的类一样可以被正常地使用，否则请使用关键字 mixin 替代 class。例如：
+
+```dart
+mixin Musical {
+  bool canPlayPiano = false;
+  bool canCompose = false;
+  bool canConduct = false;
+
+  void entertainMe() {
+    if (canPlayPiano) {
+      print('Playing piano');
+    } else if (canConduct) {
+      print('Waving hands');
+    } else {
+      print('Humming to self');
+    }
+  }
+}
+```
+
+mixin简单的用法:
+
+```dart
+mixin MixinA {
+  String? name;
+  
+  void infoMixinA() {
+    print("MixinA");
+
+  }
+}
+
+mixin MixinB {
+  String? name;
+  
+  void infoMixinB() {
+    print("MixinB");
+
+  }
+}
+
+class MyClass with MixinA, MixinB {
+  
+}
+
+void main() {
+  MyClass myclass = MyClass();
+  myclass.infoMixinA();
+  myclass.infoMixinB();
+}
+```
+
+可以使用关键字 on 来指定哪些类可以使用该 Mixin 类，比如有 Mixin 类 A，但是 A 只能被 B 类使用，则可以这样定义 A：
+
+```dart
+class Musician {
+  // ...
+}
+mixin MusicalPerformer on Musician {
+  // ...
+}
+class SingerDancer extends Musician with MusicalPerformer {
+  // ...
+}
+```
+
+在示例代码中，只有接口或继承类能使用mixin。
+
+:::tip
+1. 混入（Mixin）是一段公共代码。混入有两种声明方式：
+   * 将类当作混入class MixinA {...}
+     * 作为Mixin的类只能继承自Object，不能继承其他类。
+     * 作为Mixin的类不能有构造函数
+   * 使用Mixin关键字声明Mixin MixinB {...}  推荐这种
+2. 混入（Mixin）可以提高代码复用的效率，普通类可以通过with来使用混入
+   * class Myclass with MixinA, MixinB {...}
+3. 使用多个混入时，后引入的混入会覆盖之前混入中的重复的内容
+   * MinxinA 和 MinxinB中都有hello()方法，MyClass会使用MixinB中的方法
+:::
+
+## 类变量和方法
+
+使用关键字 static 可以声明类变量或类方法。
+
+## 静态变量
+
+静态变量（即类变量）常用于声明类范围内所属的状态变量和常量：
+
+```dart
+class Queue {
+  static const initialCapacity = 16;
+  // ···
+}
+
+void main() {
+  assert(Queue.initialCapacity == 16);
+}
+```
+
+静态变量在其首次被使用的时候才被初始化。
+
+## 静态方法
+
+静态方法（即类方法）不能对实例进行操作，因此不能使用 this。但是他们可以访问静态变量。如下面的例子所示，你可以在一个类上直接调用静态方法：
+
+```dart
+import 'dart:math';
+
+class Point {
+  double x, y;
+  Point(this.x, this.y);
+
+  static double distanceBetween(Point a, Point b) {
+    var dx = a.x - b.x;
+    var dy = a.y - b.y;
+    return sqrt(dx * dx + dy * dy);
+  }
+}
+
+void main() {
+  var a = Point(2, 2);
+  var b = Point(4, 4);
+  var distance = Point.distanceBetween(a, b);
+  assert(2.8 < distance && distance < 2.9);
+  print(distance);
+}
+```
+
+:::tip
+对于一些通用或常用的静态方法，应该将其定义为顶级函数而非静态方法。
+:::
+
+可以将静态方法作为编译时常量。例如，你可以将静态方法作为一个参数传递给一个常量构造函数。
