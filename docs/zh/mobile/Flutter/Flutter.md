@@ -254,4 +254,64 @@ Engine，即引擎层。毫无疑问是 Flutter 的核心， 该层主要是 C++
 
 Embedder，即嵌入层。Flutter 最终渲染、交互是要依赖其所在平台的操作系统 API，嵌入层主要是将 Flutter 引擎 ”安装“ 到特定平台上。嵌入层采用了当前平台的语言编写，例如 Android 使用的是 Java 和 C++， iOS 和 macOS 使用的是 Objective-C 和 Objective-C++，Windows 和 Linux 使用的是 C++。 Flutter 代码可以通过嵌入层，以模块方式集成到现有的应用中，也可以作为应用的主体。Flutter 本身包含了各个常见平台的嵌入层，假如以后 Flutter 要支持新的平台，则需要针对该新的平台编写一个嵌入层。
 
-## **1.3 搭建Flutter开发环境**
+## **1.3 Widget简介**
+### **1.3.1 Flutter中的四棵树**
+
+Widget、Element、Render、Layer树
+1. 根据Widget树生成一个Element树，Element树中的节点都继承自Element类。
+2. 根据Element树生成Render树（渲染树），渲染树中的节点都继承自RenderObject类。
+3. 根据Render树生成Layer树，然后上屏显示，Layer树中的节点都继承自Layer类。
+
+样例：
+
+```dart
+Container( // 一个容器 widget
+  color: Colors.blue, // 设置容器背景色
+  child: Row( // 可以将子widget沿水平方向排列
+    children: [
+      Image.network('https://www.example.com/1.png'), // 显示图片的 widget
+      const Text('A'),
+    ],
+  ),
+);
+```
+
+![图片加载中](../../../.vuepress/public/images/content/Flutter/1.3.1.png)
+
+### **1.3.2 StatelessWidget**
+
+`StatelessElement`间接继承自`Element`类，与`StatelessWidget`相对应。`StatelessWidget`用于不需要维护状态的场景。
+
+**Context**
+
+`Context`是当前widget在widget树中执行相关操作的一个句柄（例如查找父级widget）。每一个widget都有一个对应的context对象。
+
+### **1.3.3 StatefulWidget**
+
+* `StatefulElement` 间接继承自`Element`类，与`StatefulWidget`相对应（作为其配置数据）。`StatefulElement`中可能会多次调用`createState()`来创建状态（State）对象。
+
+* `createState()` 用于创建和 `StatefulWidget` 相关的状态，它在`StatefulWidget` 的生命周期中可能会被多次调用。例如，当一个 `StatefulWidget` 同时插入到 `widget` 树的多个位置时，Flutter 框架就会调用该方法为每一个位置生成一个独立的State实例，其实，本质上就是一个`StatefulElement`对应一个`State`实例。
+
+### **1.3.4 State**
+
+**State生命周期**
+
+* `initState`: 当 widget 第一次插入到 widget 树时会被调用，对于每一个State对象，Flutter 框架只会调用一次该回调。
+
+* `didChangeDependencies()`: 当State对象的依赖发生变化时会被调用。
+
+* `build()`: 用于构建 widget 子树
+
+* `reassemble()`：此回调是专门为了开发调试而提供的，在热重载(hot reload)时会被调用，此回调在Release模式下永远不会被调用。
+
+* `didUpdateWidget()`: reassemble()：此回调是专门为了开发调试而提供的，在热重载(hot reload)时会被调用，此回调在Release模式下永远不会被调用。
+
+* `deactivate()`：当 State 对象从树中被移除时，会调用此回调。在一些场景下，Flutter 框架会将 State 对象重新插到树中，如包含此 State 对象的子树在树的一个位置移动到另一个位置时（可以通过GlobalKey 来实现）。如果移除后没有重新插入到树中则紧接着会调用dispose()方法。
+
+* `dispose()`：当 State 对象从树中被永久移除时调用。
+
+![图片加载中](../../../.vuepress/public/images/content/Flutter/1.3.4.jpg)
+
+:::tip
+包含@mustCallSuper标注的父类方法，都要在子类方法中调用父类方法。
+:::
