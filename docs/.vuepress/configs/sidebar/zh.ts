@@ -27,6 +27,7 @@ export const sidebarZh: SidebarConfig = {
         '/zh/util/README.md',
         '/zh/util/Coding.md',
         '/zh/util/nvm.md',
+        '/zh/util/software-download.md',
       ],
     },
   ],
